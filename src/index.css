@@ -1,0 +1,114 @@
+@import "leaflet/dist/leaflet.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS CUSTOM PROPERTIES ─────────────────────────────────────────────── */
+:root {
+  --soda-primary:   #2AACBC;
+  --soda-dark:      #1A9BAB;
+  --soda-light:     #3BBFCF;
+  --soda-bg:        #D6F3F7;
+  --soda-bg-soft:   #F0FBFD;
+  --soda-footer:    #1A7A8A;
+  --soda-footer-dk: #0f5f6d;
+  --font-main: 'Nunito', 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* ─── BASE RESET ─────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: #ffffff;
+  color: #1f2937;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce-y {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.animate-fade-in   { animation: fade-in  0.8s ease both; }
+.animate-slide-up  { animation: slide-up 0.7s ease both; }
+.animate-bounce    { animation: bounce-y 1.4s ease-in-out infinite; }
+
+.delay-100 { animation-delay: 0.10s; }
+.delay-200 { animation-delay: 0.20s; }
+.delay-300 { animation-delay: 0.35s; }
+
+/* ─── SCROLLBAR ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: #f1f5f9; }
+::-webkit-scrollbar-thumb  { background: var(--soda-bg); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: var(--soda-primary); }
+
+/* ─── SELECTION ───────────────────────────────────────────────────────────── */
+::selection { background: var(--soda-bg); color: var(--soda-dark); }
+
+/* ─── FOCUS ───────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--soda-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── FORMS ───────────────────────────────────────────────────────────────── */
+input, textarea, select { font-family: var(--font-main); }
+input::placeholder, textarea::placeholder { color: #9ca3af; }
+
+/* ─── MOBILE OVERFLOW FIX ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  body { overflow-x: hidden; }
+}
+
+/* ─── MAP STYLES ──────────────────────────────────────────────────────────── */
+.soda-map-shell {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .soda-map-shell {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.soda-map-container .leaflet-container {
+  border-radius: 18px;
+  box-shadow: 0 14px 40px rgba(15, 118, 110, 0.35);
+}
