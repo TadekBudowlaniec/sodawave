@@ -1,9 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import L from "leaflet";
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import {
   MapPin,
   Phone,
@@ -21,17 +18,6 @@ import {
   RefreshCw,
   ExternalLink,
 } from "lucide-react";
-
-// Configure default Leaflet marker icons so they load correctly with Vite
-if (L && L.Icon && L.Icon.Default) {
-  // eslint-disable-next-line no-underscore-dangle
-  delete L.Icon.Default.prototype._getIconUrl;
-  L.Icon.Default.mergeOptions({
-    iconRetinaUrl: markerIcon2x,
-    iconUrl: markerIcon,
-    shadowUrl: markerShadow,
-  });
-}
 
 // ─── BRAND COLORS ─────────────────────────────────────────────────────────
 // Primary turquoise : #3BBFCF / #2AACBC
@@ -135,6 +121,15 @@ const MAP_POINTS = [
   },
 ];
 
+const SODAWAVE_MARKER_ICON = L.icon({
+  iconUrl: "/favicon.svg",
+  iconRetinaUrl: "/favicon.svg",
+  iconSize: [38, 38],
+  iconAnchor: [19, 19],
+  popupAnchor: [0, -18],
+  className: "soda-marker-icon",
+});
+
 // ─── LOGO ─────────────────────────────────────────────────────────────────
 function SodaLogo({ white = false }) {
   const wave = white ? "#fff" : "#3BBFCF";
@@ -188,8 +183,9 @@ function Navbar() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      className="fixed top-0 left-0 right-0 transition-all duration-300"
       style={{
+        zIndex: 1000,
         background: scrolled
           ? "rgba(255,255,255,0.97)"
           : "rgba(255,255,255,0.92)",
@@ -208,8 +204,8 @@ function Navbar() {
               key={l.href}
               href={l.href}
               onClick={(e) => go(e, l.href)}
-              className="text-sm font-semibold text-gray-600 hover:text-[#2AACBC] transition-colors"
-              style={{ position: "relative" }}
+              className="font-semibold text-gray-600 hover:text-[#2AACBC] transition-colors"
+              style={{ position: "relative", fontSize: "0.98rem" }}
             >
               {l.label}
             </a>
@@ -285,6 +281,7 @@ function Hero() {
         paddingTop: "72px",
         position: "relative",
         background: "linear-gradient(135deg, #ffffff 55%, #D6F3F7 55%)",
+        maxWidth: "100%",
       }}
     >
       {/* Diagonal turquoise band */}
@@ -322,7 +319,7 @@ function Hero() {
       ))}
 
       <div
-        className="max-w-7xl mx-auto px-6 w-full"
+        className="max-w-7xl mx-auto px-6 w-full hero-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
@@ -351,7 +348,7 @@ function Hero() {
               letterSpacing: "0.04em",
             }}
           >
-            <Droplets size={13} /> Nowoczesna wymiana cylindrów CO₂
+            <Droplets size={13} /> Błyskawiczna wymiana cylindrów CO₂
           </span>
 
           <h1
@@ -368,14 +365,7 @@ function Hero() {
           >
             Poczuj falę{" "}
             <br />
-            <span
-              style={{
-                WebkitTextStroke: "2.5px #2AACBC",
-                color: "transparent",
-              }}
-            >
-              orzeźwienia
-            </span>
+            <span>orzeźwienia</span>
           </h1>
 
           <div style={{ marginBottom: "20px" }}>
@@ -392,10 +382,7 @@ function Hero() {
               fontSize: "15px",
             }}
           >
-            SodaWave to nowoczesna i ekologiczna usługa wymiany cylindrów CO₂
-            oraz sprzedaży syropów do saturatorów. Nasze autoryzowane punkty
-            zapewniają szybki, bezpieczny i wygodny dostęp do wszystkiego,
-            czego potrzebujesz do przygotowania napojów w domu.
+            SodaWave to nowoczesna i ekologiczna usługa wymiany cylindrów CO₂ do saturatorów oraz sprzedaż syropów. Nasze autoryzowane punkty zapewniają szybki, wygodny i bezpieczny dostęp do wszystkiego, czego potrzebujesz do przygotowania napojów w domu. Działamy w oparciu o sprawdzony system, certyfikowany gaz spożywczy CO₂ oraz stałą dostępność produktów w punktach partnerskich. 
           </p>
 
           <div
@@ -450,8 +437,8 @@ function Hero() {
           >
             {[
               { label: "Autoryzowanych punktów", value: "100+" },
-              { label: "Partnerów handlowych",   value: "3"    },
-              { label: "Lat doświadczenia",       value: "5+"   },
+              { label: "Partnerów handlowych",   value: "40+"    },
+              { label: "Zadowolonych klientów",       value: "10000+"   },
             ].map((s) => (
               <div key={s.label}>
                 <div style={{ fontSize: "1.6rem", fontWeight: 900, color: "#2AACBC", lineHeight: 1 }}>
@@ -697,15 +684,7 @@ function MapSection() {
       subtitle="Sieć punktów w Polsce"
       light
     >
-      <div
-        className="soda-map-shell"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 1.6fr) minmax(0, 1fr)",
-          gap: "24px",
-          alignItems: "stretch",
-        }}
-      >
+      <div className="soda-map-shell">
         {/* Map with search */}
         <MapWithSearch />
 
@@ -742,9 +721,7 @@ function MapSection() {
               lineHeight: 1.6,
             }}
           >
-            Punkty wymiany cylindrów CO₂ i sprzedaży syropów znajdziesz w
-            popularnych sieciach handlowych w całej Polsce. Wybierz miasto, aby
-            zobaczyć najbliższy sklep.
+            Punkty wymiany cylindrów CO₂ oraz sprzedaży syropów znajdziesz w wybranych lokalizacjach popularnych sieci handlowych i nie tylko. Wybierz miasto, aby sprawdzić najbliższy punkt.
           </p>
           <div
             style={{
@@ -754,7 +731,7 @@ function MapSection() {
               marginTop: "4px",
             }}
           >
-            {["Stokrotka", "Lewiatan", "Chorten"].map((name) => (
+            {["Stokrotka", "Lewiatan", "Chorten", "e-paka"].map((name) => (
               <span
                 key={name}
                 style={{
@@ -784,7 +761,7 @@ function MapSection() {
             }}
           >
             <span>• Kliknij marker na mapie, aby zobaczyć szczegóły punktu.</span>
-            <span>• Wszystkie punkty oferują: cylindry CO₂ oraz syropy smakowe.</span>
+            <span>• Wszystkie punkty oferują dwa rodzaje cylindrów CO₂, pasujące do każdego saturatora, oraz szeroki wybór syropów smakowych.</span>
           </div>
         </div>
       </div>
@@ -817,10 +794,31 @@ function MapWithSearch() {
 
     leafletMapRef.current = map;
 
+    // Upewnij się, że mapa prawidłowo obliczy wymiary,
+    // szczególnie po początkowym renderze na małych ekranach
+    map.whenReady(() => {
+      map.invalidateSize();
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 400);
+    });
+
     return () => {
       map.remove();
       leafletMapRef.current = null;
     };
+  }, []);
+
+  // Korekta wymiarów mapy przy zmianie rozmiaru okna (obrót telefonu, zmiana width)
+  useEffect(() => {
+    const handleResize = () => {
+      if (leafletMapRef.current) {
+        leafletMapRef.current.invalidateSize();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Aktualizacja markerów przy zmianie filtrowanych punktów
@@ -834,7 +832,7 @@ function MapWithSearch() {
     markersRef.current = [];
 
     visiblePoints.forEach((p) => {
-      const marker = L.marker(p.position).addTo(map);
+      const marker = L.marker(p.position, { icon: SODAWAVE_MARKER_ICON }).addTo(map);
       marker.bindPopup(
         `<div style="min-width:180px">
            <div style="font-size:12px;font-weight:800;color:#111827;margin-bottom:2px">
@@ -904,7 +902,7 @@ function MapWithSearch() {
                 color: "#0f766e",
               }}
             >
-              Mapa punktów
+              Mapa autoryzowanych punktów
             </div>
             <div
               style={{
@@ -966,7 +964,7 @@ function MapWithSearch() {
       >
         <div
           ref={mapContainerRef}
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "100%", height: "100%", minHeight: "260px" }}
         />
       </div>
     </div>
@@ -1108,6 +1106,7 @@ function OfferSection() {
   return (
     <Section id="offer" title="Nasza oferta" subtitle="Produkty" light>
       <div
+        className="offer-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "minmax(0, 2fr) minmax(0, 1.2fr)",
@@ -1607,6 +1606,7 @@ function B2BSection() {
   return (
     <Section id="b2b" title="Współpraca B2B" subtitle="Dla sklepów">
       <div
+        className="b2b-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "minmax(0, 1.4fr) minmax(0, 1fr)",
@@ -1614,9 +1614,106 @@ function B2BSection() {
           alignItems: "flex-start",
         }}
       >
+        {/* Korzyści dla partnera (na mobile nad formularzem) */}
+        <div
+          className="b2b-benefits"
+          style={{
+            background: "linear-gradient(145deg, #2AACBC, #1A7A8A)",
+            borderRadius: "24px",
+            padding: "26px 22px",
+            color: "#ffffff",
+            boxShadow: "0 20px 45px rgba(15, 118, 110, 0.4)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <Building2 size={26} />
+            <div>
+              <h3
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: 900,
+                }}
+              >
+                Korzyści dla partnerów
+              </h3>
+              <p
+                style={{
+                  fontSize: "12px",
+                  color: "rgba(255,255,255,0.78)",
+                }}
+              >
+                Dołącz do sieci SodaWave i zwiększ atrakcyjność swojej oferty.
+              </p>
+            </div>
+          </div>
+
+          <ul
+            style={{
+              marginTop: "14px",
+              listStyle: "none",
+              padding: 0,
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              fontSize: "13px",
+            }}
+          >
+            {benefits.map((b) => (
+              <li
+                key={b}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <span
+                  style={{
+                    width: "22px",
+                    height: "22px",
+                    borderRadius: "999px",
+                    background: "rgba(255,255,255,0.14)",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Star size={13} />
+                </span>
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div
+            style={{
+              marginTop: "16px",
+              paddingTop: "12px",
+              borderTop: "1px dashed rgba(255,255,255,0.22)",
+              fontSize: "12px",
+              color: "rgba(240,253,250,0.9)",
+            }}
+          >
+            Zadzwoń również bezpośrednio:{" "}
+            <a
+              href="tel:+48695864734"
+              style={{
+                fontWeight: 800,
+                color: "#ffffff",
+                textDecoration: "underline",
+                textDecorationStyle: "dotted",
+              }}
+            >
+              +48 695 864 734
+            </a>
+            .
+          </div>
+        </div>
+
         {/* Formularz */}
         <form
           onSubmit={handleSubmit(onSubmit)}
+          className="b2b-form"
           style={{
             background: "#ffffff",
             borderRadius: "24px",
@@ -1820,101 +1917,6 @@ function B2BSection() {
             </p>
           )}
         </form>
-
-        {/* Korzyści dla partnera */}
-        <div
-          style={{
-            background: "linear-gradient(145deg, #2AACBC, #1A7A8A)",
-            borderRadius: "24px",
-            padding: "26px 22px",
-            color: "#ffffff",
-            boxShadow: "0 20px 45px rgba(15, 118, 110, 0.4)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <Building2 size={26} />
-            <div>
-              <h3
-                style={{
-                  fontSize: "1.2rem",
-                  fontWeight: 900,
-                }}
-              >
-                Korzyści dla partnerów
-              </h3>
-              <p
-                style={{
-                  fontSize: "12px",
-                  color: "rgba(255,255,255,0.78)",
-                }}
-              >
-                Dołącz do sieci SodaWave i zwiększ atrakcyjność swojej oferty.
-              </p>
-            </div>
-          </div>
-
-          <ul
-            style={{
-              marginTop: "14px",
-              listStyle: "none",
-              padding: 0,
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-              fontSize: "13px",
-            }}
-          >
-            {benefits.map((b) => (
-              <li
-                key={b}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                }}
-              >
-                <span
-                  style={{
-                    width: "22px",
-                    height: "22px",
-                    borderRadius: "999px",
-                    background: "rgba(255,255,255,0.14)",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Star size={13} />
-                </span>
-                <span>{b}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div
-            style={{
-              marginTop: "16px",
-              paddingTop: "12px",
-              borderTop: "1px dashed rgba(255,255,255,0.22)",
-              fontSize: "12px",
-              color: "rgba(240,253,250,0.9)",
-            }}
-          >
-            Zadzwoń również bezpośrednio:{" "}
-            <a
-              href="tel:+48695864734"
-              style={{
-                fontWeight: 800,
-                color: "#ffffff",
-                textDecoration: "underline",
-                textDecorationStyle: "dotted",
-              }}
-            >
-              +48 695 864 734
-            </a>
-            .
-          </div>
-        </div>
       </div>
     </Section>
   );

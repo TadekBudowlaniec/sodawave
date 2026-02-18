@@ -93,12 +93,16 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
 
 /* ─── MOBILE OVERFLOW FIX ─────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  body { overflow-x: hidden; }
+  html, body { overflow-x: hidden; }
 }
 
 /* ─── MAP STYLES ──────────────────────────────────────────────────────────── */
 .soda-map-shell {
   width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: stretch;
 }
 
 @media (max-width: 900px) {
@@ -111,4 +115,40 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
 .soda-map-container .leaflet-container {
   border-radius: 18px;
   box-shadow: 0 14px 40px rgba(15, 118, 110, 0.35);
+}
+
+/* ─── LAYOUT HELPERS ──────────────────────────────────────────────────────── */
+.hero-grid,
+.offer-grid {
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    padding: 3rem 1.25rem !important;
+  }
+
+  .offer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .b2b-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  .b2b-benefits {
+    order: 1;
+  }
+
+  .b2b-form {
+    order: 2;
+  }
+
+  section {
+    padding: 64px 0 !important;
+  }
 }
