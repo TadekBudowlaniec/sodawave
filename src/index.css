@@ -152,3 +152,21 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
     padding: 64px 0 !important;
   }
 }
+
+/* ─── DESKTOP LAYOUT TWEAKS ──────────────────────────────────────────────── */
+@media (min-width: 901px) {
+  .hero-grid {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .b2b-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
+    gap: 32px;
+    align-items: flex-start;
+  }
+}

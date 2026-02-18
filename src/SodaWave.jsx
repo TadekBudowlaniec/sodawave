@@ -1607,12 +1607,6 @@ function B2BSection() {
     <Section id="b2b" title="Współpraca B2B" subtitle="Dla sklepów">
       <div
         className="b2b-grid"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 1.4fr) minmax(0, 1fr)",
-          gap: "32px",
-          alignItems: "flex-start",
-        }}
       >
         {/* Korzyści dla partnera (na mobile nad formularzem) */}
         <div
