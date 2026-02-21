@@ -40,88 +40,95 @@ const scroll = (href) =>
 
 const POLAND_CENTER = [52.1, 19.4];
 
-const MAP_POINTS = [
-  {
-    id: 1,
-    partner: "Stokrotka",
-    city: "Warszawa",
-    name: "Stokrotka Warszawa – Mokotów",
-    address: "ul. Puławska 120, Warszawa",
-    position: [52.196, 21.022],
-  },
-  {
-    id: 2,
-    partner: "Lewiatan",
-    city: "Łódź",
-    name: "Lewiatan Łódź – Retkinia",
-    address: "ul. Maratońska 45, Łódź",
-    position: [51.747, 19.406],
-  },
-  {
-    id: 3,
-    partner: "Chorten",
-    city: "Białystok",
-    name: "Chorten Białystok – Centrum",
-    address: "ul. Lipowa 30, Białystok",
-    position: [53.132, 23.164],
-  },
-  {
-    id: 4,
-    partner: "Stokrotka",
-    city: "Wrocław",
-    name: "Stokrotka Wrocław – Krzyki",
-    address: "ul. Powstańców Śląskich 180, Wrocław",
-    position: [51.087, 17.020],
-  },
-  {
-    id: 5,
-    partner: "Lewiatan",
-    city: "Lublin",
-    name: "Lewiatan Lublin – Czechów",
-    address: "ul. Północna 36, Lublin",
-    position: [51.262, 22.566],
-  },
-  {
-    id: 6,
-    partner: "Chorten",
-    city: "Kraków",
-    name: "Chorten Kraków – Podgórze",
-    address: "ul. Wielicka 85, Kraków",
-    position: [50.028, 19.959],
-  },
-  {
-    id: 7,
-    partner: "Stokrotka",
-    city: "Poznań",
-    name: "Stokrotka Poznań – Jeżyce",
-    address: "ul. Dąbrowskiego 120, Poznań",
-    position: [52.412, 16.897],
-  },
-  {
-    id: 8,
-    partner: "Lewiatan",
-    city: "Gdańsk",
-    name: "Lewiatan Gdańsk – Przymorze",
-    address: "ul. Kołobrzeska 50, Gdańsk",
-    position: [54.404, 18.591],
-  },
-  {
-    id: 9,
-    partner: "Chorten",
-    city: "Rzeszów",
-    name: "Chorten Rzeszów – Śródmieście",
-    address: "ul. Piłsudskiego 10, Rzeszów",
-    position: [50.041, 21.999],
-  },
-  {
-    id: 10,
-    partner: "Stokrotka",
-    city: "Szczecin",
-    name: "Stokrotka Szczecin – Prawobrzeże",
-    address: "ul. Andrzeja Struga 25, Szczecin",
-    position: [53.399, 14.620],
-  },
+const sodaWaveLocations = [
+  { id: 1, lat: 53.1250, lng: 18.0410, address: "Bydgoszcz", name: "Galeria Pomorska, stoisko Markiewka", hours: "8–18" },
+  { id: 2, lat: 53.1210, lng: 18.0150, address: "Bydgoszcz", name: "Galeria Focus, stoisko Markiewka", hours: "8–18" },
+  { id: 3, lat: 53.1090, lng: 18.0560, address: "ul. Białogardzka 27, Bydgoszcz", name: "Warzywniaczek", hours: "8–18" },
+  { id: 4, lat: 53.1235, lng: 18.0076, address: "ul. Narcyza Gieryna 4, Bydgoszcz", name: "Sklep Groszek", hours: "8–18" },
+  { id: 5, lat: 53.1110, lng: 18.0450, address: "ul. Baczyńskiego 35, Bydgoszcz", name: "Żulka-Kulka", hours: "8–18" },
+  { id: 6, lat: 53.1200, lng: 17.9900, address: "ul. Marii Konopnickiej 2A/3, Bydgoszcz", name: "sklep spożywczy", hours: "8–18" },
+  { id: 7, lat: 53.1310, lng: 18.0050, address: "ul. Gdańska 85, Bydgoszcz", name: "Warzywniaczek", hours: "8–18" },
+  { id: 8, lat: 53.1180, lng: 18.0120, address: "ul. Waryńskiego 51/63U, Bydgoszcz", name: "Warzywniak Świeżak", hours: "8–18" },
+  { id: 9, lat: 53.1400, lng: 18.0200, address: "ul. 11 Listopada 8, Bydgoszcz", name: "Delikatesy Na Leśnym", hours: "8–18" },
+  { id: 10, lat: 53.1120, lng: 18.0300, address: "ul. A. Grzymały-Siedleckiego 10, Bydgoszcz", name: "Salon Prasowy", hours: "8–18" },
+  { id: 11, lat: 53.1350, lng: 17.9800, address: "ul. Kolbego 44, Bydgoszcz", name: "Epaka, punkt wysyłek", hours: "8–18" },
+  { id: 12, lat: 53.1150, lng: 17.9950, address: "ul. Juliusza Kossaka 48, Bydgoszcz", name: "Warzywniak U Agi", hours: "8–18" },
+  { id: 13, lat: 53.1250, lng: 17.9600, address: "ul. Nakielska 156, Bydgoszcz", name: "Delikatesy", hours: "8–18" },
+  { id: 14, lat: 52.7955, lng: 18.2605, address: "ul. Świętego Ducha 26, Inowrocław", name: "Pasmanteria Guziczek", hours: "8–18" },
+  { id: 15, lat: 52.8000, lng: 18.2650, address: "ul. Okrężek 20, Inowrocław", name: "Sklep Julia", hours: "8–18" },
+  { id: 16, lat: 52.7900, lng: 18.2550, address: "al. Kopernika 8A, Inowrocław", name: "Sklep ABC", hours: "8–18" },
+  { id: 17, lat: 52.7930, lng: 18.2500, address: "ul. Wojska Polskiego 19B, Inowrocław", name: "Intercom", hours: "8–18" },
+  { id: 18, lat: 52.8600, lng: 17.9400, address: "ul. 4 Stycznia 54 / Artylerzystów 1B, Barcin", name: "Markiewka Sklep", hours: "8–18" },
+  { id: 19, lat: 52.6580, lng: 17.9550, address: "ul. Jagiełły 20, Mogilno", name: "Naprawa Obuwia Szewc", hours: "8–18" },
+  { id: 20, lat: 52.9520, lng: 17.9250, address: "Plac 1000-lecia 20, Łabiszyn", name: "Markiewka Sklep", hours: "8–18" },
+  { id: 21, lat: 52.8060, lng: 18.0860, address: "ul. Rynek 22, Pakość", name: "Kleks", hours: "8–18" },
+  { id: 22, lat: 52.7530, lng: 18.1060, address: "ul. Główna 17, Janikowo", name: "Markiewka Sklep", hours: "8–18" },
+  { id: 23, lat: 53.0970, lng: 17.9350, address: "ul. Szubińska 8, Białe Błota", name: "Warzywa i Owoce", hours: "8–18" },
+  { id: 24, lat: 52.8480, lng: 17.7200, address: "ul. Potockiego 1, Żnin", name: "Best-Seler", hours: "8–18" },
+  { id: 25, lat: 52.6280, lng: 18.1700, address: "ul. Św. Ducha 17, Strzelno", name: "Sklep Polski Prill", hours: "8–18" },
+  { id: 26, lat: 53.0030, lng: 17.7400, address: "ul. Bema 3, Szubin", name: "Czysta Chata", hours: "8–18" },
+  { id: 27, lat: 53.1410, lng: 17.5950, address: "ul. Dąbrowskiego 36, Nakło nad Notecią", name: "Czysta Chata", hours: "8–18" },
+  { id: 28, lat: 53.0800, lng: 18.2250, address: "ul. Żwirki i Wigury 1, Solec Kujawski", name: "Sklep spożywczy Jola", hours: "8–18" },
+  { id: 29, lat: 53.3130, lng: 17.9350, address: "ul. Pomianowskiego 9, Koronowo", name: "Sklep Zajączek", hours: "8–18" },
+  { id: 30, lat: 53.3150, lng: 17.9400, address: "ul. Witosa 14, Koronowo", name: "Chatka Puchatka", hours: "8–18" },
+  { id: 31, lat: 52.9000, lng: 18.1350, address: "ul. Jęczmienna 2A, Złotniki Kujawskie", name: "Markiewka", hours: "8–18" },
+  { id: 32, lat: 52.8420, lng: 18.2100, address: "ul. Dworcowa 17, Jaksice", name: "Lewiatan", hours: "8–18" },
+  { id: 33, lat: 52.8960, lng: 18.2430, address: "Rojewo 141", name: "Lewiatan", hours: "8–18" },
+  { id: 34, lat: 52.8900, lng: 18.3200, address: "Gniewkówiec 21", name: "Lewiatan", hours: "8–18" },
+  { id: 35, lat: 52.9720, lng: 18.0660, address: "ul. Bydgoska 14I/J, Nowa Wieś Wielka", name: "sklep spożywczy", hours: "8–18" },
+  { id: 36, lat: 52.8970, lng: 18.4060, address: "ul. Dworcowa 4, Gniewkowo", name: "Lewiatan", hours: "8–18" },
+  { id: 37, lat: 53.0200, lng: 18.6400, address: "ul. W. Dziewulskiego 39C, Toruń", name: "Epaka, punkt wysyłek", hours: "8–18" },
+  { id: 38, lat: 53.0160, lng: 18.5900, address: "ul. Kraszewskiego 38, Toruń", name: "sklep spożywczo-warzywny", hours: "8–18" },
+  { id: 39, lat: 53.0300, lng: 18.5700, address: "ul. Bartosza Głowackiego 2, Toruń", name: "Sklep Cykoria", hours: "8–18" },
+  { id: 40, lat: 52.9900, lng: 18.5800, address: "ul. Poznańska 80, Toruń", name: "Lewiatan", hours: "8–18" },
+  { id: 41, lat: 52.9850, lng: 18.6100, address: "ul. Strzałowa 7, Toruń", name: "Lewiatan", hours: "8–18" },
+  { id: 42, lat: 53.0180, lng: 18.5850, address: "ul. Bema 20A, Toruń", name: "Lewiatan", hours: "8–18" },
+  { id: 43, lat: 52.9950, lng: 18.6300, address: "ul. Łódzka 35, Toruń", name: "Lewiatan", hours: "8–18" },
+  { id: 44, lat: 53.0250, lng: 18.6500, address: "ul. Łyskowskiego 29/35, Toruń", name: "Lewiatan", hours: "8–18" },
+  { id: 45, lat: 53.2200, lng: 17.8900, address: "Mochle 14", name: "Sklep Odido", hours: "8–18" },
+  { id: 46, lat: 52.6780, lng: 18.3280, address: "ul. Rynek 1, Kruszwica", name: "DW-Kiosk", hours: "8–18" },
+  { id: 47, lat: 52.6800, lng: 18.3300, address: "ul. Kujawska 29A, Kruszwica", name: "DW-Kiosk", hours: "8–18" },
+  { id: 48, lat: 53.1255, lng: 17.9550, address: "ul. Nakielska 180, Bydgoszcz", name: "Lin", hours: "8–18" },
+  { id: 49, lat: 53.0180, lng: 18.5750, address: "ul. Fałata 92, Toruń", name: "Sklep ABC", hours: "8–18" },
+  { id: 50, lat: 52.7935, lng: 18.2505, address: "ul. Wojska Polskiego, Inowrocław", name: "Witaminka 1", hours: "8–18" },
+  { id: 51, lat: 52.7936, lng: 18.2506, address: "ul. Wojska Polskiego, Inowrocław", name: "Witaminka 2", hours: "8–18" },
+  { id: 52, lat: 52.7937, lng: 18.2507, address: "ul. Wojska Polskiego, Inowrocław", name: "Witaminka 3", hours: "8–18" },
+  { id: 53, lat: 53.1155, lng: 17.9955, address: "ul. Juliusza Kossaka 43, Bydgoszcz", name: "Rumaks", hours: "8–18" },
+  { id: 54, lat: 52.8200, lng: 18.3500, address: "Wierzchosławice 56", name: "Chatka Puchatka", hours: "8–18" },
+  { id: 55, lat: 53.1100, lng: 18.0400, address: "ul. Kaczyńskiego 36/9, Bydgoszcz", name: "Groszek", hours: "8–18" },
+  { id: 56, lat: 52.7550, lng: 18.1050, address: "ul. Ogrodowa 24, Janikowo", name: "Delikatesy", hours: "8–18" },
+  { id: 57, lat: 52.7500, lng: 18.1100, address: "ul. Dworcowa 17, Janikowo", name: "sklep", hours: "8–18" },
+  { id: 58, lat: 53.3100, lng: 17.9500, address: "ul. Szosa Bydgoska 33, Koronowo", name: "Delikatesy", hours: "8–18" },
+  { id: 59, lat: 53.0200, lng: 18.0200, address: "Brzoza", name: "Warzywniak", hours: "8–18" },
+  { id: 60, lat: 52.2530, lng: 20.9800, address: "ul. Piaskowa 6, Warszawa", name: "Lewiatan", hours: "7–23" },
+  { id: 61, lat: 52.0950, lng: 21.6150, address: "ul. Mińska 8, Siennica", name: "Antosiewicz", hours: "8–18" },
+  { id: 62, lat: 51.9500, lng: 22.0200, address: "Stary Jamielnik 69", name: "Lewiatan", hours: "7–21" },
+  { id: 63, lat: 51.9320, lng: 22.3880, address: "ul. Stodolna 19A, Łuków", name: "Stokrotka", hours: "7–21" },
+  { id: 64, lat: 51.9280, lng: 22.3800, address: "Aleje Tadeusza Kościuszki 40, Łuków", name: "Sklep Rondo, Delikatesy Sezam", hours: "7–23" },
+  { id: 65, lat: 51.9220, lng: 22.3900, address: "ul. K. I. Gałczyńskiego 52, Łuków", name: "Lewiatan", hours: "8–22" },
+  { id: 66, lat: 51.9350, lng: 22.3750, address: "Farfak 62, Łuków", name: "Sklep spożywczy Ewa", hours: "8–18" },
+  { id: 67, lat: 51.9300, lng: 22.3850, address: "ul. Leopolda Staffa 4, Łuków", name: "Strefa Alkoholi", hours: "8–23" },
+  { id: 68, lat: 51.9850, lng: 22.7800, address: "ul. Brzeska 53A, Międzyrzec Podlaski", name: "Lewiatan", hours: "6–21" },
+  { id: 69, lat: 52.1000, lng: 22.4500, address: "ul. Dębowa 4, Zbuczyn", name: "Stacja Paliw Zbuczyn", hours: "6–22" },
+  { id: 70, lat: 52.1670, lng: 22.2850, address: "ul. Garwolińska 80, Siedlce", name: "Lewiatan", hours: "8–21" },
+  { id: 71, lat: 52.1500, lng: 22.2500, address: "Romanówka 18, Siedlce", name: "Chorten", hours: "6–21" },
+  { id: 72, lat: 52.1600, lng: 22.2900, address: "ul. Dąbrowskiego 8, Siedlce", name: "Lewiatan", hours: "6–20" },
+  { id: 73, lat: 52.1800, lng: 22.3000, address: "Gostchorz 42A, Siedlce", name: "Lewiatan", hours: "8–21" },
+  { id: 74, lat: 51.9700, lng: 22.3000, address: "Biardy 36", name: "Groszek", hours: "8–18" },
+  { id: 75, lat: 51.9500, lng: 22.4500, address: "Krynka 226", name: "Lewiatan", hours: "8–21" },
+  { id: 76, lat: 52.0500, lng: 22.2500, address: "Radomyśl 44", name: "Lewiatan", hours: "8–21" },
+  { id: 77, lat: 51.9550, lng: 22.3300, address: "ul. Księży Sopyłów 39A, Gręzówka", name: "Lewiatan", hours: "8–21" },
+  { id: 78, lat: 51.8300, lng: 22.1800, address: "ul. Łukowska 66, Krzywda", name: "Strzyżewski J.", hours: "8–18" },
+  { id: 79, lat: 51.9800, lng: 22.7850, address: "ul. Lubelska 62, Międzyrzec Podlaski", name: "E-Paka", hours: "8–16" },
+  { id: 80, lat: 52.1700, lng: 22.2800, address: "ul. Jana Kilińskiego 19, Siedlce", name: "Witamina", hours: "8–17" },
+  { id: 81, lat: 51.9200, lng: 22.2000, address: "Stanin 150", name: "Staszko", hours: "7–17" },
 ];
+
+const MAP_POINTS = sodaWaveLocations.map((p) => ({
+  ...p,
+  position: [p.lat, p.lng],
+  city: p.address.includes(", ") ? p.address.split(", ").pop() : p.address.split(" ")[0] || p.address,
+}));
 
 const FAQ_ITEMS = [
   {
@@ -1110,7 +1117,7 @@ function Hero() {
         className="max-w-7xl mx-auto px-6 w-full hero-grid"
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gridTemplateColumns: "1fr 2fr",
           alignItems: "center",
           gap: "2rem",
           padding: "4rem 1.5rem",
@@ -1224,7 +1231,7 @@ function Hero() {
             style={{ display: "flex", gap: "36px", marginTop: "36px" }}
           >
             {[
-              { label: "Autoryzowanych punktów", value: "100+" },
+              { label: "Autoryzowanych punktów", value: "81" },
               { label: "Partnerów handlowych",   value: "40+"    },
               { label: "Zadowolonych klientów",       value: "10000+"   },
             ].map((s) => (
@@ -1247,6 +1254,7 @@ function Hero() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            minWidth: 0,
           }}
         >
           <img
@@ -1254,7 +1262,7 @@ function Hero() {
             alt="Zadowolony zespół SodaWave z butlami CO2"
             style={{
               width: "100%",
-              maxWidth: "600px",
+              maxWidth: "1100px",
               height: "auto",
               objectFit: "contain",
               marginLeft: "auto",
@@ -1506,18 +1514,18 @@ function MapWithSearch() {
     visiblePoints.forEach((p) => {
       const marker = L.marker(p.position, { icon: SODAWAVE_MARKER_ICON }).addTo(map);
       marker.bindPopup(
-        `<div style="min-width:180px">
+        `<div style="min-width:200px">
            <div style="font-size:12px;font-weight:800;color:#111827;margin-bottom:2px">
              ${p.name}
            </div>
            <div style="font-size:11px;color:#6b7280;margin-bottom:6px">
-             ${p.address} · ${p.city}
+             ${p.address}
            </div>
            <div style="display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;background:#D6F3F7;border:1px solid #2AACBC;font-size:10px;font-weight:700;color:#0f766e;margin-bottom:4px">
              Dostępne: Cylindry i Syropy
            </div>
-           <div style="margin-top:4px;font-size:10px;color:#9ca3af">
-             Partner: ${p.partner}
+           <div style="margin-top:4px;font-size:10px;color:#6b7280">
+             Godziny: ${p.hours || "8–18"}
            </div>
          </div>`
       );
@@ -3223,7 +3231,7 @@ function Footer() {
               }}
             >
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/sodawave.pl/"
                 target="_blank"
                 rel="noreferrer"
                 data-nosnippet
@@ -3249,7 +3257,7 @@ function Footer() {
                 <Instagram size={18} />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/sodawavepl"
                 target="_blank"
                 rel="noreferrer"
                 data-nosnippet
