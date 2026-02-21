@@ -117,21 +117,68 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
   box-shadow: 0 14px 40px rgba(15, 118, 110, 0.35);
 }
 
+/* Leaflet controls under fixed header */
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 400;
+}
+
+.leaflet-top.leaflet-left {
+  top: 80px; /* clear fixed navbar height */
+}
+
+/* ─── SEO SECTION ───────────────────────────────────────────────────────── */
+.seo-section {
+  width: 100%;
+}
+
+/* Nadrzędny toggle – płynne rozwijanie bez display:none (SEO-safe) */
+.seo-content-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease;
+}
+
+.seo-content-wrapper--open {
+  grid-template-rows: 1fr;
+}
+
+.seo-content-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .seo-section {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .seo-section {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
 /* ─── LAYOUT HELPERS ──────────────────────────────────────────────────────── */
 .hero-grid,
 .offer-grid {
   max-width: 100%;
 }
 
-@media (max-width: 900px) {
+/* MOBILE: jednokolumnowy layout, pionowe karty */
+@media (max-width: 767px) {
   .hero-grid {
     grid-template-columns: 1fr !important;
     padding: 3rem 1.25rem !important;
   }
 
   .offer-grid {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .b2b-grid {
@@ -151,16 +198,136 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
   section {
     padding: 64px 0 !important;
   }
+
+  .offer-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .offer-card__content {
+    flex: 1 1 auto !important;
+    max-width: 100% !important;
+    z-index: 2;
+  }
+
+  .offer-card__image {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    margin-top: 12px;
+    z-index: 1;
+  }
+}
+
+/* Hero image tweaks */
+@media (min-width: 992px) {
+  .hero-image {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero-image {
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* TABLET: siatka 2x2 dla 4 kart */
+@media (min-width: 768px) and (max-width: 991px) {
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    align-items: stretch;
+  }
 }
 
 /* ─── DESKTOP LAYOUT TWEAKS ──────────────────────────────────────────────── */
-@media (min-width: 901px) {
+@media (min-width: 992px) {
   .hero-grid {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  .about-grid {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .about-text {
+    flex: 0 0 65%;
+    max-width: 65%;
+  }
+
+  .about-image {
+    flex: 0 0 35%;
+    max-width: 35%;
+  }
+
+  .offer-card {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: relative;
+    overflow: hidden;
+    min-height: 260px;
+  }
+
+  .offer-card__content {
+    flex: 0 0 55%;
+    max-width: 55%;
+    position: relative;
+    z-index: 2;
+    padding-right: 32px;
+  }
+
+  .offer-card__image {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    width: auto;
+    height: 85%;
+    object-fit: contain;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Dokładniejsze pozycjonowanie butelki syropu */
+  .offer-card--white .offer-card__image {
+    right: -15px;
+    bottom: -5px;
+    height: 85%;
+  }
+
+  /* 4 karty w jednym rzędzie na wszystkich desktopach */
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  /* 4 karty w jednym rzędzie na szerokich ekranach */
+  @media (min-width: 1200px) {
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
   }
 
   .b2b-grid {

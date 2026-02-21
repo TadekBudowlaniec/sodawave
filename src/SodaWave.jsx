@@ -17,6 +17,8 @@ import {
   Zap,
   RefreshCw,
   ExternalLink,
+  Instagram,
+  Facebook,
 } from "lucide-react";
 
 // ─── BRAND COLORS ─────────────────────────────────────────────────────────
@@ -121,6 +123,801 @@ const MAP_POINTS = [
   },
 ];
 
+const FAQ_ITEMS = [
+  {
+    question: "Czym różni się cylinder różowy od niebieskiego?",
+    type: "long",
+  },
+  {
+    question: "Jak działa wymiana cylindra CO₂?",
+    answer:
+      "Przynosisz pusty cylinder do punktu SodaWave i od razu wymieniasz go na pełny. Cały proces jest szybki i prosty.",
+  },
+  {
+    question: "Czy muszę wcześniej coś zamawiać lub się rejestrować?",
+    answer:
+      "Nie. Wymiana odbywa się od ręki, bez zamawiania i bez formalności.",
+  },
+  {
+    question: "Jakie cylindry mogę wymienić?",
+    answer:
+      "Wymieniamy cylindry pasujące do wszystkich saturatorów dostępnych na rynku, w tym modele wkręcane oraz Quick Connect.",
+  },
+  {
+    question: "Czy gaz w cylindrach jest bezpieczny?",
+    answer:
+      "Tak. Wszystkie cylindry to certyfikowany, bezpieczny gaz spożywczy CO₂.",
+  },
+  {
+    question: "Gdzie znajdę punkty wymiany SodaWave?",
+    answer:
+      "Nasze punkty znajdują się w wielu miastach, a sieć stale się rozwija. Aktualne lokalizacje znajdziesz na naszej mapie.",
+  },
+  {
+    question: "Czy mogę kupić syropy SodaStream w punktach SodaWave?",
+    answer:
+      "Tak. W punktach dostępne są popularne syropy SodaStream, które możesz kupić przy okazji wymiany cylindra.",
+  },
+  {
+    question: "Czy korzystanie z SodaWave jest bardziej ekologiczne?",
+    answer:
+      "Tak. Wymiana cylindrów i korzystanie z saturatorów ogranicza zużycie jednorazowych plastikowych butelek i wspiera gospodarkę obiegu zamkniętego.",
+  },
+  {
+    question: "Ile trwa wymiana cylindra?",
+    answer: "Zazwyczaj tylko chwilę – tyle, ile standardowa obsługa w punkcie.",
+  },
+];
+
+const SEO_REGIONS = [
+  {
+    name: "Województwo Podlaskie",
+    cities: [
+      "Augustów",
+      "Białystok",
+      "Bielsk Podlaski",
+      "Brańsk",
+      "Choroszcz",
+      "Ciechanowiec",
+      "Czarna Białostocka",
+      "Czyżew",
+      "Drohiczyn",
+      "Goniądz",
+      "Grajewo",
+      "Hajnówka",
+      "Jedwabne",
+      "Kleszczele",
+      "Kolno",
+      "Knyszyn",
+      "Łapy",
+      "Łomża",
+      "Mońki",
+      "Rajgród",
+      "Sejny",
+      "Siemiatycze",
+      "Sokółka",
+      "Supraśl",
+      "Suwałki",
+      "Szczuczyn",
+      "Tykocin",
+      "Wasilków",
+      "Zabłudów",
+      "Zambrów",
+    ],
+  },
+  {
+    name: "Województwo Pomorskie",
+    cities: [
+      "Brusy",
+      "Bytów",
+      "Chojnice",
+      "Czarna Woda",
+      "Czarne",
+      "Człuchów",
+      "Debrzno",
+      "Dzierzgoń",
+      "Gdańsk",
+      "Gdynia",
+      "Hel",
+      "Jastarnia",
+      "Kartuzy",
+      "Kościerzyna",
+      "Krynica Morska",
+      "Kwidzyn",
+      "Lębork",
+      "Malbork",
+      "Miastko",
+      "Nowy Dwór Gdański",
+      "Pelplin",
+      "Prabuty",
+      "Puck",
+      "Reda",
+      "Rumia",
+      "Skarszewy",
+      "Słupsk",
+      "Sopot",
+      "Starogard Gdański",
+      "Sztum",
+      "Tczew",
+      "Ustka",
+      "Wejherowo",
+      "Władysławowo",
+    ],
+  },
+  {
+    name: "Województwo Śląskie",
+    cities: [
+      "Będzin",
+      "Bielsko-Biała",
+      "Bieruń",
+      "Blachownia",
+      "Bytom",
+      "Chorzów",
+      "Cieszyn",
+      "Czeladź",
+      "Czechowice-Dziedzice",
+      "Czerwionka-Leszczyny",
+      "Dąbrowa Górnicza",
+      "Gliwice",
+      "Imielin",
+      "Jastrzębie-Zdrój",
+      "Jaworzno",
+      "Kalety",
+      "Katowice",
+      "Knurów",
+      "Koziegłowy",
+      "Krzanowice",
+      "Krzepice",
+      "Kuźnia Raciborska",
+      "Lędziny",
+      "Lubliniec",
+      "Łaziska Górne",
+      "Miasteczko Śląskie",
+      "Mikołów",
+      "Myszków",
+      "Orzesze",
+      "Piekary Śląskie",
+      "Pilica",
+      "Poręba",
+      "Pszczyna",
+      "Pyskowice",
+      "Racibórz",
+      "Radlin",
+      "Ruda Śląska",
+      "Rybnik",
+      "Rydułtowy",
+      "Siemianowice Śląskie",
+      "Skoczów",
+      "Sławków",
+      "Sosnowiec",
+      "Sośnicowice",
+      "Strumień",
+      "Szczyrk",
+      "Świętochłowice",
+      "Tarnowskie Góry",
+      "Toszek",
+      "Tychy",
+      "Ustroń",
+      "Wilamowice",
+      "Wisła",
+      "Wodzisław Śląski",
+      "Wojkowice",
+      "Zabrze",
+      "Zawiercie",
+      "Żory",
+      "Żywiec",
+    ],
+  },
+  {
+    name: "Województwo Świętokrzyskie",
+    cities: [
+      "Bodzentyn",
+      "Busko-Zdrój",
+      "Chęciny",
+      "Chmielnik",
+      "Daleszyce",
+      "Jędrzejów",
+      "Kazimierza Wielka",
+      "Kielce",
+      "Koprzywnica",
+      "Końskie",
+      "Kunów",
+      "Łagów",
+      "Małogoszcz",
+      "Opatów",
+      "Osiek",
+      "Ostrowiec Świętokrzyski",
+      "Pińczów",
+      "Połaniec",
+      "Sandomierz",
+      "Skalbmierz",
+      "Skarżysko-Kamienna",
+      "Starachowice",
+      "Staszów",
+      "Suchedniów",
+      "Wąchock",
+      "Wiślica",
+    ],
+  },
+  {
+    name: "Województwo Warmińsko-Mazurskie",
+    cities: [
+      "Bartoszyce",
+      "Biała Piska",
+      "Bisztynek",
+      "Braniewo",
+      "Dobre Miasto",
+      "Elbląg",
+      "Ełk",
+      "Frombork",
+      "Giżycko",
+      "Górowo Iławeckie",
+      "Iława",
+      "Jeziorany",
+      "Kętrzyn",
+      "Kisielice",
+      "Lidzbark",
+      "Lidzbark Warmiński",
+      "Lubawa",
+      "Mikołajki",
+      "Miłakowo",
+      "Miłomłyn",
+      "Mrągowo",
+      "Nidzica",
+      "Nowe Miasto Lubawskie",
+      "Olecko",
+      "Olsztyn",
+      "Orneta",
+      "Ostróda",
+      "Pasłęk",
+      "Pieniężno",
+      "Ruciane-Nida",
+      "Sępopol",
+      "Susz",
+      "Szczytno",
+      "Tolkmicko",
+      "Węgorzewo",
+    ],
+  },
+  {
+    name: "Województwo Wielkopolskie",
+    cities: [
+      "Adamanów",
+      "Bojanowo",
+      "Borek Wielkopolski",
+      "Budzyń",
+      "Chodzież",
+      "Czarnków",
+      "Czempiń",
+      "Dąbie",
+      "Dobra",
+      "Dolsk",
+      "Gniezno",
+      "Gostyń",
+      "Grabów nad Prosną",
+      "Grodzisk Wielkopolski",
+      "Jaraczewo",
+      "Jarocin",
+      "Kalisz",
+      "Kępno",
+      "Kleczew",
+      "Koło",
+      "Konin",
+      "Kościan",
+      "Krotoszyn",
+      "Krzywiń",
+      "Krzyż Wielkopolski",
+      "Leszno",
+      "Lwówek",
+      "Margonin",
+      "Międzychód",
+      "Mikstat",
+      "Mosina",
+      "Murowana Goślina",
+      "Nekla",
+      "Nowy Tomyśl",
+      "Oborniki",
+      "Odolanów",
+      "Opalenica",
+      "Ostrów Wielkopolski",
+      "Ostrzeszów",
+      "Pleszew",
+      "Poznań",
+      "Puszczykowo",
+      "Pyzdry",
+      "Rakoniewice",
+      "Rawicz",
+      "Rogoźno",
+      "Sieraków",
+      "Słupca",
+      "Stawiszyn",
+      "Sulmierzyce",
+      "Szamocin",
+      "Szamotuły",
+      "Ślesin",
+      "Śmigiel",
+      "Tuliszków",
+      "Turek",
+      "Ujście",
+      "Wągrowiec",
+      "Wieleń",
+      "Wielichowo",
+      "Wolsztyn",
+      "Września",
+      "Wyrzysk",
+      "Zbąszyń",
+      "Złotów",
+    ],
+  },
+  {
+    name: "Województwo Zachodniopomorskie",
+    cities: [
+      "Barlinek",
+      "Białogard",
+      "Borne Sulinowo",
+      "Chociwel",
+      "Chojna",
+      "Darłowo",
+      "Dobra",
+      "Drawno",
+      "Drawsko Pomorskie",
+      "Dziwnów",
+      "Goleniów",
+      "Gryfice",
+      "Gryfino",
+      "Ińsko",
+      "Kamień Pomorski",
+      "Karlino",
+      "Kołobrzeg",
+      "Koszalin",
+      "Łobez",
+      "Maszewo",
+      "Mielno",
+      "Międzyzdroje",
+      "Myślibórz",
+      "Nowe Warpno",
+      "Połczyn-Zdrój",
+      "Polanów",
+      "Pyrzyce",
+      "Recz",
+      "Resko",
+      "Sianów",
+      "Sławno",
+      "Stargard",
+      "Stepnica",
+      "Suchań",
+      "Szczecin",
+      "Szczecinek",
+      "Świdwin",
+      "Świnoujście",
+      "Trzcińsko-Zdrój",
+      "Trzebiatów",
+      "Tychowo",
+      "Wałcz",
+      "Węgorzyno",
+      "Wolin",
+      "Złocieniec",
+    ],
+  },
+  {
+    name: "Województwo Dolnośląskie",
+    cities: [
+      "Bardo",
+      "Bielawa",
+      "Bierutów",
+      "Bogatynia",
+      "Bolesławiec",
+      "Bolków",
+      "Brzeg Dolny",
+      "Chocianów",
+      "Chojnów",
+      "Duszniki-Zdrój",
+      "Dzierżoniów",
+      "Głogów",
+      "Głuszyca",
+      "Góra",
+      "Jawor",
+      "Jedlina-Zdrój",
+      "Jelcz-Laskowice",
+      "Kamienna Góra",
+      "Karpacz",
+      "Kowary",
+      "Kudowa-Zdrój",
+      "Legnica",
+      "Leśna",
+      "Lubań",
+      "Lubawka",
+      "Lubin",
+      "Lwówek Śląski",
+      "Malczyce",
+      "Milicz",
+      "Nowa Ruda",
+      "Oleśnica",
+      "Oława",
+      "Piechowice",
+      "Pieńsk",
+      "Polanica-Zdrój",
+      "Polkowice",
+      "Prusice",
+      "Przemków",
+      "Sobótka",
+      "Stronie Śląskie",
+      "Strzegom",
+      "Syców",
+      "Szklarska Poręba",
+      "Ścinawa",
+      "Środa Śląska",
+      "Świdnica",
+      "Świebodzice",
+      "Trzebnica",
+      "Twardogóra",
+      "Wałbrzych",
+      "Wąsosz",
+      "Węgliniec",
+      "Wleń",
+      "Wołów",
+      "Wrocław",
+      "Ząbkowice Śląskie",
+      "Zgorzelec",
+      "Ziębice",
+      "Złotoryja",
+    ],
+  },
+  {
+    name: "Województwo Kujawsko-Pomorskie",
+    cities: [
+      "Aleksandrów Kujawski",
+      "Barcin",
+      "Bydgoszcz",
+      "Chełmno",
+      "Chełmża",
+      "Ciechocinek",
+      "Dobrzyń nad Wisłą",
+      "Golub-Dobrzyń",
+      "Górzno",
+      "Grudziądz",
+      "Inowrocław",
+      "Jabłonowo Pomorskie",
+      "Janikowo",
+      "Kamień Krajeński",
+      "Koronowo",
+      "Kowalewo Pomorskie",
+      "Kruszwica",
+      "Lipno",
+      "Mogilno",
+      "Mrocza",
+      "Nakło nad Notecią",
+      "Nieszawa",
+      "Nowe",
+      "Pakość",
+      "Piotrków Kujawski",
+      "Radziejów",
+      "Rypin",
+      "Solec Kujawski",
+      "Strzelno",
+      "Świecie",
+      "Toruń",
+      "Tuchola",
+      "Wąbrzeźno",
+      "Więcbork",
+      "Włocławek",
+      "Żnin",
+    ],
+  },
+  {
+    name: "Województwo Lubelskie",
+    cities: [
+      "Annopol",
+      "Bełżyce",
+      "Biała Podlaska",
+      "Biłgoraj",
+      "Chełm",
+      "Dęblin",
+      "Frampol",
+      "Hrubieszów",
+      "Janów Lubelski",
+      "Józefów",
+      "Kazimierz Dolny",
+      "Kock",
+      "Kraśnik",
+      "Krasnobród",
+      "Krasnystaw",
+      "Łaszczów",
+      "Lubartów",
+      "Lublin",
+      "Łuków",
+      "Nałęczów",
+      "Opole Lubelskie",
+      "Ostrów Lubelski",
+      "Parczew",
+      "Piaski",
+      "Poniatowa",
+      "Puławy",
+      "Radzyń Podlaski",
+      "Rejowiec Fabryczny",
+      "Ryki",
+      "Świdnik",
+      "Szczebrzeszyn",
+      "Tarnogród",
+      "Terespol",
+      "Tomaszów Lubelski",
+      "Tyszowce",
+      "Włodawa",
+      "Zamość",
+      "Zwierzyniec",
+    ],
+  },
+  {
+    name: "Województwo Lubuskie",
+    cities: [
+      "Babimost",
+      "Bytom Odrzański",
+      "Czerwieńsk",
+      "Dąbie",
+      "Dobiegniew",
+      "Gorzów Wielkopolski",
+      "Gozdnica",
+      "Iłowa",
+      "Jasień",
+      "Krosno Odrzańskie",
+      "Kostrzyn nad Odrą",
+      "Kożuchów",
+      "Lubsko",
+      "Łęknica",
+      "Małomice",
+      "Międzyrzecz",
+      "Nowa Sól",
+      "Ośno Lubuskie",
+      "Rzepin",
+      "Skwierzyna",
+      "Słubice",
+      "Strzelce Krajeńskie",
+      "Sulechów",
+      "Szlichtyngowa",
+      "Świebodzin",
+      "Torzym",
+      "Trzciel",
+      "Wschowa",
+      "Zielona Góra",
+      "Żagań",
+      "Żary",
+    ],
+  },
+  {
+    name: "Województwo Łódzkie",
+    cities: [
+      "Aleksandrów Łódzki",
+      "Bełchatów",
+      "Biała Rawska",
+      "Błaszki",
+      "Brzeziny",
+      "Drzewica",
+      "Działoszyn",
+      "Głowno",
+      "Kamieńsk",
+      "Koluszki",
+      "Konstantynów Łódzki",
+      "Krośniewice",
+      "Kutno",
+      "Łask",
+      "Łęczyca",
+      "Łowicz",
+      "Łódź",
+      "Opoczno",
+      "Ozorków",
+      "Pajęczno",
+      "Piotrków Trybunalski",
+      "Poddębice",
+      "Przedbórz",
+      "Radomsko",
+      "Rawa Mazowiecka",
+      "Sieradz",
+      "Skierniewice",
+      "Sulejów",
+      "Szadek",
+      "Tomaszów Mazowiecki",
+      "Tuszyn",
+      "Uniejów",
+      "Warta",
+      "Wieluń",
+      "Zduńska Wola",
+      "Zgierz",
+      "Żychlin",
+    ],
+  },
+  {
+    name: "Województwo Małopolskie",
+    cities: [
+      "Alwernia",
+      "Andrychów",
+      "Bochnia",
+      "Brzesko",
+      "Bukowno",
+      "Chełmek",
+      "Chrzanów",
+      "Ciężkowice",
+      "Czchów",
+      "Dąbrowa Tarnowska",
+      "Dobczyce",
+      "Gorlice",
+      "Jordanów",
+      "Kalwaria Zebrzydowska",
+      "Kraków",
+      "Krynica-Zdrój",
+      "Limanowa",
+      "Maków Podhalański",
+      "Miechów",
+      "Myślenice",
+      "Nowy Sącz",
+      "Nowy Targ",
+      "Olkusz",
+      "Oświęcim",
+      "Piwniczna-Zdrój",
+      "Proszowice",
+      "Rabka-Zdrój",
+      "Skała",
+      "Skawina",
+      "Słomniki",
+      "Stary Sącz",
+      "Sucha Beskidzka",
+      "Sułkowice",
+      "Szczawnica",
+      "Świątniki Górne",
+      "Tarnów",
+      "Trzebinia",
+      "Tuchów",
+      "Wadowice",
+      "Wieliczka",
+      "Wojnicz",
+      "Zakliczyn",
+      "Zakopane",
+      "Żabno",
+    ],
+  },
+  {
+    name: "Województwo Mazowieckie",
+    cities: [
+      "Białobrzegi",
+      "Bieżuń",
+      "Błonie",
+      "Brok",
+      "Brwinów",
+      "Ciechanów",
+      "Garwolin",
+      "Gąbin",
+      "Gostynin",
+      "Góra Kalwaria",
+      "Grodzisk Mazowiecki",
+      "Grójec",
+      "Halinów",
+      "Iłża",
+      "Józefów",
+      "Karczew",
+      "Kałuszyn",
+      "Kobyłka",
+      "Konstancin-Jeziorna",
+      "Kosów Lacki",
+      "Kozienice",
+      "Legionowo",
+      "Lipsko",
+      "Łaskarzew",
+      "Łochów",
+      "Łomianki",
+      "Łosice",
+      "Maków Mazowiecki",
+      "Milanówek",
+      "Mińsk Mazowiecki",
+      "Mława",
+      "Mogielnica",
+      "Mszczonów",
+      "Nasielsk",
+      "Nowe Miasto nad Pilicą",
+      "Nowy Dwór Mazowiecki",
+      "Ożarów Mazowiecki",
+      "Ostrów Mazowiecka",
+      "Otwock",
+      "Piaseczno",
+      "Piastów",
+      "Pionki",
+      "Płock",
+      "Płońsk",
+      "Podkowa Leśna",
+      "Pruszków",
+      "Przasnysz",
+      "Pułtusk",
+      "Radom",
+      "Raciąż",
+      "Sanniki",
+      "Siedlce",
+      "Sierpc",
+      "Sochaczew",
+      "Sokołów Podlaski",
+      "Sulejówek",
+      "Szydłowiec",
+      "Tarczyn",
+      "Warszawa",
+      "Warka",
+      "Węgrów",
+      "Wołomin",
+      "Wyszków",
+      "Zakroczym",
+      "Ząbki",
+      "Zielonka",
+      "Żelechów",
+      "Żyrardów",
+    ],
+  },
+  {
+    name: "Województwo Opolskie",
+    cities: [
+      "Baborów",
+      "Brzeg",
+      "Dobrodzień",
+      "Głogówek",
+      "Głubczyce",
+      "Gogolin",
+      "Grodków",
+      "Kędzierzyn-Koźle",
+      "Kluczbork",
+      "Kolonowskie",
+      "Korfantów",
+      "Lewin Brzeski",
+      "Namysłów",
+      "Niemodlin",
+      "Nysa",
+      "Olesno",
+      "Opole",
+      "Ozimek",
+      "Paczków",
+      "Praszka",
+      "Prudnik",
+      "Strzelce Opolskie",
+      "Tułowice",
+      "Ujazd",
+      "Zawadzkie",
+    ],
+  },
+  {
+    name: "Województwo Podkarpackie",
+    cities: [
+      "Baranów Sandomierski",
+      "Brzozów",
+      "Dębica",
+      "Dukla",
+      "Dynów",
+      "Głogów Małopolski",
+      "Jarosław",
+      "Jasło",
+      "Kańczuga",
+      "Kolbuszowa",
+      "Krosno",
+      "Leżajsk",
+      "Lubaczów",
+      "Łańcut",
+      "Mielec",
+      "Narol",
+      "Nisko",
+      "Nowa Dęba",
+      "Pruchnik",
+      "Przemyśl",
+      "Przeworsk",
+      "Radomyśl Wielki",
+      "Ropczyce",
+      "Rudnik nad Sanem",
+      "Rzeszów",
+      "Sanok",
+      "Sędziszów Małopolski",
+      "Stalowa Wola",
+      "Strzyżów",
+      "Tarnobrzeg",
+      "Ulanów",
+      "Ustrzyki Dolne",
+      "Zagórz",
+      "Zaklików",
+    ],
+  },
+];
+
 const SODAWAVE_MARKER_ICON = L.icon({
   iconUrl: "/favicon.svg",
   iconRetinaUrl: "/favicon.svg",
@@ -131,35 +928,26 @@ const SODAWAVE_MARKER_ICON = L.icon({
 });
 
 // ─── LOGO ─────────────────────────────────────────────────────────────────
-function SodaLogo({ white = false }) {
-  const wave = white ? "#fff" : "#3BBFCF";
+function SodaLogo() {
   return (
     <a
       href="#hero"
-      onClick={(e) => { e.preventDefault(); scroll("#hero"); }}
-      className="flex items-center gap-1.5 select-none"
+      onClick={(e) => {
+        e.preventDefault();
+        scroll("#hero");
+      }}
+      className="flex items-center gap-2 select-none"
+      style={{ textDecoration: "none" }}
     >
-      <svg width="36" height="36" viewBox="0 0 38 38" fill="none">
-        <circle cx="19" cy="19" r="18" fill={wave} opacity=".18" />
-        <circle cx="19" cy="19" r="11" fill={wave} opacity=".28" />
-        <ellipse cx="19" cy="19" rx="6" ry="9" fill={wave} />
-        <path
-          d="M7 23 Q13 17 19 23 Q25 29 31 23"
-          stroke={white ? "#fff" : "#1A9BAB"}
-          strokeWidth="2.2"
-          fill="none"
-          strokeLinecap="round"
-        />
-      </svg>
-      <span
-        className="font-black text-xl tracking-tight"
-        style={{ color: white ? "#fff" : "#1A9BAB" }}
-      >
-        Soda
-        <span style={{ color: white ? "rgba(255,255,255,0.8)" : "#2AACBC" }}>
-          Wave
-        </span>
-      </span>
+      <img
+        src="/Logo SodaWave bez tła.png"
+        alt="SodaWave – logo"
+        style={{
+          height: "64px",
+          width: "auto",
+          display: "block",
+        }}
+      />
     </a>
   );
 }
@@ -452,142 +1240,26 @@ function Hero() {
           </div>
         </div>
 
-        {/* RIGHT — visual card */}
+        {/* RIGHT — team photo */}
         <div
-          className="animate-fade-in delay-300"
+          className="animate-fade-in delay-300 hero-image"
           style={{
             display: "flex",
             justifyContent: "center",
-            alignItems: "flex-end",
-            position: "relative",
+            alignItems: "center",
           }}
         >
-          <div
+          <img
+            src="/ZESPÓŁ BEZ TŁA.png"
+            alt="Zadowolony zespół SodaWave z butlami CO2"
             style={{
               width: "100%",
-              maxWidth: "460px",
-              minHeight: "400px",
-              borderRadius: "24px",
-              background: "linear-gradient(145deg, #3BBFCF, #1A9BAB)",
-              overflow: "hidden",
-              boxShadow: "0 24px 60px rgba(42,172,188,0.35)",
-              position: "relative",
+              maxWidth: "600px",
+              height: "auto",
+              objectFit: "contain",
+              marginLeft: "auto",
             }}
-          >
-            {/* Silhouettes placeholder */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                paddingBottom: "32px",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "flex-end", gap: "8px", marginBottom: "16px" }}>
-                {[
-                  { h: 190, w: 76 },
-                  { h: 220, w: 86 },
-                  { h: 200, w: 76 },
-                ].map((p, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      width: p.w,
-                      height: p.h,
-                      background: "#fff",
-                      opacity: 0.25,
-                      borderRadius: "50% 50% 0 0",
-                    }}
-                  />
-                ))}
-              </div>
-              <span
-                style={{
-                  color: "rgba(255,255,255,0.65)",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Zespół SodaWave
-              </span>
-            </div>
-
-            {/* Floating chips */}
-            <div
-              style={{
-                position: "absolute",
-                top: "20px",
-                left: "20px",
-                background: "rgba(255,255,255,0.93)",
-                borderRadius: "16px",
-                padding: "8px 16px",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-              }}
-            >
-              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ec4899", display: "inline-block" }} />
-              <span style={{ fontSize: "12px", fontWeight: 700, color: "#374151" }}>Quick Connect</span>
-            </div>
-            <div
-              style={{
-                position: "absolute",
-                top: "20px",
-                right: "20px",
-                background: "rgba(255,255,255,0.93)",
-                borderRadius: "16px",
-                padding: "8px 16px",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-              }}
-            >
-              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#3b82f6", display: "inline-block" }} />
-              <span style={{ fontSize: "12px", fontWeight: 700, color: "#374151" }}>Wkręcane</span>
-            </div>
-
-            {/* Wave decoration */}
-            <svg
-              style={{ position: "absolute", bottom: 0, left: 0, right: 0, width: "100%" }}
-              viewBox="0 0 460 80"
-              fill="none"
-            >
-              <path
-                d="M0 40 Q115 10 230 40 Q345 70 460 40 L460 80 L0 80 Z"
-                fill="white"
-                opacity="0.12"
-              />
-            </svg>
-          </div>
-
-          {/* Floating eco badge */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: "-16px",
-              left: "-16px",
-              background: "#fff",
-              borderRadius: "16px",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-              padding: "12px 20px",
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-            }}
-          >
-            <Leaf size={22} color="#22c55e" />
-            <div>
-              <div style={{ fontSize: "10px", color: "#9ca3af" }}>Usługa</div>
-              <div style={{ fontWeight: 900, color: "#1f2937", fontSize: "13px" }}>Ekologiczna</div>
-            </div>
-          </div>
+          />
         </div>
       </div>
 
@@ -925,7 +1597,7 @@ function MapWithSearch() {
         >
           <input
             type="text"
-            placeholder="Wyszukaj po mieście (np. Warszawa)"
+            placeholder="Wyszukaj po mieście"
             value={searchCity}
             onChange={(e) => setSearchCity(e.target.value)}
             style={{
@@ -974,74 +1646,77 @@ function MapWithSearch() {
 // ─── ABOUT ────────────────────────────────────────────────────────────────
 function AboutSection() {
   const pillars = [
-    { icon: <Leaf size={26} />,     title: "Ekologia",     desc: "Wielokrotne użycie cylindrów CO₂ zamiast jednorazowych butelek. Mniej plastiku, mniejszy ślad węglowy."            },
-    { icon: <Zap size={26} />,      title: "Wygoda",       desc: "Sieć punktów w popularnych sklepach spożywczych. Szybka wymiana bez czekania i zamawiania online."                 },
-    { icon: <Award size={26} />,    title: "Polska firma", desc: "Działamy lokalnie, rozwijamy się w całym kraju. Wspieramy polską sieć handlową i polskich partnerów."              },
-    { icon: <Star size={26} />,     title: "Jakość",       desc: "Oryginalne cylindry, atestowane i bezpieczne. Pełna kontrola jakości i certyfikowane napełnianie."                 },
+    { icon: <Leaf size={26} />,     title: "Ekologia",     desc: "Wielokrotne zmniejszenie zużywania plastiku dzięki używaniu cylindrów z gazem CO₂ oraz syropów. Mniej plastiku to mniejszy ślad węglowy."            },
+    { icon: <Zap size={26} />,      title: "Wygoda",       desc: "Prosto, lokalnie i bez zbędnych kroków Zawsze na miejscu."                 },
+    { icon: <Award size={26} />,    title: "Polska firma", desc: "Działamy lokalnie, rozwijamy się w całym kraju. W 100% Polski kapitał."              },
+    { icon: <Star size={26} />,     title: "Jakość",       desc: "Pewna wymiana, atestowane i bezpieczne. Pełna kontrola i certyfikowany gaz."                 },
   ];
 
   return (
     <Section id="about" title="O nas" subtitle="Kim jesteśmy">
       <div
+        className="about-grid"
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          display: "flex",
+          flexDirection: "column",
           gap: "48px",
           alignItems: "center",
           marginBottom: "56px",
         }}
       >
-        <div>
+        <div className="about-text">
           <p style={{ color: "#4b5563", lineHeight: 1.8, fontSize: "16px", marginBottom: "16px" }}>
-            SodaWave to ekologiczna alternatywa dla napojów gazowanych w
-            jednorazowych butelkach. Jako marka należąca do firmy{" "}
-            <strong style={{ color: "#2AACBC" }}>PRUMET</strong> działamy w
-            duchu Gospodarki Obiegu Zamkniętego (GOZ) – cylindry CO₂ krążą w
-            systemie wymiany, zamiast stawać się odpadem.
+          SodaWave to wygodna i ekologiczna alternatywa dla kupowania wody w plastikowych butelkach. Ułatwiamy codzienne korzystanie z saturatorów, oferując szybką wymianę cylindrów CO₂ oraz możliwość zakupu popularnych syropów SodaStream w dogodnych punktach blisko Ciebie.
+          Naszym celem jest maksymalna wygoda. Przychodzisz do punktu z pustym cylindrem i od razu wymieniasz go na pełny – bez czekania, bez zamawiania i bez komplikacji. Dbamy o to, aby usługa była zawsze dostępna, dzięki czemu możesz korzystać z niej dokładnie wtedy, kiedy tego potrzebujesz.
           </p>
           <p style={{ color: "#4b5563", lineHeight: 1.8, marginBottom: "12px" }}>
-            Zapewniamy kompleksową obsługę dla punktów sprzedaży: od{" "}
-            <strong>wdrożenia</strong> (materiały POS, ekspozytory), przez{" "}
-            <strong>logistykę</strong> (stałe dostawy i odbiór pustych
-            cylindrów), aż po <strong>serwis</strong> i wsparcie opiekuna B2B.
-            Dzięki temu sklepy mogą w prosty sposób włączyć się w GOZ i
-            zaoferować klientom wygodną wymianę cylindrów oraz oryginalne
-            syropy.
+          Działamy w wielu miastach i stale rozwijamy sieć punktów wymiany, aby dostęp do usługi był coraz łatwiejszy. Każdy cylinder napełniany jest certyfikowanym, bezpiecznym gazem spożywczym CO₂, co gwarantuje wysoką jakość oraz bezpieczeństwo użytkowania w domowych warunkach.
           </p>
-          <p style={{ color: "#6b7280", lineHeight: 1.7, fontSize: "14px" }}>
-            Współpracujemy z największymi sieciami handlowymi w Polsce:
-            Stokrotką, Lewiatanem i Chortenem, budując gęstą sieć punktów
-            SodaWave w całym kraju.
+          <p style={{ color: "#4b5563", lineHeight: 1.8, marginBottom: "12px" }}>
+          SodaWave to także świadomy wybór dla środowiska. Wymiana cylindrów i korzystanie z saturatorów pozwala ograniczyć ilość jednorazowych plastikowych butelek, zmniejszyć zużycie plastiku oraz wspiera ideę gospodarki obiegu zamkniętego. To prosty sposób na bardziej ekologiczne codzienne nawyki bez rezygnowania z komfortu i z realną oszczędnością.
+          Dbamy o każdy detal naszej usługi, również ten wizualny. Nasze ekspozytory wykonane są w całości z kartonu pochodzącego z recyklingu i po zakończeniu użytkowania nadają się do ponownego przetworzenia. Dzięki temu także sposób prezentacji usługi pozostaje zgodny z ideą odpowiedzialności środowiskowej.
           </p>
+          <p style={{ color: "#6b7280", lineHeight: 1.7, fontSize: "15px" }}>
+          Chcemy, aby przygotowanie ulubionych napojów w domu było proste, szybkie i odpowiedzialne. Dlatego łączymy wygodę, dostępność, realną oszczędność i ekologię w jednym rozwiązaniu.
+          SodaWave – poczuj falę orzeźwienia razem z nami.
+          </p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              marginTop: "20px",
+              flexWrap: "wrap",
+            }}
+          >
+            <img
+              src="/Logo SodaWave bez tła.png"
+              alt="Logo SodaWave"
+              style={{ height: "42px", width: "auto" }}
+            />
+            <span style={{ fontWeight: 400, color: "#4b5563", fontSize: "14px" }}>
+              - poczuj falę orzeźwienia razem z nami.
+            </span>
+          </div>
         </div>
 
         <div
+          className="about-image"
           style={{
-            background: "linear-gradient(135deg, #3BBFCF, #1A9BAB)",
-            borderRadius: "24px",
-            padding: "32px",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          {[
-            ["NIP",    "8252205177"         ],
-            ["Firma",  "PRUMET"             ],
-            ["Telefon","+48 695 864 734"    ],
-            ["Model",  "Sieć punktów wymiany"],
-          ].map(([k, v]) => (
-            <div
-              key={k}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                borderBottom: "1px solid rgba(255,255,255,0.18)",
-                paddingBottom: "12px",
-                marginBottom: "12px",
-              }}
-            >
-              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", fontWeight: 600 }}>{k}</span>
-              <span style={{ color: "#fff", fontSize: "13px", fontWeight: 700 }}>{v}</span>
-            </div>
-          ))}
+          <img
+            src="/KOŁO BEZ TŁA ZMIANA 4.png"
+            alt="SodaWave – grafika koła z falą"
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+              objectFit: "contain",
+            }}
+          />
         </div>
       </div>
 
@@ -1103,36 +1778,41 @@ function AboutSection() {
 
 // ─── OFFER ────────────────────────────────────────────────────────────────
 function OfferSection() {
+  const [openFaqIndex, setOpenFaqIndex] = useState(0);
+
   return (
     <Section id="offer" title="Nasza oferta" subtitle="Produkty" light>
       <div
         className="offer-grid"
         style={{
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 2fr) minmax(0, 1.2fr)",
-          gap: "28px",
+          gap: "24px",
           alignItems: "stretch",
         }}
       >
-        {/* Produkty */}
+        {/* Cylinder Quick Connect */}
         <div
+          className="offer-card offer-card--pink"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "18px",
+            background: "#fdf2f8",
+            border: "2px solid #f9a8d4",
+            borderRadius: "24px",
+            padding: "20px 20px 18px",
+            boxShadow: "0 14px 40px rgba(219, 39, 119, 0.15)",
+            display: "flex",
+            flexDirection: "row",
+            gap: "16px",
+            alignItems: "stretch",
+            position: "relative",
+            overflow: "hidden",
           }}
         >
-          {/* Cylinder Quick Connect */}
           <div
+            className="offer-card__content"
             style={{
-              background: "#fdf2f8",
-              border: "2px solid #f9a8d4",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 14px 40px rgba(219, 39, 119, 0.15)",
+              flex: "0 0 55%",
               display: "flex",
               flexDirection: "column",
-              gap: "12px",
+              gap: "10px",
             }}
           >
             <div
@@ -1144,10 +1824,14 @@ function OfferSection() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#fff",
+                overflow: "hidden",
               }}
             >
-              <RefreshCw size={26} />
+              <img
+                src="/quick_connect.png"
+                alt="Cylinder Quick Connect"
+                style={{ width: "100%", height: "100%", objectFit: "contain" }}
+              />
             </div>
             <div>
               <h3
@@ -1167,72 +1851,78 @@ function OfferSection() {
                   lineHeight: 1.7,
                 }}
               >
-                Szybki montaż, pasuje do nowych saturatorów. Idealny do modeli z
-                systemem Quick Connect.
+                Szybki montaż, pasuje do modeli saturatorów z systemem Quick
+                Connect.
               </p>
             </div>
             <div
               style={{
-                marginTop: "8px",
+                marginTop: "4px",
                 display: "flex",
                 flexWrap: "wrap",
                 gap: "8px",
                 fontSize: "11px",
               }}
             >
-              <span
-                style={{
-                  padding: "4px 10px",
-                  borderRadius: "999px",
-                  background: "#f9a8d4",
-                  color: "#4b5563",
-                  fontWeight: 700,
-                }}
-              >
-                60 L napoju
-              </span>
-              <span
-                style={{
-                  padding: "4px 10px",
-                  borderRadius: "999px",
-                  background: "#fee2e2",
-                  color: "#b91c1c",
-                  fontWeight: 700,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "4px",
-                }}
-              >
-                <Leaf size={12} /> Ekologia
-              </span>
-              <span
-                style={{
-                  padding: "4px 10px",
-                  borderRadius: "999px",
-                  background: "#dcfce7",
-                  color: "#166534",
-                  fontWeight: 700,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "4px",
-                }}
-              >
-                <Zap size={12} /> Oszczędność
-              </span>
+              {[
+                "60 L napoju",
+                "Ekologia",
+                "Oszczędność",
+                "Mniej plastiku",
+                "Pasuje do wielu modeli",
+              ].map((label) => (
+                <span
+                  key={label}
+                  style={{
+                    padding: "4px 10px",
+                    borderRadius: "999px",
+                    background: "#f9a8d4",
+                    color: "#4b5563",
+                    fontWeight: 700,
+                  }}
+                >
+                  {label}
+                </span>
+              ))}
             </div>
           </div>
-
-          {/* Cylinder Wkręcany */}
-          <div
+          <img
+            className="offer-card__image"
+            src="/rozowy.png"
+            alt="Cylinder Quick Connect – różowy"
             style={{
-              background: "#eff6ff",
-              border: "2px solid #bfdbfe",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 14px 40px rgba(37, 99, 235, 0.15)",
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              objectPosition: "right bottom",
+            }}
+          />
+        </div>
+
+        {/* Cylinder Wkręcany */}
+        <div
+          className="offer-card offer-card--blue"
+          style={{
+            background: "#eff6ff",
+            border: "2px solid #bfdbfe",
+            borderRadius: "24px",
+            padding: "20px 20px 18px",
+            boxShadow: "0 14px 40px rgba(37, 99, 235, 0.15)",
+            display: "flex",
+            flexDirection: "row",
+            gap: "16px",
+            alignItems: "stretch",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            className="offer-card__content"
+            style={{
+              flex: "0 0 55%",
               display: "flex",
               flexDirection: "column",
-              gap: "12px",
+              gap: "10px",
             }}
           >
             <div
@@ -1244,10 +1934,14 @@ function OfferSection() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#fff",
+                overflow: "hidden",
               }}
             >
-              <Zap size={26} />
+              <img
+                src="/wkręcany.png"
+                alt="Cylinder wkręcany"
+                style={{ width: "100%", height: "100%", objectFit: "contain" }}
+              />
             </div>
             <div>
               <h3
@@ -1267,70 +1961,77 @@ function OfferSection() {
                   lineHeight: 1.7,
                 }}
               >
-                Uniwersalny, pasuje do klasycznych modeli saturatorów. Sprawdzony
-                standard na rynku.
+                Pasuje do modeli saturatorów z systemem wkręcanym.
               </p>
             </div>
             <div
               style={{
-                marginTop: "8px",
+                marginTop: "4px",
                 display: "flex",
                 flexWrap: "wrap",
                 gap: "8px",
                 fontSize: "11px",
               }}
             >
-              <span
-                style={{
-                  padding: "4px 10px",
-                  borderRadius: "999px",
-                  background: "#bfdbfe",
-                  color: "#1e3a8a",
-                  fontWeight: 700,
-                }}
-              >
-                Pasuje do klasycznych gwintów
-              </span>
-              <span
-                style={{
-                  padding: "4px 10px",
-                  borderRadius: "999px",
-                  background: "#dcfce7",
-                  color: "#166534",
-                  fontWeight: 700,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "4px",
-                }}
-              >
-                <Leaf size={12} /> Mniej plastiku
-              </span>
-              <span
-                style={{
-                  padding: "4px 10px",
-                  borderRadius: "999px",
-                  background: "#fef9c3",
-                  color: "#854d0e",
-                  fontWeight: 700,
-                }}
-              >
-                Wymiana zamiast kupna nowego
-              </span>
+              {[
+                "60 L napoju",
+                "Ekologia",
+                "Oszczędność",
+                "Mniej plastiku",
+                "Pasuje do wielu modeli",
+              ].map((label) => (
+                <span
+                  key={label}
+                  style={{
+                    padding: "4px 10px",
+                    borderRadius: "999px",
+                    background: "#bfdbfe",
+                    color: "#1e3a8a",
+                    fontWeight: 700,
+                  }}
+                >
+                  {label}
+                </span>
+              ))}
             </div>
           </div>
-
-          {/* Syropy */}
-          <div
+          <img
+            className="offer-card__image"
+            src="/niebieski.png"
+            alt="Cylinder wkręcany – niebieski"
             style={{
-              background: "#ffffff",
-              border: "2px solid #D6F3F7",
-              borderRadius: "24px",
-              padding: "24px",
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              objectPosition: "right bottom",
+            }}
+          />
+        </div>
+
+        {/* Syropy */}
+        <div
+          className="offer-card offer-card--white"
+          style={{
+            background: "#ffffff",
+            border: "2px solid #D6F3F7",
+            borderRadius: "24px",
+            padding: "20px 20px 18px",
+            display: "flex",
+            flexDirection: "row",
+            gap: "16px",
+            alignItems: "stretch",
+            boxShadow: "0 12px 32px rgba(15, 118, 110, 0.12)",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            className="offer-card__content"
+            style={{
+              flex: "0 0 55%",
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
-              gap: "12px",
-              boxShadow: "0 12px 32px rgba(15, 118, 110, 0.12)",
+              gap: "10px",
             }}
           >
             <div
@@ -1360,12 +2061,12 @@ function OfferSection() {
               style={{
                 fontSize: "13px",
                 color: "#4b5563",
-                textAlign: "center",
+                textAlign: "left",
                 lineHeight: 1.7,
               }}
             >
-              Oryginalne syropy do saturatorów w popularnych smakach: Pepsi,
-              Mirinda, 7UP oraz Lemoniada.
+              Syropy w wielu smakach: Pepsi, Mirinda, 7UP, Lemoniada, Mountain
+              Dew, Pepsi Zero Cukru.
             </p>
             <div
               style={{
@@ -1373,11 +2074,18 @@ function OfferSection() {
                 display: "flex",
                 flexWrap: "wrap",
                 gap: "8px",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 fontSize: "11px",
               }}
             >
-              {["Pepsi", "Mirinda", "7UP", "Lemoniada"].map((name) => (
+              {[
+                "Pepsi",
+                "Mirinda",
+                "7UP",
+                "Mountain Dew",
+                "Lemoniada",
+                "Pepsi Zero",
+              ].map((name) => (
                 <span
                   key={name}
                   style={{
@@ -1393,20 +2101,18 @@ function OfferSection() {
                 </span>
               ))}
             </div>
-            <span
-              style={{
-                background: "#D6F3F7",
-                color: "#1A9BAB",
-                fontSize: "11px",
-                fontWeight: 700,
-                padding: "4px 12px",
-                borderRadius: "999px",
-                marginTop: "6px",
-              }}
-            >
-              Dostępny w punktach
-            </span>
           </div>
+          <img
+            className="offer-card__image"
+            src="/pepsi.png"
+            alt="Syropy SodaStream – zestaw Pepsi"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              objectPosition: "right bottom",
+            }}
+          />
         </div>
 
         {/* Box z ekologią/oszczędnością */}
@@ -1438,9 +2144,8 @@ function OfferSection() {
               color: "rgba(255,255,255,0.85)",
             }}
           >
-            Wymiana cylindrów zamiast kupowania nowych zmniejsza ilość odpadów i
-            pozwala zaoszczędzić nawet kilkadziesiąt procent w porównaniu z
-            wodą gazowaną w butelkach PET.
+           Wymiana cylindrów to mniej odpadów i realne oszczędności. Przygotowując napoje w domu, obniżasz koszt jednego litra w porównaniu z wodą gazowaną w plastikowych butelkach. Jeden cylinder wystarcza nawet na 60 litrów wody, a jeden syrop pozwala przygotować do 9 litrów napoju – bez generowania dodatkowych opakowań PET.
+
           </p>
           <ul
             style={{
@@ -1473,7 +2178,7 @@ function OfferSection() {
               >
                 <Zap size={12} />
               </span>
-              Niższy koszt 1 litra napoju w porównaniu z butelkami sklepowymi.
+              Niższy koszt 1 litra napoju w porównaniu z butelkami sklepowymi
             </li>
             <li
               style={{
@@ -1493,10 +2198,53 @@ function OfferSection() {
                   justifyContent: "center",
                 }}
               >
-                <Leaf size={12} />
+                <Droplets size={12} />
               </span>
-              Jeden cylinder to nawet do 60 litrów napoju bez dodatkowych
-              butelek.
+              Jeden cylinder to nawet do 60 litrów wody gazowanej bez dodatkowych opłat
+            </li>
+            <li
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <span
+                style={{
+                  width: "18px",
+                  height: "18px",
+                  borderRadius: "999px",
+                  background: "rgba(255,255,255,0.16)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Building2 size={12} />
+              </span>
+              Wygoda i oszczędność miejsca w domu bez konieczności przechowywania zapasów butelek
+            </li>
+            <li
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <span
+                style={{
+                  width: "18px",
+                  height: "18px",
+                  borderRadius: "999px",
+                  background: "rgba(255,255,255,0.16)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Star size={12} />
+              </span>
+              Pełna kontrola nad stopniem nagazowania wody, dopasowana do własnych preferencji
             </li>
           </ul>
         </div>
@@ -1504,6 +2252,7 @@ function OfferSection() {
 
       {/* FAQ pod ofertą */}
       <div
+        id="faq"
         style={{
           marginTop: "40px",
           paddingTop: "24px",
@@ -1544,35 +2293,172 @@ function OfferSection() {
             background: "#F9FAFB",
             borderRadius: "18px",
             border: "1px solid #E5E7EB",
-            padding: "16px 18px",
+            padding: "8px 10px",
           }}
         >
-          <p
+          {FAQ_ITEMS.map((item, index) => {
+            const isOpen = openFaqIndex === index;
+            return (
+              <div
+                key={item.question}
+                style={{
+                  borderRadius: "14px",
+                  border: "1px solid #E5E7EB",
+                  background: "#ffffff",
+                  marginBottom: "8px",
+                  overflow: "hidden",
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOpenFaqIndex(isOpen ? -1 : index)
+                  }
+                  style={{
+                    width: "100%",
+                    padding: "10px 14px",
+                    background: "transparent",
+                    border: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "13px",
+                      fontWeight: 700,
+                      color: "#111827",
+                      textAlign: "left",
+                    }}
+                  >
+                    {item.question}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "18px",
+                      color: "#6b7280",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    {isOpen ? "−" : "+"}
+                  </span>
+                </button>
+                <div
+                  style={{
+                    maxHeight: isOpen ? "600px" : "0",
+                    overflow: "hidden",
+                    transition: "max-height 0.3s ease",
+                  }}
+                >
+                  <div
+                    style={{
+                      padding: isOpen ? "0 14px 12px" : "0 14px 0",
+                      fontSize: "13px",
+                      color: "#4B5563",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {item.type === "long" ? (
+                      <>
+                        <p style={{ marginBottom: "8px" }}>
+                          Różnica między cylindrami dotyczy sposobu montażu w
+                          saturatorze. Wszystkie dostępne na rynku saturatory
+                          można podzielić na dwa typy, w zależności od rodzaju
+                          mocowania cylindra: wkręcane oraz wciskane (Quick
+                          Connect).
+                        </p>
+                        <p style={{ marginBottom: "8px" }}>
+                          <strong>Cylinder wkręcany</strong> – najczęściej
+                          oznaczony kolorem niebieskim. Montuje się go poprzez
+                          wkręcenie do saturatora.
+                        </p>
+                        <p style={{ marginBottom: "8px" }}>
+                          <strong>Cylinder Quick Connect</strong> – oznaczony
+                          kolorem różowym. Jest to system wciskany,
+                          umożliwiający szybki i prosty montaż bez wkręcania.
+                        </p>
+                        <p style={{ marginBottom: "8px" }}>
+                          W punktach SodaWave cylindry są łatwe do
+                          rozróżnienia:
+                        </p>
+                        <ul
+                          style={{
+                            paddingLeft: "18px",
+                            marginBottom: "8px",
+                          }}
+                        >
+                          <li>
+                            cylindry wkręcane (niebieskie) znajdują się w
+                            dolnej części ekspozytora i posiadają niebieską
+                            plombę,
+                          </li>
+                          <li>
+                            cylindry Quick Connect (różowe) umieszczone są
+                            wyżej i posiadają różową plombę.
+                          </li>
+                        </ul>
+                        <p>
+                          Jeśli nie masz pewności, który cylinder pasuje do
+                          Twojego saturatora, obsługa punktu chętnie pomoże w
+                          wyborze właściwego wariantu.
+                        </p>
+                      </>
+                    ) : (
+                      <p>{item.answer}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div
+          style={{
+            marginTop: "18px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => scroll("#map")}
             style={{
-              fontSize: "14px",
+              borderRadius: "999px",
+              border: "none",
+              padding: "10px 24px",
+              background: "#2AACBC",
+              color: "#ffffff",
               fontWeight: 700,
-              marginBottom: "6px",
-              color: "#111827",
+              fontSize: "14px",
+              cursor: "pointer",
+              boxShadow: "0 8px 24px rgba(42,172,188,0.35)",
+              fontFamily: "inherit",
+              transition: "background 0.2s, transform 0.1s, box-shadow 0.2s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#1A9BAB")}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "#2AACBC";
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow =
+                "0 8px 24px rgba(42,172,188,0.35)";
+            }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.transform = "translateY(1px)";
+              e.currentTarget.style.boxShadow =
+                "0 4px 16px rgba(42,172,188,0.3)";
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow =
+                "0 8px 24px rgba(42,172,188,0.35)";
             }}
           >
-            Jaka jest różnica między cylindrem niebieskim a różowym?
-          </p>
-          <p
-            style={{
-              fontSize: "13px",
-              color: "#4B5563",
-              lineHeight: 1.7,
-            }}
-          >
-            Cylinder <strong>różowy</strong> to system{" "}
-            <strong>Quick Connect</strong> – specjalne złącze „klik”, które
-            pasuje do nowych modeli saturatorów i umożliwia bardzo szybki
-            montaż. Cylinder <strong>niebieski</strong> jest{" "}
-            <strong>wkręcany</strong> i posiada klasyczny gwint, dzięki czemu
-            współpracuje z większością tradycyjnych urządzeń do gazowania
-            wody. Oba cylindry zawierają tę samą ilość gazu CO₂, różnią się
-            jedynie typem mocowania do urządzenia.
-          </p>
+            Znajdź najbliższy punkt
+          </button>
         </div>
       </div>
     </Section>
@@ -1595,10 +2481,14 @@ function B2BSection() {
   };
 
   const benefits = [
-    "Brak inwestycji",
-    "Darmowy ekspozytor",
-    "Zysk netto ok. 6.32 zł na wymianie",
-    "Obsługa 24/7",
+    "Brak inwestycji własnych",
+    "Stały, przewidywalny dochód",
+    "Obsługa operacyjna 24/7 – pełne wsparcie logistyczne i serwisowe po naszej stronie",
+    "Regularna reklama punktu w mediach, zwiększająca jego rozpoznawalność i ruch klientów",
+    "Przyciąganie nowych klientów dzięki popularnej i poszukiwanej usłudze",
+    "Utożsamienie punktu z aktualnymi trendami ekologicznymi i ideą gospodarki obiegu zamkniętego",
+    "Brak dodatkowej obsługi personelu – prosty i szybki proces wymiany",
+    "Elastyczna współpraca – możliwość zakończenia w dowolnym momencie, bez kosztów i zobowiązań",
   ];
 
   const nipPattern = /^[0-9]{10}$/;
@@ -1916,11 +2806,217 @@ function B2BSection() {
   );
 }
 
+// ─── SEO / REGIONS ─────────────────────────────────────────────────────────
+function SeoSection() {
+  const [isSectionOpen, setIsSectionOpen] = useState(false);
+  const [openRegion, setOpenRegion] = useState(SEO_REGIONS[0]?.name ?? null);
+
+  return (
+    <section
+      className={`seo-section${isSectionOpen ? " seo-section--open" : ""}`}
+      style={{
+        background: "#F9FAFB",
+        padding: isSectionOpen ? "24px 0 48px" : "24px 0",
+        marginTop: "0",
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        <button
+          type="button"
+          onClick={() => setIsSectionOpen(!isSectionOpen)}
+          aria-expanded={isSectionOpen}
+          aria-controls="seo-content-wrapper"
+          id="seo-toggle"
+          style={{
+            width: "100%",
+            background: "none",
+            border: "none",
+            padding: 0,
+            cursor: "pointer",
+            fontFamily: "inherit",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            flexWrap: "wrap",
+          }}
+        >
+          <span
+            style={{
+              fontSize: "1.6rem",
+              fontWeight: 900,
+              color: "#111827",
+              textAlign: "center",
+            }}
+          >
+            Wymiana cylindrów CO₂ – znajdź nas w swoim mieście
+          </span>
+          <span
+            style={{
+              fontSize: "1.4rem",
+              color: "#6b7280",
+              lineHeight: 1,
+            }}
+          >
+            {isSectionOpen ? "−" : "+"}
+          </span>
+        </button>
+
+        <div
+          id="seo-content-wrapper"
+          className={`seo-content-wrapper${isSectionOpen ? " seo-content-wrapper--open" : ""}`}
+          role="region"
+          aria-labelledby="seo-toggle"
+        >
+          <div className="seo-content-inner">
+            <p
+              style={{
+                textAlign: "center",
+                maxWidth: "720px",
+                margin: "24px auto 28px",
+                fontSize: "13px",
+                color: "#6b7280",
+              }}
+            >
+              Poniżej znajdziesz listę miast, w których dostępne są punkty wymiany
+              cylindrów SodaWave oraz sprzedaży syropów do saturatorów. Lista ma
+              charakter informacyjny i jest na bieżąco rozwijana wraz z rozwojem
+              sieci.
+            </p>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          {SEO_REGIONS.map((region) => {
+            const isOpen = openRegion === region.name;
+            return (
+              <div
+                key={region.name}
+                style={{
+                  borderRadius: "16px",
+                  border: "1px solid #E5E7EB",
+                  background: "#ffffff",
+                  overflow: "hidden",
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOpenRegion(isOpen ? null : region.name)
+                  }
+                  style={{
+                    width: "100%",
+                    padding: "10px 16px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    background: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      color: "#111827",
+                      textAlign: "left",
+                    }}
+                  >
+                    {region.name}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "18px",
+                      color: "#6b7280",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    {isOpen ? "−" : "+"}
+                  </span>
+                </button>
+                <div
+                  style={{
+                    maxHeight: isOpen ? "800px" : "0",
+                    overflow: "hidden",
+                    transition: "max-height 0.3s ease",
+                    borderTop: isOpen ? "1px solid #E5E7EB" : "none",
+                  }}
+                >
+                  <div
+                    className="seo-city-grid"
+                    style={{
+                      padding: isOpen ? "12px 16px 14px" : "0 16px",
+                      display: "grid",
+                      gridTemplateColumns:
+                        "repeat(auto-fit, minmax(120px, 1fr))",
+                      gap: "6px 16px",
+                      fontSize: "12px",
+                      color: "#4b5563",
+                    }}
+                  >
+                    {region.cities.map((city) => (
+                      <span key={city}>{city}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div
+          style={{
+            marginTop: "28px",
+            fontSize: "12px",
+            color: "#666666",
+            lineHeight: 1.7,
+            maxWidth: "900px",
+          }}
+        >
+          <p style={{ marginBottom: "10px" }}>
+            Wymiana cylindrów CO₂ do saturatorów to usługa, która umożliwia
+            szybki i wygodny dostęp do wody gazowanej bez konieczności
+            kupowania plastikowych butelek. Coraz więcej użytkowników wybiera
+            lokalne punkty wymiany cylindrów CO₂, ponieważ pozwala to
+            oszczędzać czas, pieniądze i ograniczać ilość odpadów. Wymiana
+            cylindra odbywa się bez zamawiania, bez oczekiwania i bez
+            formalności.
+          </p>
+          <p style={{ marginBottom: "10px" }}>
+            Dostępna wymiana cylindra CO₂ do saturatora realizowana jest w
+            punktach stacjonarnych, gdzie wystarczy oddać pusty cylinder i
+            odebrać pełny. Dzięki temu wymiana cylindrów CO₂ od ręki jest
+            możliwa wtedy, kiedy jest potrzebna. W punktach obsługiwane są
+            różne typy cylindrów, w tym cylindry wkręcane oraz cylindry Quick
+            Connect. Popularna jest również wymiana cylindrów SodaStream,
+            obejmująca cylindry kompatybilne z najczęściej spotykanymi modelami
+            urządzeń.
+          </p>
+          <p>
+            Jeden cylinder pozwala przygotować nawet do 60 litrów wody
+            gazowanej, co oznacza niższy koszt jednego litra napoju w
+            porównaniu z wodą kupowaną w butelkach sklepowych. Domowa woda
+            gazowana bez plastiku to praktyczna alternatywa dla zgrzewek PET. W
+            ofercie punktów dostępne są również syropy do saturatorów, w tym
+            syropy SodaStream, które umożliwiają przygotowanie różnorodnych
+            napojów gazowanych w domu. Rozbudowana sieć punktów wymiany w
+            Polsce sprawia, że usługa jest łatwo dostępna lokalnie w wielu
+            miastach. To rozwiązanie bezpieczne, ekologiczne i zgodne z ideą
+            gospodarki obiegu zamkniętego.
+          </p>
+        </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── CONTACT ──────────────────────────────────────────────────────────────
 function ContactSection() {
   const contacts = [
     { icon: <Phone size={26} />, title: "Telefon", value: "+48 695 864 734",    href: "tel:+48695864734"             },
-    { icon: <Mail size={26} />,  title: "E-mail",  value: "kontakt@sodawave.pl", href: "mailto:kontakt@sodawave.pl"   },
+    { icon: <Mail size={26} />,  title: "E-mail",  value: "sodawave@sodawave.pl", href: "mailto:sodawave@sodawave.pl"   },
     { icon: <MapPin size={26} />,title: "Siedziba", value: "Polska",             href: "#map"                         },
   ];
 
@@ -2116,8 +3212,69 @@ function Footer() {
             <SodaLogo white />
             <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "13px", marginTop: "16px", lineHeight: 1.7 }}>
               Nowoczesna i ekologiczna usługa wymiany cylindrów CO₂ oraz
-              sprzedaży syropów do saturatorów.
+              sprzedaży syropów do saturatorów. Dostępne w wielu miastach w
+              Polsce – szybko, wygodnie i bez plastiku.
             </p>
+            <div
+              style={{
+                display: "flex",
+                gap: "12px",
+                marginTop: "18px",
+              }}
+            >
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                data-nosnippet
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  borderRadius: "999px",
+                  background: "rgba(255,255,255,0.12)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#ffffff",
+                  transition: "background 0.2s, transform 0.1s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.22)")}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(255,255,255,0.12)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+                onMouseDown={(e) => (e.currentTarget.style.transform = "translateY(1px)")}
+                onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+              >
+                <Instagram size={18} />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                data-nosnippet
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  borderRadius: "999px",
+                  background: "rgba(255,255,255,0.12)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#ffffff",
+                  transition: "background 0.2s, transform 0.1s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.22)")}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(255,255,255,0.12)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+                onMouseDown={(e) => (e.currentTarget.style.transform = "translateY(1px)")}
+                onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+              >
+                <Facebook size={18} />
+              </a>
+            </div>
           </div>
 
           <div>
@@ -2136,6 +3293,28 @@ function Footer() {
                   </a>
                 </li>
               ))}
+              <li style={{ marginBottom: "8px" }}>
+                <a
+                  href="#contact"
+                  onClick={(e) => { e.preventDefault(); scroll("#contact"); }}
+                  style={{ color: "rgba(255,255,255,0.55)", fontSize: "14px", transition: "color 0.2s" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}
+                >
+                  Kontakt
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#faq"
+                  onClick={(e) => { e.preventDefault(); scroll("#faq"); }}
+                  style={{ color: "rgba(255,255,255,0.55)", fontSize: "14px", transition: "color 0.2s" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}
+                >
+                  FAQ
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -2143,8 +3322,9 @@ function Footer() {
             <h4 style={{ color: "#fff", fontWeight: 900, marginBottom: "16px" }}>Dane firmy</h4>
             <ul style={{ listStyle: "none", padding: 0, color: "rgba(255,255,255,0.55)", fontSize: "13px" }}>
               {[
-                { label: "Firma",   val: "PRUMET"          },
+                { label: "Firma",   val: "PRUMET | operator sieci SodaWave" },
                 { label: "NIP",     val: "8252205177"       },
+                { label: "Adres",   val: "Łazy, 21-400 Łuków, Polska" },
               ].map(({ label, val }) => (
                 <li key={label} style={{ marginBottom: "8px" }}>
                   <span style={{ color: "#fff", fontWeight: 600 }}>{label}: </span>{val}
@@ -2172,6 +3352,19 @@ function Footer() {
                   sodawave@sodawave.pl
                 </a>
               </li>
+              <li style={{ marginTop: "8px" }}>
+                <a
+                  href="#"
+                  style={{
+                    color: "rgba(255,255,255,0.55)",
+                    fontSize: "12px",
+                    textDecoration: "underline",
+                    textDecorationStyle: "dotted",
+                  }}
+                >
+                  Polityka prywatności
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -2186,12 +3379,21 @@ function Footer() {
             gap: "8px",
           }}
         >
-          <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "12px" }}>
-            © {new Date().getFullYear()} SodaWave / PRUMET. Wszelkie prawa zastrzeżone.
+          <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "20px" }}>
+            © 2026 SodaWave | PRUMET wszelkie prawa zastrzeżone
           </p>
-          <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "12px" }}>
-            NIP: 8252205177 | Polska
-          </p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              color: "rgba(255,255,255,0.25)",
+              fontSize: "12px",
+            }}
+          >
+            <Leaf size={12} color="#bbf7d0" />
+            <span>Działamy zgodnie z ideą gospodarki obiegu zamkniętego</span>
+          </div>
         </div>
       </div>
     </footer>
@@ -2201,7 +3403,12 @@ function Footer() {
 // ─── APP ──────────────────────────────────────────────────────────────────
 export default function App() {
   return (
-    <div style={{ fontFamily: "'Nunito', 'Poppins', 'Segoe UI', sans-serif", minHeight: "100vh" }}>
+    <div
+      style={{
+        fontFamily: "'Nunito', 'Poppins', 'Segoe UI', sans-serif",
+        minHeight: "100vh",
+      }}
+    >
       <Navbar />
       <Hero />
       <MapSection />
@@ -2209,6 +3416,7 @@ export default function App() {
       <OfferSection />
       <B2BSection />
       <ContactSection />
+      <SeoSection />
       <Footer />
     </div>
   );
