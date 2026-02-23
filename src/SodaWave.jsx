@@ -1711,15 +1711,15 @@ function AboutSection() {
               alignItems: "center",
               gap: "10px",
               marginTop: "20px",
-              flexWrap: "wrap",
+              flexWrap: "nowrap",
             }}
           >
             <img
-              src="\logo_dlugopis.png"
+              src="/logo_dlugopis.png"
               alt="Logo SodaWave"
-              style={{ height: "42px", width: "auto" }}
+              style={{ height: "42px", width: "auto", flexShrink: 0 }}
             />
-            <span style={{ fontWeight: 400, color: "#4b5563", fontSize: "14px" }}>
+            <span style={{ fontWeight: 400, color: "#4b5563", fontSize: "14px", whiteSpace: "nowrap" }}>
               - poczuj falę orzeźwienia razem z nami.
             </span>
           </div>
@@ -1810,6 +1810,8 @@ function OfferSection() {
       <div
         className="offer-grid"
         style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
           gap: "24px",
           alignItems: "stretch",
         }}
@@ -1821,24 +1823,24 @@ function OfferSection() {
             background: "#fdf2f8",
             border: "2px solid #f9a8d4",
             borderRadius: "24px",
-            padding: "20px 20px 18px",
             boxShadow: "0 14px 40px rgba(219, 39, 119, 0.15)",
             display: "flex",
             flexDirection: "row",
-            gap: "16px",
-            alignItems: "stretch",
             position: "relative",
-            overflow: "visible",
+            overflow: "hidden",
+            minHeight: "420px", // Stała wysokość dla proporcji butli
           }}
         >
           <div
             className="offer-card__content"
             style={{
-              flex: "0 0 48%",
+              flex: "0 0 55%",
+              padding: "32px 0 32px 24px",
               display: "flex",
               flexDirection: "column",
               gap: "10px",
-              justifyContent: "flex-start",
+              position: "relative",
+              zIndex: 2,
             }}
           >
             <div
@@ -1860,83 +1862,40 @@ function OfferSection() {
               />
             </div>
             <div>
-              <h3
-                style={{
-                  fontSize: "1.1rem",
-                  fontWeight: 900,
-                  color: "#be185d",
-                  marginBottom: "4px",
-                }}
-              >
+              <h3 style={{ fontSize: "1.1rem", fontWeight: 900, color: "#be185d", marginBottom: "4px" }}>
                 Cylinder Quick Connect
               </h3>
-              <p
-                style={{
-                  fontSize: "13px",
-                  color: "#4b5563",
-                  lineHeight: 1.7,
-                }}
-              >
-                Szybki montaż, pasuje do modeli saturatorów z systemem Quick
-                Connect.
+              <p style={{ fontSize: "13px", color: "#4b5563", lineHeight: 1.7 }}>
+                Szybki montaż, pasuje do modeli saturatorów z systemem Quick Connect.
               </p>
             </div>
-            <div
-              style={{
-                marginTop: "4px",
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "8px",
-                fontSize: "11px",
-              }}
-            >
-              {[
-                "60 L napoju",
-                "Ekologia",
-                "Oszczędność",
-                "Mniej plastiku",
-                "Pasuje do wielu modeli",
-              ].map((label) => (
-                <span
-                  key={label}
-                  style={{
-                    padding: "4px 10px",
-                    borderRadius: "999px",
-                    background: "#f9a8d4",
-                    color: "#4b5563",
-                    fontWeight: 700,
-                  }}
-                >
+            <div style={{ marginTop: "4px", display: "flex", flexWrap: "wrap", gap: "8px", fontSize: "11px" }}>
+              {["60 L napoju", "Ekologia", "Oszczędność", "Mniej plastiku", "Pasuje do wielu modeli"].map((label) => (
+                <span key={label} style={{ padding: "4px 10px", borderRadius: "999px", background: "#f9a8d4", color: "#4b5563", fontWeight: 700 }}>
                   {label}
                 </span>
               ))}
             </div>
           </div>
-          <div
+          
+          {/* OBRAZEK - absolutnie przypięty do SUFITU */}
+          <img
+            className="offer-card__image"
+            src="/rozowy.png"
+            alt="Cylinder Quick Connect – różowy"
             style={{
               position: "absolute",
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: "48%",
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "flex-end",
-              padding: "20px 20px 18px",
+              right: "-15px",
+              top: "-15px", // Gwarantuje uderzenie w sam sufit (niweluje puste piksele pliku)
+              width: "55%",
+              height: "115%", // Pociągnie zdjęcie od sufitu aż po samą podłogę
+              objectFit: "contain",
+              objectPosition: "right top", // Kotwica na samej górze
+              zIndex: 1,
+              pointerEvents: "none",
+              transform: "translateX(-10px)", // Mocno powiększone
             }}
-          >
-            <img
-              className="offer-card__image"
-              src="/rozowy.png"
-              alt="Cylinder Quick Connect – różowy"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-                objectPosition: "right bottom",
-              }}
-            />
-          </div>
+          />
         </div>
 
         {/* Cylinder Wkręcany */}
@@ -1946,24 +1905,24 @@ function OfferSection() {
             background: "#eff6ff",
             border: "2px solid #bfdbfe",
             borderRadius: "24px",
-            padding: "20px 20px 18px",
             boxShadow: "0 14px 40px rgba(37, 99, 235, 0.15)",
             display: "flex",
             flexDirection: "row",
-            gap: "16px",
-            alignItems: "stretch",
             position: "relative",
-            overflow: "visible",
+            overflow: "hidden",
+            minHeight: "420px",
           }}
         >
           <div
             className="offer-card__content"
             style={{
-              flex: "0 0 48%",
+              flex: "0 0 55%",
+              padding: "32px 0 32px 24px",
               display: "flex",
               flexDirection: "column",
               gap: "10px",
-              justifyContent: "flex-start",
+              position: "relative",
+              zIndex: 2,
             }}
           >
             <div
@@ -1985,82 +1944,40 @@ function OfferSection() {
               />
             </div>
             <div>
-              <h3
-                style={{
-                  fontSize: "1.1rem",
-                  fontWeight: 900,
-                  color: "#1d4ed8",
-                  marginBottom: "4px",
-                }}
-              >
+              <h3 style={{ fontSize: "1.1rem", fontWeight: 900, color: "#1d4ed8", marginBottom: "4px" }}>
                 Cylinder Wkręcany
               </h3>
-              <p
-                style={{
-                  fontSize: "13px",
-                  color: "#4b5563",
-                  lineHeight: 1.7,
-                }}
-              >
+              <p style={{ fontSize: "13px", color: "#4b5563", lineHeight: 1.7 }}>
                 Pasuje do modeli saturatorów z systemem wkręcanym.
               </p>
             </div>
-            <div
-              style={{
-                marginTop: "4px",
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "8px",
-                fontSize: "11px",
-              }}
-            >
-              {[
-                "60 L napoju",
-                "Ekologia",
-                "Oszczędność",
-                "Mniej plastiku",
-                "Pasuje do wielu modeli",
-              ].map((label) => (
-                <span
-                  key={label}
-                  style={{
-                    padding: "4px 10px",
-                    borderRadius: "999px",
-                    background: "#bfdbfe",
-                    color: "#1e3a8a",
-                    fontWeight: 700,
-                  }}
-                >
+            <div style={{ marginTop: "4px", display: "flex", flexWrap: "wrap", gap: "8px", fontSize: "11px" }}>
+              {["60 L napoju", "Ekologia", "Oszczędność", "Mniej plastiku", "Pasuje do wielu modeli"].map((label) => (
+                <span key={label} style={{ padding: "4px 10px", borderRadius: "999px", background: "#bfdbfe", color: "#1e3a8a", fontWeight: 700 }}>
                   {label}
                 </span>
               ))}
             </div>
           </div>
-          <div
+
+          {/* OBRAZEK - absolutnie przypięty do SUFITU */}
+          <img
+            className="offer-card__image"
+            src="/niebieski.png"
+            alt="Cylinder wkręcany – niebieski"
             style={{
               position: "absolute",
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: "48%",
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "flex-end",
-              padding: "20px 20px 18px",
+              right: "-15px",
+              top: "-15px",
+              width: "55%",
+              height: "115%",
+              objectFit: "contain",
+              objectPosition: "right top",
+              zIndex: 1,
+              pointerEvents: "none",
+              transform: "translateX(-10px)", // Mocno powiększone
             }}
-          >
-            <img
-              className="offer-card__image"
-              src="/niebieski.png"
-              alt="Cylinder wkręcany – niebieski"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-                objectPosition: "right bottom",
-              }}
-            />
-          </div>
+          />
         </div>
 
         {/* Syropy */}
@@ -2070,24 +1987,24 @@ function OfferSection() {
             background: "#ffffff",
             border: "2px solid #D6F3F7",
             borderRadius: "24px",
-            padding: "20px 20px 18px",
+            boxShadow: "0 12px 32px rgba(15, 118, 110, 0.12)",
             display: "flex",
             flexDirection: "row",
-            gap: "16px",
-            alignItems: "stretch",
-            boxShadow: "0 12px 32px rgba(15, 118, 110, 0.12)",
             position: "relative",
-            overflow: "visible",
+            overflow: "hidden",
+            minHeight: "420px",
           }}
         >
           <div
             className="offer-card__content"
             style={{
-              flex: "0 0 48%",
+              flex: "0 0 55%",
+              padding: "32px 0 32px 24px",
               display: "flex",
               flexDirection: "column",
               gap: "10px",
-              justifyContent: "flex-start",
+              position: "relative",
+              zIndex: 2,
             }}
           >
             <div
@@ -2104,87 +2021,40 @@ function OfferSection() {
             >
               <Droplets size={26} />
             </div>
-            <h3
-              style={{
-                fontSize: "1.1rem",
-                fontWeight: 900,
-                color: "#0f766e",
-              }}
-            >
+            <h3 style={{ fontSize: "1.1rem", fontWeight: 900, color: "#0f766e" }}>
               Syropy SodaStream
             </h3>
-            <p
-              style={{
-                fontSize: "13px",
-                color: "#4b5563",
-                textAlign: "left",
-                lineHeight: 1.7,
-              }}
-            >
-              Syropy w wielu smakach: Pepsi, Mirinda, 7UP, Lemoniada, Mountain
-              Dew, Pepsi Zero Cukru.
+            <p style={{ fontSize: "13px", color: "#4b5563", textAlign: "left", lineHeight: 1.7 }}>
+              Syropy w wielu smakach: Pepsi, Mirinda, 7UP, Lemoniada, Mountain Dew, Pepsi Zero Cukru.
             </p>
-            <div
-              style={{
-                marginTop: "4px",
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "8px",
-                justifyContent: "flex-start",
-                fontSize: "11px",
-              }}
-            >
-              {[
-                "Pepsi",
-                "Mirinda",
-                "7UP",
-                "Mountain Dew",
-                "Lemoniada",
-                "Pepsi Zero",
-              ].map((name) => (
-                <span
-                  key={name}
-                  style={{
-                    padding: "4px 10px",
-                    borderRadius: "999px",
-                    background: "#F0FBFD",
-                    border: "1px solid #D6F3F7",
-                    color: "#1A9BAB",
-                    fontWeight: 700,
-                  }}
-                >
+            <div style={{ marginTop: "4px", display: "flex", flexWrap: "wrap", gap: "8px", justifyContent: "flex-start", fontSize: "11px" }}>
+              {["Pepsi", "Mirinda", "7UP", "Mountain Dew", "Lemoniada", "Pepsi Zero"].map((name) => (
+                <span key={name} style={{ padding: "4px 10px", borderRadius: "999px", background: "#F0FBFD", border: "1px solid #D6F3F7", color: "#1A9BAB", fontWeight: 700 }}>
                   {name}
                 </span>
               ))}
             </div>
           </div>
-          <div
+
+          {/* PEPSI - powiększona i zrównana z zaworami cylindrów */}
+          <img
+            className="offer-card__image"
+            src="/pepsi.png"
+            alt="Syropy SodaStream – zestaw Pepsi"
             style={{
               position: "absolute",
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: "48%",
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "flex-end",
-              padding: "20px 20px 18px",
+              right: "-5px",
+              top: "15px", // Lekko niżej, by nakrętka Pepsi była na równi z zaworami cylindrów z lewej strony
+              width: "55%",
+              height: "100%",
+              objectFit: "contain",
+              objectPosition: "right top", // Trzyma się góry!
+              transform: "scale(1.1) translateY(201px)", // Mocno powiększone
+              transformOrigin: "top right", // Skalujemy od góry, by nie zepsuć linii
+              zIndex: 1,
+              pointerEvents: "none"
             }}
-          >
-            <img
-              className="offer-card__image"
-              src="/pepsi.png"
-              alt="Syropy SodaStream – zestaw Pepsi"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-                objectPosition: "right bottom",
-                transform: "scale(1.2) translateY(-5%)",
-                transformOrigin: "bottom right",
-              }}
-            />
-          </div>
+          />
         </div>
 
         {/* Box z ekologią/oszczędnością */}
@@ -2195,288 +2065,72 @@ function OfferSection() {
             padding: "26px 24px",
             color: "#fff",
             boxShadow: "0 20px 45px rgba(15, 118, 110, 0.38)",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <Leaf size={26} />
-            <h3
-              style={{
-                fontSize: "1.2rem",
-                fontWeight: 900,
-              }}
-            >
+            <h3 style={{ fontSize: "1.2rem", fontWeight: 900 }}>
               Ekologicznie i oszczędnie
             </h3>
           </div>
-          <p
-            style={{
-              marginTop: "10px",
-              fontSize: "13px",
-              lineHeight: 1.7,
-              color: "rgba(255,255,255,0.85)",
-            }}
-          >
-           Wymiana cylindrów to mniej odpadów i realne oszczędności. Przygotowując napoje w domu, obniżasz koszt jednego litra w porównaniu z wodą gazowaną w plastikowych butelkach. Jeden cylinder wystarcza nawet na 60 litrów wody, a jeden syrop pozwala przygotować do 9 litrów napoju – bez generowania dodatkowych opakowań PET.
-
+          <p style={{ marginTop: "10px", fontSize: "13px", lineHeight: 1.7, color: "rgba(255,255,255,0.85)" }}>
+            Wymiana cylindrów to mniej odpadów i realne oszczędności. Przygotowując napoje w domu, obniżasz koszt jednego litra w porównaniu z wodą gazowaną w plastikowych butelkach. Jeden cylinder wystarcza nawet na 60 litrów wody, a jeden syrop pozwala przygotować do 9 litrów napoju – bez generowania dodatkowych opakowań PET.
           </p>
-          <ul
-            style={{
-              marginTop: "14px",
-              listStyle: "none",
-              padding: 0,
-              display: "flex",
-              flexDirection: "column",
-              gap: "8px",
-              fontSize: "13px",
-            }}
-          >
-            <li
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
-              <span
-                style={{
-                  width: "18px",
-                  height: "18px",
-                  borderRadius: "999px",
-                  background: "rgba(255,255,255,0.16)",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Zap size={12} />
-              </span>
+          <ul style={{ marginTop: "14px", listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "8px", fontSize: "13px" }}>
+            <li style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ width: "18px", height: "18px", borderRadius: "999px", background: "rgba(255,255,255,0.16)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}><Zap size={12} /></span>
               Niższy koszt 1 litra napoju w porównaniu z butelkami sklepowymi
             </li>
-            <li
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
-              <span
-                style={{
-                  width: "18px",
-                  height: "18px",
-                  borderRadius: "999px",
-                  background: "rgba(255,255,255,0.16)",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Droplets size={12} />
-              </span>
+            <li style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ width: "18px", height: "18px", borderRadius: "999px", background: "rgba(255,255,255,0.16)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}><Droplets size={12} /></span>
               Jeden cylinder to nawet do 60 litrów wody gazowanej bez dodatkowych opłat
             </li>
-            <li
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
-              <span
-                style={{
-                  width: "18px",
-                  height: "18px",
-                  borderRadius: "999px",
-                  background: "rgba(255,255,255,0.16)",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Building2 size={12} />
-              </span>
+            <li style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ width: "18px", height: "18px", borderRadius: "999px", background: "rgba(255,255,255,0.16)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}><Building2 size={12} /></span>
               Wygoda i oszczędność miejsca w domu bez konieczności przechowywania zapasów butelek
             </li>
-            <li
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
-              <span
-                style={{
-                  width: "18px",
-                  height: "18px",
-                  borderRadius: "999px",
-                  background: "rgba(255,255,255,0.16)",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Star size={12} />
-              </span>
+            <li style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ width: "18px", height: "18px", borderRadius: "999px", background: "rgba(255,255,255,0.16)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}><Star size={12} /></span>
               Pełna kontrola nad stopniem nagazowania wody, dopasowana do własnych preferencji
             </li>
           </ul>
         </div>
       </div>
 
-      {/* FAQ pod ofertą */}
-      <div
-        id="faq"
-        style={{
-          marginTop: "40px",
-          paddingTop: "24px",
-          borderTop: "1px solid #E5E7EB",
-        }}
-      >
-        <h3
-          style={{
-            fontSize: "1.1rem",
-            fontWeight: 900,
-            color: "#111827",
-            marginBottom: "10px",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-          }}
-        >
-          <span
-            style={{
-              width: "22px",
-              height: "22px",
-              borderRadius: "999px",
-              background: "#D6F3F7",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#2AACBC",
-              fontSize: "14px",
-              fontWeight: 900,
-            }}
-          >
-            ?
-          </span>
+      {/* FAQ */}
+      <div id="faq" style={{ marginTop: "40px", paddingTop: "24px", borderTop: "1px solid #E5E7EB" }}>
+        <h3 style={{ fontSize: "1.1rem", fontWeight: 900, color: "#111827", marginBottom: "10px", display: "flex", alignItems: "center", gap: "8px" }}>
+          <span style={{ width: "22px", height: "22px", borderRadius: "999px", background: "#D6F3F7", display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#2AACBC", fontSize: "14px", fontWeight: 900 }}>?</span>
           FAQ
         </h3>
-        <div
-          style={{
-            background: "#F9FAFB",
-            borderRadius: "18px",
-            border: "1px solid #E5E7EB",
-            padding: "8px 10px",
-          }}
-        >
+        <div style={{ background: "#F9FAFB", borderRadius: "18px", border: "1px solid #E5E7EB", padding: "8px 10px" }}>
           {FAQ_ITEMS.map((item, index) => {
             const isOpen = openFaqIndex === index;
             return (
-              <div
-                key={item.question}
-                style={{
-                  borderRadius: "14px",
-                  border: "1px solid #E5E7EB",
-                  background: "#ffffff",
-                  marginBottom: "8px",
-                  overflow: "hidden",
-                }}
-              >
+              <div key={item.question} style={{ borderRadius: "14px", border: "1px solid #E5E7EB", background: "#ffffff", marginBottom: "8px", overflow: "hidden" }}>
                 <button
                   type="button"
-                  onClick={() =>
-                    setOpenFaqIndex(isOpen ? -1 : index)
-                  }
-                  style={{
-                    width: "100%",
-                    padding: "10px 14px",
-                    background: "transparent",
-                    border: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    cursor: "pointer",
-                    fontFamily: "inherit",
-                  }}
+                  onClick={() => setOpenFaqIndex(isOpen ? -1 : index)}
+                  style={{ width: "100%", padding: "10px 14px", background: "transparent", border: "none", display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", fontFamily: "inherit" }}
                 >
-                  <span
-                    style={{
-                      fontSize: "13px",
-                      fontWeight: 700,
-                      color: "#111827",
-                      textAlign: "left",
-                    }}
-                  >
-                    {item.question}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "18px",
-                      color: "#6b7280",
-                      marginLeft: "10px",
-                    }}
-                  >
-                    {isOpen ? "−" : "+"}
-                  </span>
+                  <span style={{ fontSize: "13px", fontWeight: 700, color: "#111827", textAlign: "left" }}>{item.question}</span>
+                  <span style={{ fontSize: "18px", color: "#6b7280", marginLeft: "10px" }}>{isOpen ? "−" : "+"}</span>
                 </button>
-                <div
-                  style={{
-                    maxHeight: isOpen ? "600px" : "0",
-                    overflow: "hidden",
-                    transition: "max-height 0.3s ease",
-                  }}
-                >
-                  <div
-                    style={{
-                      padding: isOpen ? "0 14px 12px" : "0 14px 0",
-                      fontSize: "13px",
-                      color: "#4B5563",
-                      lineHeight: 1.7,
-                    }}
-                  >
+                <div style={{ maxHeight: isOpen ? "600px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
+                  <div style={{ padding: isOpen ? "0 14px 12px" : "0 14px 0", fontSize: "13px", color: "#4B5563", lineHeight: 1.7 }}>
                     {item.type === "long" ? (
                       <>
-                        <p style={{ marginBottom: "8px" }}>
-                          Różnica między cylindrami dotyczy sposobu montażu w
-                          saturatorze. Wszystkie dostępne na rynku saturatory
-                          można podzielić na dwa typy, w zależności od rodzaju
-                          mocowania cylindra: wkręcane oraz wciskane (Quick
-                          Connect).
-                        </p>
-                        <p style={{ marginBottom: "8px" }}>
-                          <strong>Cylinder wkręcany</strong> – najczęściej
-                          oznaczony kolorem niebieskim. Montuje się go poprzez
-                          wkręcenie do saturatora.
-                        </p>
-                        <p style={{ marginBottom: "8px" }}>
-                          <strong>Cylinder Quick Connect</strong> – oznaczony
-                          kolorem różowym. Jest to system wciskany,
-                          umożliwiający szybki i prosty montaż bez wkręcania.
-                        </p>
-                        <p style={{ marginBottom: "8px" }}>
-                          W punktach SodaWave cylindry są łatwe do
-                          rozróżnienia:
-                        </p>
-                        <ul
-                          style={{
-                            paddingLeft: "18px",
-                            marginBottom: "8px",
-                          }}
-                        >
-                          <li>
-                            cylindry wkręcane (niebieskie) znajdują się w
-                            dolnej części ekspozytora i posiadają niebieską
-                            plombę,
-                          </li>
-                          <li>
-                            cylindry Quick Connect (różowe) umieszczone są
-                            wyżej i posiadają różową plombę.
-                          </li>
+                        <p style={{ marginBottom: "8px" }}>Różnica między cylindrami dotyczy sposobu montażu w saturatorze. Wszystkie dostępne na rynku saturatory można podzielić na dwa typy, w zależności od rodzaju mocowania cylindra: wkręcane oraz wciskane (Quick Connect).</p>
+                        <p style={{ marginBottom: "8px" }}><strong>Cylinder wkręcany</strong> – najczęściej oznaczony kolorem niebieskim. Montuje się go poprzez wkręcenie do saturatora.</p>
+                        <p style={{ marginBottom: "8px" }}><strong>Cylinder Quick Connect</strong> – oznaczony kolorem różowym. Jest to system wciskany, umożliwiający szybki i prosty montaż bez wkręcania.</p>
+                        <p style={{ marginBottom: "8px" }}>W punktach SodaWave cylindry są łatwe do rozróżnienia:</p>
+                        <ul style={{ paddingLeft: "18px", marginBottom: "8px" }}>
+                          <li>cylindry wkręcane (niebieskie) znajdują się w dolnej części ekspozytora i posiadają niebieską plombę,</li>
+                          <li>cylindry Quick Connect (różowe) umieszczone są wyżej i posiadają różową plombę.</li>
                         </ul>
-                        <p>
-                          Jeśli nie masz pewności, który cylinder pasuje do
-                          Twojego saturatora, obsługa punktu chętnie pomoże w
-                          wyborze właściwego wariantu.
-                        </p>
+                        <p>Jeśli nie masz pewności, który cylinder pasuje do Twojego saturatora, obsługa punktu chętnie pomoże w wyborze właściwego wariantu.</p>
                       </>
                     ) : (
                       <p>{item.answer}</p>
@@ -2487,20 +2141,10 @@ function OfferSection() {
             );
           })}
         </div>
-
-        <div
-          style={{
-            marginTop: "18px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-        </div>
       </div>
     </Section>
   );
 }
-
 // ─── B2B ──────────────────────────────────────────────────────────────────
 function B2BSection() {
   const {

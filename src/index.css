@@ -209,19 +209,34 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
   .offer-card {
     flex-direction: column !important;
     align-items: stretch !important;
+    min-height: 0 !important;
   }
 
   .offer-card__content {
     flex: 1 1 auto !important;
     max-width: 100% !important;
     z-index: 2;
+    order: 1;
   }
 
+  /* Na telefonie zdjęcia pod blokami tekstowymi (w przepływie, nie absolute) */
   .offer-card__image {
     position: static !important;
-    width: 100% !important;
+    order: 2;
+    width: auto !important;
+    max-width: 100% !important;
     height: auto !important;
-    margin-top: 12px;
+    max-height: 640px !important;
+    margin-top: 0px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+    align-self: center;
     z-index: 1;
   }
 }
@@ -296,38 +311,43 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
   .offer-card {
     display: flex !important;
     flex-direction: row !important;
-    align-items: stretch !important;
+    align-items: center !important;
     justify-content: space-between !important;
     position: relative;
-    overflow: visible;
-    min-height: 380px;
+    overflow: hidden;
+    min-height: 260px;
   }
 
   .offer-card__content {
-    flex: 0 0 48%;
-    max-width: 48%;
+    flex: 0 0 55%;
+    max-width: 55%;
     position: relative;
     z-index: 2;
-    padding-right: 12px;
+    padding-right: 32px;
   }
 
-  /* Image wrapper is flex child; img fills wrapper */
   .offer-card__image {
-    flex: none;
-    position: relative;
-    right: auto;
-    top: auto;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    right: -20px;
+    top: 10px;
+    width: auto;
+    height: 90%;
     object-fit: contain;
-    object-position: right bottom;
     z-index: 1;
     pointer-events: none;
   }
 
+  /* Dokładniejsze pozycjonowanie butelki syropu */
+  .offer-card__image-container .offer-card__image {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+  }
+
   .offer-card--white .offer-card__image {
-    right: auto;
-    top: auto;
+    right: -15px;
+    top: 10px;
+    height: 90%;
   }
 
   /* 4 karty w jednym rzędzie na wszystkich desktopach */
