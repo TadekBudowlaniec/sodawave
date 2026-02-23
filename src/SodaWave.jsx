@@ -2063,7 +2063,7 @@ function OfferSection() {
           style={{
             background: "linear-gradient(145deg, #3BBFCF, #1A7A8A)",
             borderRadius: "28px",
-            padding: "26px 24px",
+            padding: "32px 24px 26px",
             color: "#fff",
             boxShadow: "0 20px 45px rgba(15, 118, 110, 0.38)",
             display: "flex",
