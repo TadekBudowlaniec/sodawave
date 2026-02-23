@@ -2467,15 +2467,29 @@ function B2BSection() {
   const onSubmit = async (data) => {
     setServerMsg(null);
     try {
-      const res = await fetch("/api/b2b", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        headers: { 
+          "Content-Type": "application/json",
+          Accept: "application/json" 
+        },
+        body: JSON.stringify({
+          access_key: "c7141449-9681-4d0f-a0b6-f91f12105466",
+          subject: "Nowe zgłoszenie B2B - SodaWave",
+          from_name: data.companyName || "Formularz B2B",
+          // Przekazanie ładnie nazwanych pól do maila:
+          "Nazwa firmy": data.companyName,
+          "NIP": data.nip,
+          "Osoba kontaktowa": data.fullName,
+          "E-mail": data.email,
+          "Telefon": data.phone,
+          "Adres lokalu": data.address
+        }),
       });
       const payload = await res.json().catch(() => ({}));
 
-      if (!res.ok) {
-        const message = payload?.error || "Nie udało się wysłać zgłoszenia.";
+      if (!res.ok || !payload.success) {
+        const message = payload?.message || "Nie udało się wysłać zgłoszenia.";
         setServerMsg({ type: "error", text: message });
         setError("root", { type: "server", message });
         return;
@@ -3048,19 +3062,33 @@ function ContactSection() {
   const onSubmit = async (data) => {
     setServerMsg(null);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        headers: { 
+          "Content-Type": "application/json",
+          Accept: "application/json" 
+        },
+        body: JSON.stringify({
+          access_key: "c7141449-9681-4d0f-a0b6-f91f12105466",
+          subject: "Nowa wiadomość z formularza kontaktowego - SodaWave",
+          from_name: data.fullName || "Formularz Kontaktowy",
+          // Przekazanie ładnie nazwanych pól do maila:
+          "Imię i nazwisko": data.fullName,
+          "E-mail": data.email,
+          "Telefon": data.phone,
+          "Treść wiadomości": data.message
+        }),
       });
       const payload = await res.json().catch(() => ({}));
-      if (!res.ok) {
+      
+      if (!res.ok || !payload.success) {
         setServerMsg({
           type: "error",
-          text: payload?.error || "Nie udało się wysłać wiadomości.",
+          text: payload?.message || "Nie udało się wysłać wiadomości.",
         });
         return;
       }
+      
       setServerMsg({ type: "success", text: "Wiadomość została wysłana. Dziękujemy!" });
       reset();
     } catch (_e) {
