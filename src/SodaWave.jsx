@@ -950,7 +950,7 @@ function SodaLogo() {
         src="/Logo SodaWave bez tła.png"
         alt="SodaWave – logo"
         style={{
-          height: "64px",
+          height: "54px",
           width: "auto",
           display: "block",
         }}
@@ -990,7 +990,9 @@ function Navbar() {
       }}
     >
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-        <SodaLogo />
+        <div style={{ marginLeft: "-18px" }}>
+          <SodaLogo />
+        </div>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-7">
@@ -999,7 +1001,7 @@ function Navbar() {
               key={l.href}
               href={l.href}
               onClick={(e) => go(e, l.href)}
-              className="font-semibold text-gray-600 hover:text-[#2AACBC] transition-colors"
+              className="font-bold text-gray-600 hover:text-[#2AACBC] transition-colors"
               style={{ position: "relative", fontSize: "0.98rem" }}
             >
               {l.label}
@@ -1008,7 +1010,7 @@ function Navbar() {
           <a
             href="#contact"
             onClick={(e) => go(e, "#contact")}
-            className="ml-2 text-white text-sm font-bold px-5 py-2 rounded-full transition-all flex items-center gap-2"
+            className="ml-2 text-white text-sm font-extrabold px-5 py-2 rounded-full transition-all flex items-center gap-2"
             style={{ background: "#2AACBC" }}
             onMouseEnter={(e) => (e.currentTarget.style.background = "#1A9BAB")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "#2AACBC")}
@@ -1045,7 +1047,7 @@ function Navbar() {
               key={l.href}
               href={l.href}
               onClick={(e) => go(e, l.href)}
-              className="text-base font-semibold text-gray-700"
+              className="text-base font-bold text-gray-700"
               style={{ color: "#374151" }}
             >
               {l.label}
@@ -1054,7 +1056,7 @@ function Navbar() {
           <a
             href="#contact"
             onClick={(e) => go(e, "#contact")}
-            className="text-white font-bold px-4 py-3 rounded-full text-center"
+            className="text-white font-extrabold px-4 py-3 rounded-full text-center"
             style={{ background: "#2AACBC" }}
           >
             Kontakt
@@ -1101,7 +1103,7 @@ function Hero() {
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        overflow: "hidden",
+        overflow: "visible",
         paddingTop: "72px",
         position: "relative",
         background: "linear-gradient(135deg, #ffffff 55%, #D6F3F7 55%)",
@@ -1152,6 +1154,7 @@ function Hero() {
           padding: "4rem 1.5rem",
           position: "relative",
           zIndex: 1,
+          overflow: "visible",
         }}
       >
         {/* LEFT */}
@@ -1273,7 +1276,7 @@ function Hero() {
             </div>
             <div>
               <div style={{ fontSize: "1.6rem", fontWeight: 900, color: "#2AACBC", lineHeight: 1 }}>
-                {clientsCount.toLocaleString("pl-PL")}
+                {clientsCount.toLocaleString("pl-PL")}+
               </div>
               <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "4px" }}>
                 Zadowolonych klientów
@@ -1290,6 +1293,8 @@ function Hero() {
             justifyContent: "center",
             alignItems: "center",
             minWidth: 0,
+            overflow: "visible",
+            transform: "translateX(80px)",
           }}
         >
           <img
@@ -1823,13 +1828,13 @@ function OfferSection() {
             gap: "16px",
             alignItems: "stretch",
             position: "relative",
-            overflow: "hidden",
+            overflow: "visible",
           }}
         >
           <div
             className="offer-card__content"
             style={{
-              flex: "0 0 55%",
+              flex: "0 0 48%",
               display: "flex",
               flexDirection: "column",
               gap: "10px",
@@ -1907,17 +1912,31 @@ function OfferSection() {
               ))}
             </div>
           </div>
-          <img
-            className="offer-card__image"
-            src="/rozowy.png"
-            alt="Cylinder Quick Connect – różowy"
+          <div
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              objectPosition: "right bottom",
+              position: "absolute",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: "48%",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "flex-end",
+              padding: "20px 20px 18px",
             }}
-          />
+          >
+            <img
+              className="offer-card__image"
+              src="/rozowy.png"
+              alt="Cylinder Quick Connect – różowy"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                objectPosition: "right bottom",
+              }}
+            />
+          </div>
         </div>
 
         {/* Cylinder Wkręcany */}
@@ -1934,13 +1953,13 @@ function OfferSection() {
             gap: "16px",
             alignItems: "stretch",
             position: "relative",
-            overflow: "hidden",
+            overflow: "visible",
           }}
         >
           <div
             className="offer-card__content"
             style={{
-              flex: "0 0 55%",
+              flex: "0 0 48%",
               display: "flex",
               flexDirection: "column",
               gap: "10px",
@@ -2017,17 +2036,31 @@ function OfferSection() {
               ))}
             </div>
           </div>
-          <img
-            className="offer-card__image"
-            src="/niebieski.png"
-            alt="Cylinder wkręcany – niebieski"
+          <div
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              objectPosition: "right bottom",
+              position: "absolute",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: "48%",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "flex-end",
+              padding: "20px 20px 18px",
             }}
-          />
+          >
+            <img
+              className="offer-card__image"
+              src="/niebieski.png"
+              alt="Cylinder wkręcany – niebieski"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                objectPosition: "right bottom",
+              }}
+            />
+          </div>
         </div>
 
         {/* Syropy */}
@@ -2044,13 +2077,13 @@ function OfferSection() {
             alignItems: "stretch",
             boxShadow: "0 12px 32px rgba(15, 118, 110, 0.12)",
             position: "relative",
-            overflow: "hidden",
+            overflow: "visible",
           }}
         >
           <div
             className="offer-card__content"
             style={{
-              flex: "0 0 55%",
+              flex: "0 0 48%",
               display: "flex",
               flexDirection: "column",
               gap: "10px",
@@ -2125,17 +2158,33 @@ function OfferSection() {
               ))}
             </div>
           </div>
-          <img
-            className="offer-card__image"
-            src="/pepsi.png"
-            alt="Syropy SodaStream – zestaw Pepsi"
+          <div
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              objectPosition: "right bottom",
+              position: "absolute",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: "48%",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "flex-end",
+              padding: "20px 20px 18px",
             }}
-          />
+          >
+            <img
+              className="offer-card__image"
+              src="/pepsi.png"
+              alt="Syropy SodaStream – zestaw Pepsi"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                objectPosition: "right bottom",
+                transform: "scale(1.2) translateY(-5%)",
+                transformOrigin: "bottom right",
+              }}
+            />
+          </div>
         </div>
 
         {/* Box z ekologią/oszczędnością */}
@@ -3369,7 +3418,7 @@ function Footer() {
           }}
         >
           <div>
-            <SodaLogo white />
+            <img src="/logo_dlugopis.png" alt="SodaWave" style={{ height: "48px", width: "auto", filter: "brightness(0) invert(1)" }} />
             <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "13px", marginTop: "16px", lineHeight: 1.7 }}>
               Nowoczesna i ekologiczna usługa wymiany cylindrów CO₂ oraz
               sprzedaży syropów do saturatorów. Dostępne w wielu miastach w
