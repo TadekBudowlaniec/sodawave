@@ -40,88 +40,88 @@ const scroll = (href) =>
 
 const POLAND_CENTER = [52.1, 19.4];
 
-const sodaWaveLocations = [
-  { id: 1, lat: 53.1250, lng: 18.0410, address: "Bydgoszcz", name: "Galeria Pomorska, stoisko Markiewka", hours: "8–18" },
-  { id: 2, lat: 53.1210, lng: 18.0150, address: "Bydgoszcz", name: "Galeria Focus, stoisko Markiewka", hours: "8–18" },
-  { id: 3, lat: 53.1090, lng: 18.0560, address: "ul. Białogardzka 27, Bydgoszcz", name: "Warzywniaczek", hours: "8–18" },
-  { id: 4, lat: 53.1235, lng: 18.0076, address: "ul. Narcyza Gieryna 4, Bydgoszcz", name: "Sklep Groszek", hours: "8–18" },
-  { id: 5, lat: 53.1110, lng: 18.0450, address: "ul. Baczyńskiego 35, Bydgoszcz", name: "Żulka-Kulka", hours: "8–18" },
-  { id: 6, lat: 53.1200, lng: 17.9900, address: "ul. Marii Konopnickiej 2A/3, Bydgoszcz", name: "sklep spożywczy", hours: "8–18" },
-  { id: 7, lat: 53.1310, lng: 18.0050, address: "ul. Gdańska 85, Bydgoszcz", name: "Warzywniaczek", hours: "8–18" },
-  { id: 8, lat: 53.1180, lng: 18.0120, address: "ul. Waryńskiego 51/63U, Bydgoszcz", name: "Warzywniak Świeżak", hours: "8–18" },
-  { id: 9, lat: 53.1400, lng: 18.0200, address: "ul. 11 Listopada 8, Bydgoszcz", name: "Delikatesy Na Leśnym", hours: "8–18" },
-  { id: 10, lat: 53.1120, lng: 18.0300, address: "ul. A. Grzymały-Siedleckiego 10, Bydgoszcz", name: "Salon Prasowy", hours: "8–18" },
-  { id: 11, lat: 53.1350, lng: 17.9800, address: "ul. Kolbego 44, Bydgoszcz", name: "Epaka, punkt wysyłek", hours: "8–18" },
-  { id: 12, lat: 53.1150, lng: 17.9950, address: "ul. Juliusza Kossaka 48, Bydgoszcz", name: "Warzywniak U Agi", hours: "8–18" },
-  { id: 13, lat: 53.1250, lng: 17.9600, address: "ul. Nakielska 156, Bydgoszcz", name: "Delikatesy", hours: "8–18" },
-  { id: 14, lat: 52.7955, lng: 18.2605, address: "ul. Świętego Ducha 26, Inowrocław", name: "Pasmanteria Guziczek", hours: "8–18" },
-  { id: 15, lat: 52.8000, lng: 18.2650, address: "ul. Okrężek 20, Inowrocław", name: "Sklep Julia", hours: "8–18" },
-  { id: 16, lat: 52.7900, lng: 18.2550, address: "al. Kopernika 8A, Inowrocław", name: "Sklep ABC", hours: "8–18" },
-  { id: 17, lat: 52.7930, lng: 18.2500, address: "ul. Wojska Polskiego 19B, Inowrocław", name: "Intercom", hours: "8–18" },
-  { id: 18, lat: 52.8600, lng: 17.9400, address: "ul. 4 Stycznia 54 / Artylerzystów 1B, Barcin", name: "Markiewka Sklep", hours: "8–18" },
-  { id: 19, lat: 52.6580, lng: 17.9550, address: "ul. Jagiełły 20, Mogilno", name: "Naprawa Obuwia Szewc", hours: "8–18" },
-  { id: 20, lat: 52.9520, lng: 17.9250, address: "Plac 1000-lecia 20, Łabiszyn", name: "Markiewka Sklep", hours: "8–18" },
-  { id: 21, lat: 52.8060, lng: 18.0860, address: "ul. Rynek 22, Pakość", name: "Kleks", hours: "8–18" },
-  { id: 22, lat: 52.7530, lng: 18.1060, address: "ul. Główna 17, Janikowo", name: "Markiewka Sklep", hours: "8–18" },
-  { id: 23, lat: 53.0970, lng: 17.9350, address: "ul. Szubińska 8, Białe Błota", name: "Warzywa i Owoce", hours: "8–18" },
-  { id: 24, lat: 52.8480, lng: 17.7200, address: "ul. Potockiego 1, Żnin", name: "Best-Seler", hours: "8–18" },
-  { id: 25, lat: 52.6280, lng: 18.1700, address: "ul. Św. Ducha 17, Strzelno", name: "Sklep Polski Prill", hours: "8–18" },
-  { id: 26, lat: 53.0030, lng: 17.7400, address: "ul. Bema 3, Szubin", name: "Czysta Chata", hours: "8–18" },
-  { id: 27, lat: 53.1410, lng: 17.5950, address: "ul. Dąbrowskiego 36, Nakło nad Notecią", name: "Czysta Chata", hours: "8–18" },
-  { id: 28, lat: 53.0800, lng: 18.2250, address: "ul. Żwirki i Wigury 1, Solec Kujawski", name: "Sklep spożywczy Jola", hours: "8–18" },
-  { id: 29, lat: 53.3130, lng: 17.9350, address: "ul. Pomianowskiego 9, Koronowo", name: "Sklep Zajączek", hours: "8–18" },
-  { id: 30, lat: 53.3150, lng: 17.9400, address: "ul. Witosa 14, Koronowo", name: "Chatka Puchatka", hours: "8–18" },
-  { id: 31, lat: 52.9000, lng: 18.1350, address: "ul. Jęczmienna 2A, Złotniki Kujawskie", name: "Markiewka", hours: "8–18" },
-  { id: 32, lat: 52.8420, lng: 18.2100, address: "ul. Dworcowa 17, Jaksice", name: "Lewiatan", hours: "8–18" },
-  { id: 33, lat: 52.8960, lng: 18.2430, address: "Rojewo 141", name: "Lewiatan", hours: "8–18" },
-  { id: 34, lat: 52.8900, lng: 18.3200, address: "Gniewkówiec 21", name: "Lewiatan", hours: "8–18" },
-  { id: 35, lat: 52.9720, lng: 18.0660, address: "ul. Bydgoska 14I/J, Nowa Wieś Wielka", name: "sklep spożywczy", hours: "8–18" },
-  { id: 36, lat: 52.8970, lng: 18.4060, address: "ul. Dworcowa 4, Gniewkowo", name: "Lewiatan", hours: "8–18" },
-  { id: 37, lat: 53.0200, lng: 18.6400, address: "ul. W. Dziewulskiego 39C, Toruń", name: "Epaka, punkt wysyłek", hours: "8–18" },
-  { id: 38, lat: 53.0160, lng: 18.5900, address: "ul. Kraszewskiego 38, Toruń", name: "sklep spożywczo-warzywny", hours: "8–18" },
-  { id: 39, lat: 53.0300, lng: 18.5700, address: "ul. Bartosza Głowackiego 2, Toruń", name: "Sklep Cykoria", hours: "8–18" },
-  { id: 40, lat: 52.9900, lng: 18.5800, address: "ul. Poznańska 80, Toruń", name: "Lewiatan", hours: "8–18" },
-  { id: 41, lat: 52.9850, lng: 18.6100, address: "ul. Strzałowa 7, Toruń", name: "Lewiatan", hours: "8–18" },
-  { id: 42, lat: 53.0180, lng: 18.5850, address: "ul. Bema 20A, Toruń", name: "Lewiatan", hours: "8–18" },
-  { id: 43, lat: 52.9950, lng: 18.6300, address: "ul. Łódzka 35, Toruń", name: "Lewiatan", hours: "8–18" },
-  { id: 44, lat: 53.0250, lng: 18.6500, address: "ul. Łyskowskiego 29/35, Toruń", name: "Lewiatan", hours: "8–18" },
-  { id: 45, lat: 53.2200, lng: 17.8900, address: "Mochle 14", name: "Sklep Odido", hours: "8–18" },
-  { id: 46, lat: 52.6780, lng: 18.3280, address: "ul. Rynek 1, Kruszwica", name: "DW-Kiosk", hours: "8–18" },
-  { id: 47, lat: 52.6800, lng: 18.3300, address: "ul. Kujawska 29A, Kruszwica", name: "DW-Kiosk", hours: "8–18" },
-  { id: 48, lat: 53.1255, lng: 17.9550, address: "ul. Nakielska 180, Bydgoszcz", name: "Lin", hours: "8–18" },
-  { id: 49, lat: 53.0180, lng: 18.5750, address: "ul. Fałata 92, Toruń", name: "Sklep ABC", hours: "8–18" },
+export const sodaWaveLocations = [
+  { id: 1, lat: 51.938981958301675, lng: 22.384780370042876, address: "Aleje Tadeusza Kościuszki 40, Łuków", name: "Sklep Rondo, Delikatesy Sezam", hours: "7–23" },
+  { id: 2, lat: 53.1235, lng: 18.0163, address: "Bydgoszcz", name: "Galeria Focus, stoisko Markiewka", hours: "8–18" },
+  { id: 3, lat: 53.1026, lng: 18.0315, address: "ul. Białogardzka 27, Bydgoszcz", name: "Warzywniaczek", hours: "8–18" },
+  { id: 4, lat: 53.1594, lng: 18.1633, address: "ul. Narcyza Gieryna 4, Bydgoszcz", name: "Sklep Groszek", hours: "8–18" },
+  { id: 5, lat: 53.1092, lng: 18.0538, address: "ul. Baczyńskiego 35, Bydgoszcz", name: "Żulka-Kulka, sklep spożywczy", hours: "8–18" },
+  { id: 6, lat: 53.1165, lng: 17.9942, address: "ul. Marii Konopnickiej 2A/3, Bydgoszcz", name: "sklep spożywczy", hours: "8–18" },
+  { id: 7, lat: 53.1332, lng: 18.0062, address: "ul. Gdańska 85, Bydgoszcz", name: "Warzywniaczek", hours: "8–18" },
+  { id: 8, lat: 53.1163, lng: 17.9806, address: "ul. Waryńskiego 51/63U, Bydgoszcz", name: "Warzywniak Świeżak", hours: "8–18" },
+  { id: 9, lat: 53.1412, lng: 18.0135, address: "ul. 11 Listopada 8, Bydgoszcz", name: "Delikatesy Na Leśnym", hours: "8–18" },
+  { id: 10, lat: 53.1054, lng: 18.0152, address: "ul. A. Grzymały-Siedleckiego 10, Bydgoszcz", name: "Salon Prasowy", hours: "8–18" },
+  { id: 11, lat: 53.1475, lng: 17.9501, address: "ul. Kolbego 44, Bydgoszcz", name: "Epaka, punkt wysyłek", hours: "8–18" },
+  { id: 12, lat: 53.1154, lng: 17.9856, address: "ul. Juliusza Kossaka 48, Bydgoszcz", name: "Warzywniak U Agi", hours: "8–18" },
+  { id: 13, lat: 53.1251, lng: 17.9515, address: "ul. Nakielska 156, Bydgoszcz", name: "Delikatesy", hours: "8–18" },
+  { id: 14, lat: 52.7954, lng: 18.2570, address: "ul. Świętego Ducha 26, Inowrocław", name: "Pasmanteria Guziczek", hours: "8–18" },
+  { id: 15, lat: 52.7820, lng: 18.2550, address: "ul. Okrężek 20, Inowrocław", name: "Sklep Julia", hours: "8–18" },
+  { id: 16, lat: 52.7905, lng: 18.2530, address: "al. Kopernika 8A, Inowrocław", name: "Sklep ABC", hours: "8–18" },
+  { id: 17, lat: 52.7885, lng: 18.2610, address: "ul. Wojska Polskiego 19B, Inowrocław", name: "Intercom, sklep komputerowy", hours: "8–18" },
+  { id: 18, lat: 52.8630, lng: 17.9540, address: "ul. 4 Stycznia 54 / Artylerzystów 1B, Barcin", name: "Markiewka Sklep", hours: "8–18" },
+  { id: 19, lat: 52.6580, lng: 17.9575, address: "ul. Jagiełły 20, Mogilno", name: "Naprawa Obuwia Szewc", hours: "8–18" },
+  { id: 20, lat: 52.9535, lng: 17.9220, address: "Plac 1000-lecia 20, Łabiszyn", name: "Markiewka Sklep", hours: "8–18" },
+  { id: 21, lat: 52.8055, lng: 18.0875, address: "ul. Rynek 22, Pakość", name: "Kleks", hours: "8–18" },
+  { id: 22, lat: 52.7533, lng: 18.1105, address: "ul. Główna 17, Janikowo", name: "Markiewka Sklep", hours: "8–18" },
+  { id: 23, lat: 53.0965, lng: 17.9355, address: "ul. Szubińska 8, Białe Błota", name: "Warzywa i Owoce", hours: "8–18" },
+  { id: 24, lat: 52.8488, lng: 17.7205, address: "ul. Potockiego 1, Żnin", name: "Best-Seler", hours: "8–18" },
+  { id: 25, lat: 52.6285, lng: 18.1720, address: "ul. Św. Ducha 17, Strzelno", name: "Sklep Polski Prill", hours: "8–18" },
+  { id: 26, lat: 53.0015, lng: 17.7405, address: "ul. Bema 3, Szubin", name: "Czysta Chata", hours: "8–18" },
+  { id: 27, lat: 53.1415, lng: 17.5955, address: "ul. Dąbrowskiego 36, Nakło nad Notecią", name: "Czysta Chata", hours: "8–18" },
+  { id: 28, lat: 53.0805, lng: 18.2255, address: "ul. Żwirki i Wigury 1, Solec Kujawski", name: "Sklep spożywczy Jola", hours: "8–18" },
+  { id: 29, lat: 53.3135, lng: 17.9380, address: "ul. Pomianowskiego 9, Koronowo", name: "Sklep Zajączek", hours: "8–18" },
+  { id: 30, lat: 53.3155, lng: 17.9420, address: "ul. Witosa 14, Koronowo", name: "Chatka Puchatka", hours: "8–18" },
+  { id: 31, lat: 52.9005, lng: 18.1360, address: "ul. Jęczmienna 2A, Złotniki Kujawskie", name: "Markiewka", hours: "8–18" },
+  { id: 32, lat: 52.8425, lng: 18.2110, address: "ul. Dworcowa 17, Jaksice", name: "Lewiatan", hours: "8–18" },
+  { id: 33, lat: 52.8965, lng: 18.2435, address: "Rojewo 141", name: "Lewiatan", hours: "8–18" },
+  { id: 34, lat: 52.8905, lng: 18.3205, address: "Gniewkówiec 21", name: "Lewiatan", hours: "8–18" },
+  { id: 35, lat: 52.9725, lng: 18.0665, address: "ul. Bydgoska 14I/J, Nowa Wieś Wielka", name: "sklep spożywczy", hours: "8–18" },
+  { id: 36, lat: 52.8975, lng: 18.4065, address: "ul. Dworcowa 4, Gniewkowo", name: "Lewiatan", hours: "8–18" },
+  { id: 37, lat: 53.0205, lng: 18.6410, address: "ul. W. Dziewulskiego 39C, Toruń", name: "Epaka, punkt wysyłek", hours: "8–18" },
+  { id: 38, lat: 53.0165, lng: 18.5910, address: "ul. Kraszewskiego 38, Toruń", name: "sklep spożywczo-warzywny", hours: "8–18" },
+  { id: 39, lat: 53.0285, lng: 18.5710, address: "ul. Bartosza Głowackiego 2, Toruń", name: "Sklep Cykoria", hours: "8–18" },
+  { id: 40, lat: 52.9905, lng: 18.5810, address: "ul. Poznańska 80, Toruń", name: "Lewiatan", hours: "8–18" },
+  { id: 41, lat: 52.9855, lng: 18.6110, address: "ul. Strzałowa 7, Toruń", name: "Lewiatan", hours: "8–18" },
+  { id: 42, lat: 53.0185, lng: 18.5860, address: "ul. Bema 20A, Toruń", name: "Lewiatan", hours: "8–18" },
+  { id: 43, lat: 52.9955, lng: 18.6310, address: "ul. Łódzka 35, Toruń", name: "Lewiatan", hours: "8–18" },
+  { id: 44, lat: 53.0255, lng: 18.6510, address: "ul. Łyskowskiego 29/35, Toruń", name: "Lewiatan", hours: "8–18" },
+  { id: 45, lat: 53.2205, lng: 17.8905, address: "Mochle 14", name: "Sklep Odido", hours: "8–18" },
+  { id: 46, lat: 52.6785, lng: 18.3285, address: "ul. Rynek 1, Kruszwica", name: "DW-Kiosk", hours: "8–18" },
+  { id: 47, lat: 52.6805, lng: 18.3305, address: "ul. Kujawska 29A, Kruszwica", name: "DW-Kiosk", hours: "8–18" },
+  { id: 48, lat: 53.1255, lng: 17.9555, address: "ul. Nakielska 180, Bydgoszcz", name: "Lin", hours: "8–18" },
+  { id: 49, lat: 53.0185, lng: 18.5755, address: "ul. Fałata 92, Toruń", name: "Sklep ABC", hours: "8–18" },
   { id: 50, lat: 52.7935, lng: 18.2505, address: "ul. Wojska Polskiego, Inowrocław", name: "Witaminka 1", hours: "8–18" },
   { id: 51, lat: 52.7936, lng: 18.2506, address: "ul. Wojska Polskiego, Inowrocław", name: "Witaminka 2", hours: "8–18" },
   { id: 52, lat: 52.7937, lng: 18.2507, address: "ul. Wojska Polskiego, Inowrocław", name: "Witaminka 3", hours: "8–18" },
-  { id: 53, lat: 53.1155, lng: 17.9955, address: "ul. Juliusza Kossaka 43, Bydgoszcz", name: "Rumaks", hours: "8–18" },
-  { id: 54, lat: 52.8200, lng: 18.3500, address: "Wierzchosławice 56", name: "Chatka Puchatka", hours: "8–18" },
-  { id: 55, lat: 53.1100, lng: 18.0400, address: "ul. Kaczyńskiego 36/9, Bydgoszcz", name: "Groszek", hours: "8–18" },
-  { id: 56, lat: 52.7550, lng: 18.1050, address: "ul. Ogrodowa 24, Janikowo", name: "Delikatesy", hours: "8–18" },
-  { id: 57, lat: 52.7500, lng: 18.1100, address: "ul. Dworcowa 17, Janikowo", name: "sklep", hours: "8–18" },
-  { id: 58, lat: 53.3100, lng: 17.9500, address: "ul. Szosa Bydgoska 33, Koronowo", name: "Delikatesy", hours: "8–18" },
-  { id: 59, lat: 53.0200, lng: 18.0200, address: "Brzoza", name: "Warzywniak", hours: "8–18" },
-  { id: 60, lat: 52.2530, lng: 20.9800, address: "ul. Piaskowa 6, Warszawa", name: "Lewiatan", hours: "7–23" },
-  { id: 61, lat: 52.0950, lng: 21.6150, address: "ul. Mińska 8, Siennica", name: "Antosiewicz", hours: "8–18" },
-  { id: 62, lat: 51.9500, lng: 22.0200, address: "Stary Jamielnik 69", name: "Lewiatan", hours: "7–21" },
-  { id: 63, lat: 51.9320, lng: 22.3880, address: "ul. Stodolna 19A, Łuków", name: "Stokrotka", hours: "7–21" },
-  { id: 64, lat: 51.9280, lng: 22.3800, address: "Aleje Tadeusza Kościuszki 40, Łuków", name: "Sklep Rondo, Delikatesy Sezam", hours: "7–23" },
-  { id: 65, lat: 51.9220, lng: 22.3900, address: "ul. K. I. Gałczyńskiego 52, Łuków", name: "Lewiatan", hours: "8–22" },
-  { id: 66, lat: 51.9350, lng: 22.3750, address: "Farfak 62, Łuków", name: "Sklep spożywczy Ewa", hours: "8–18" },
-  { id: 67, lat: 51.9300, lng: 22.3850, address: "ul. Leopolda Staffa 4, Łuków", name: "Strefa Alkoholi", hours: "8–23" },
-  { id: 68, lat: 51.9850, lng: 22.7800, address: "ul. Brzeska 53A, Międzyrzec Podlaski", name: "Lewiatan", hours: "6–21" },
-  { id: 69, lat: 52.1000, lng: 22.4500, address: "ul. Dębowa 4, Zbuczyn", name: "Stacja Paliw Zbuczyn", hours: "6–22" },
-  { id: 70, lat: 52.1670, lng: 22.2850, address: "ul. Garwolińska 80, Siedlce", name: "Lewiatan", hours: "8–21" },
-  { id: 71, lat: 52.1500, lng: 22.2500, address: "Romanówka 18, Siedlce", name: "Chorten", hours: "6–21" },
-  { id: 72, lat: 52.1600, lng: 22.2900, address: "ul. Dąbrowskiego 8, Siedlce", name: "Lewiatan", hours: "6–20" },
-  { id: 73, lat: 52.1800, lng: 22.3000, address: "Gostchorz 42A, Siedlce", name: "Lewiatan", hours: "8–21" },
-  { id: 74, lat: 51.9700, lng: 22.3000, address: "Biardy 36", name: "Groszek", hours: "8–18" },
-  { id: 75, lat: 51.9500, lng: 22.4500, address: "Krynka 226", name: "Lewiatan", hours: "8–21" },
-  { id: 76, lat: 52.0500, lng: 22.2500, address: "Radomyśl 44", name: "Lewiatan", hours: "8–21" },
-  { id: 77, lat: 51.9550, lng: 22.3300, address: "ul. Księży Sopyłów 39A, Gręzówka", name: "Lewiatan", hours: "8–21" },
-  { id: 78, lat: 51.8300, lng: 22.1800, address: "ul. Łukowska 66, Krzywda", name: "Strzyżewski J.", hours: "8–18" },
-  { id: 79, lat: 51.9800, lng: 22.7850, address: "ul. Lubelska 62, Międzyrzec Podlaski", name: "E-Paka", hours: "8–16" },
-  { id: 80, lat: 52.1700, lng: 22.2800, address: "ul. Jana Kilińskiego 19, Siedlce", name: "Witamina", hours: "8–17" },
-  { id: 81, lat: 51.9200, lng: 22.2000, address: "Stanin 150", name: "Staszko", hours: "7–17" },
+  { id: 53, lat: 53.1155, lng: 17.9855, address: "ul. Juliusza Kossaka 43, Bydgoszcz", name: "Rumaks", hours: "8–18" },
+  { id: 54, lat: 52.8205, lng: 18.3505, address: "Wierzchosławice 56", name: "Chatka Puchatka", hours: "8–18" },
+  { id: 55, lat: 53.1105, lng: 18.0405, address: "ul. Kaczyńskiego 36/9, Bydgoszcz", name: "Groszek", hours: "8–18" },
+  { id: 56, lat: 52.7555, lng: 18.1055, address: "ul. Ogrodowa 24, Janikowo", name: "Delikatesy", hours: "8–18" },
+  { id: 57, lat: 52.7505, lng: 18.1105, address: "ul. Dworcowa 17, Janikowo", name: "sklep", hours: "8–18" },
+  { id: 58, lat: 53.3105, lng: 17.9505, address: "ul. Szosa Bydgoska 33, Koronowo", name: "Delikatesy", hours: "8–18" },
+  { id: 59, lat: 53.0205, lng: 18.0205, address: "Brzoza", name: "Warzywniak", hours: "8–18" },
+  { id: 60, lat: 52.25628017997793, lng: 20.97681638900404, address: "ul. Piaskowa 6, Warszawa", name: "Lewiatan", hours: "7–23" },
+  { id: 61, lat: 52.09160676550525, lng: 21.61931811238021, address: "ul. Mińska 8, Siennica", name: "Antosiewicz, sklep wielobranżowy", hours: "8–18" },
+  { id: 62, lat: 51.9494455870526, lng: 22.052085027715055, address: "Stary Jamielnik 69", name: "Lewiatan", hours: "7–21" },
+  { id: 63, lat: 51.93318663901361, lng: 22.37589898168492, address: "ul. Stodolna 19A, Łuków", name: "Stokrotka", hours: "7–21" },
+  { id: 64, lat: 53.1264, lng: 18.0504, address: "Bydgoszcz", name: "Galeria Pomorska, stoisko Markiewka", hours: "8–18" },
+  { id: 65, lat: 51.943397604616976, lng: 22.38275631237166, address: "ul. K. I. Gałczyńskiego 52, Łuków", name: "Lewiatan", hours: "8–22" },
+  { id: 66, lat: 51.95402459932325, lng: 22.389352225864968, address: "Farfak 62, Łuków", name: "Sklep spożywczy Ewa", hours: "8–18" },
+  { id: 67, lat: 51.94320457876996, lng: 22.378351527581383, address: "ul. Leopolda Staffa 4, Łuków", name: "Strefa Alkoholi", hours: "8–23" },
+  { id: 68, lat: 51.98941291931856, lng: 22.795084846040833, address: "ul. Brzeska 53A, Międzyrzec Podlaski", name: "Lewiatan", hours: "6–21" },
+  { id: 69, lat: 52.0893724320998, lng: 22.442928398838518, address: "ul. Dębowa 4, Zbuczyn", name: "Stacja Paliw Zbuczyn", hours: "6–22" },
+  { id: 70, lat: 52.15331431802724, lng: 22.24433141787723, address: "ul. Garwolińska 80, Siedlce", name: "Lewiatan", hours: "8–21" },
+  { id: 71, lat: 52.157479896866846, lng: 22.250006170923967, address: "Romanówka 18, Siedlce", name: "Chorten", hours: "6–21" },
+  { id: 72, lat: 52.178827409211905, lng: 22.289864182564557, address: "ul. Dąbrowskiego 8, Siedlce", name: "Lewiatan", hours: "6–20" },
+  { id: 73, lat: 52.04836284747071, lng: 22.298016354490937, address: "Gostchorz 42A, Siedlce", name: "Lewiatan", hours: "8–21" },
+  { id: 74, lat: 52.02327767969077, lng: 22.312644035266672, address: "Biardy 36", name: "Groszek", hours: "8–18" },
+  { id: 75, lat: 52.00270247114304, lng: 22.397915069500144, address: "Krynka 226", name: "Lewiatan", hours: "8–21" },
+  { id: 76, lat: 52.03505257330378, lng: 22.3580851201243, address: "Radomyśl 44", name: "Lewiatan", hours: "8–21" },
+  { id: 77, lat: 51.9927957901223, lng: 22.300122540331376, address: "ul. Księży Sopyłów 39A, Gręzówka", name: "Lewiatan", hours: "8–21" },
+  { id: 78, lat: 51.803032437382825, lng: 22.19039709953342, address: "ul. Łukowska 66, Krzywda", name: "Strzyżewski J., dywany", hours: "8–18" },
+  { id: 79, lat: 51.9829770598782, lng: 22.778727604251163, address: "ul. Lubelska 62, Międzyrzec Podlaski", name: "EPaka", hours: "8–16" },
+  { id: 80, lat: 52.16417916832067, lng: 22.276193203839465, address: "ul. Jana Kilińskiego 19, Siedlce", name: "Witamina, owoce i warzywa", hours: "8–17" },
+  { id: 81, lat: 51.87270205045594, lng: 22.19017372536445, address: "Stanin 150", name: "Staszko", hours: "7–17" }
 ];
 
 const MAP_POINTS = sodaWaveLocations.map((p) => ({
@@ -1006,13 +1006,14 @@ function Navbar() {
             </a>
           ))}
           <a
-            href="tel:+48695864734"
+            href="#contact"
+            onClick={(e) => go(e, "#contact")}
             className="ml-2 text-white text-sm font-bold px-5 py-2 rounded-full transition-all flex items-center gap-2"
             style={{ background: "#2AACBC" }}
             onMouseEnter={(e) => (e.currentTarget.style.background = "#1A9BAB")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "#2AACBC")}
           >
-            <Phone size={13} /> +48 695 864 734
+            Kontakt
           </a>
         </nav>
 
@@ -1051,11 +1052,12 @@ function Navbar() {
             </a>
           ))}
           <a
-            href="tel:+48695864734"
+            href="#contact"
+            onClick={(e) => go(e, "#contact")}
             className="text-white font-bold px-4 py-3 rounded-full text-center"
             style={{ background: "#2AACBC" }}
           >
-            Zadzwoń: +48 695 864 734
+            Kontakt
           </a>
         </nav>
       </div>
@@ -1064,7 +1066,34 @@ function Navbar() {
 }
 
 // ─── HERO ─────────────────────────────────────────────────────────────────
+function useCountUp(target, duration = 1200) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    let frameId;
+    const start = performance.now();
+
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const next = Math.floor(progress * target);
+      setValue(next);
+      if (progress < 1) {
+        frameId = requestAnimationFrame(step);
+      }
+    };
+
+    frameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frameId);
+  }, [target, duration]);
+
+  return value;
+}
+
 function Hero() {
+  const pointsCount = useCountUp(100);
+  const partnersCount = useCountUp(40);
+  const clientsCount = useCountUp(10000, 1600);
+
   return (
     <section
       id="hero"
@@ -1147,7 +1176,7 @@ function Hero() {
           </span>
 
           <h1
-            className="animate-slide-up"
+            className="animate-slide-up hero-title-breath"
             style={{
               fontFamily: "'Nunito', sans-serif",
               fontSize: "clamp(2.4rem, 5vw, 3.8rem)",
@@ -1162,10 +1191,6 @@ function Hero() {
             <br />
             <span>orzeźwienia</span>
           </h1>
-
-          <div style={{ marginBottom: "20px" }}>
-            <SodaLogo />
-          </div>
 
           <p
             className="animate-slide-up delay-100"
@@ -1230,20 +1255,30 @@ function Hero() {
             className="animate-slide-up delay-300"
             style={{ display: "flex", gap: "36px", marginTop: "36px" }}
           >
-            {[
-              { label: "Autoryzowanych punktów", value: "81" },
-              { label: "Partnerów handlowych",   value: "40+"    },
-              { label: "Zadowolonych klientów",       value: "10000+"   },
-            ].map((s) => (
-              <div key={s.label}>
-                <div style={{ fontSize: "1.6rem", fontWeight: 900, color: "#2AACBC", lineHeight: 1 }}>
-                  {s.value}
-                </div>
-                <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "4px" }}>
-                  {s.label}
-                </div>
+            <div>
+              <div style={{ fontSize: "1.6rem", fontWeight: 900, color: "#2AACBC", lineHeight: 1 }}>
+                {pointsCount}+
               </div>
-            ))}
+              <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "4px" }}>
+                Autoryzowanych punktów
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: "1.6rem", fontWeight: 900, color: "#2AACBC", lineHeight: 1 }}>
+                {partnersCount}+
+              </div>
+              <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "4px" }}>
+                Partnerów handlowych
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: "1.6rem", fontWeight: 900, color: "#2AACBC", lineHeight: 1 }}>
+                {clientsCount.toLocaleString("pl-PL")}
+              </div>
+              <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "4px" }}>
+                Zadowolonych klientów
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1403,31 +1438,9 @@ function MapSection() {
           >
             Punkty wymiany cylindrów CO₂ oraz sprzedaży syropów znajdziesz w wybranych lokalizacjach popularnych sieci handlowych i nie tylko. Wybierz miasto, aby sprawdzić najbliższy punkt.
           </p>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "10px",
-              marginTop: "4px",
-            }}
-          >
-            {["Stokrotka", "Lewiatan", "Chorten", "e-paka"].map((name) => (
-              <span
-                key={name}
-                style={{
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  padding: "6px 12px",
-                  borderRadius: "999px",
-                  background: "#F0FBFD",
-                  border: "1px solid #D6F3F7",
-                  color: "#1A9BAB",
-                }}
-              >
-                {name}
-              </span>
-            ))}
-          </div>
+         
+       
+          
           <div
             style={{
               marginTop: "8px",
@@ -1656,8 +1669,8 @@ function AboutSection() {
   const pillars = [
     { icon: <Leaf size={26} />,     title: "Ekologia",     desc: "Wielokrotne zmniejszenie zużywania plastiku dzięki używaniu cylindrów z gazem CO₂ oraz syropów. Mniej plastiku to mniejszy ślad węglowy."            },
     { icon: <Zap size={26} />,      title: "Wygoda",       desc: "Prosto, lokalnie i bez zbędnych kroków Zawsze na miejscu."                 },
-    { icon: <Award size={26} />,    title: "Polska firma", desc: "Działamy lokalnie, rozwijamy się w całym kraju. W 100% Polski kapitał."              },
-    { icon: <Star size={26} />,     title: "Jakość",       desc: "Pewna wymiana, atestowane i bezpieczne. Pełna kontrola i certyfikowany gaz."                 },
+    { icon: <Award size={26} />,    title: "Polska firma", desc: "Działamy lokalnie, rozwijamy się w całym kraju. W 100% polski kapitał."              },
+    { icon: <Star size={26} />,     title: "Jakość",       desc: "Pewna wymiana, produkty atestowane i bezpieczne. Pełna kontrola i certyfikowany gaz."                 },
   ];
 
   return (
@@ -1686,7 +1699,6 @@ function AboutSection() {
           </p>
           <p style={{ color: "#6b7280", lineHeight: 1.7, fontSize: "15px" }}>
           Chcemy, aby przygotowanie ulubionych napojów w domu było proste, szybkie i odpowiedzialne. Dlatego łączymy wygodę, dostępność, realną oszczędność i ekologię w jednym rozwiązaniu.
-          SodaWave – poczuj falę orzeźwienia razem z nami.
           </p>
           <div
             style={{
@@ -1698,7 +1710,7 @@ function AboutSection() {
             }}
           >
             <img
-              src="/Logo SodaWave bez tła.png"
+              src="\logo_dlugopis.png"
               alt="Logo SodaWave"
               style={{ height: "42px", width: "auto" }}
             />
@@ -1821,6 +1833,7 @@ function OfferSection() {
               display: "flex",
               flexDirection: "column",
               gap: "10px",
+              justifyContent: "flex-start",
             }}
           >
             <div
@@ -1931,6 +1944,7 @@ function OfferSection() {
               display: "flex",
               flexDirection: "column",
               gap: "10px",
+              justifyContent: "flex-start",
             }}
           >
             <div
@@ -2040,6 +2054,7 @@ function OfferSection() {
               display: "flex",
               flexDirection: "column",
               gap: "10px",
+              justifyContent: "flex-start",
             }}
           >
             <div
@@ -2431,42 +2446,6 @@ function OfferSection() {
             justifyContent: "center",
           }}
         >
-          <button
-            type="button"
-            onClick={() => scroll("#map")}
-            style={{
-              borderRadius: "999px",
-              border: "none",
-              padding: "10px 24px",
-              background: "#2AACBC",
-              color: "#ffffff",
-              fontWeight: 700,
-              fontSize: "14px",
-              cursor: "pointer",
-              boxShadow: "0 8px 24px rgba(42,172,188,0.35)",
-              fontFamily: "inherit",
-              transition: "background 0.2s, transform 0.1s, box-shadow 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#1A9BAB")}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "#2AACBC";
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 8px 24px rgba(42,172,188,0.35)";
-            }}
-            onMouseDown={(e) => {
-              e.currentTarget.style.transform = "translateY(1px)";
-              e.currentTarget.style.boxShadow =
-                "0 4px 16px rgba(42,172,188,0.3)";
-            }}
-            onMouseUp={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 8px 24px rgba(42,172,188,0.35)";
-            }}
-          >
-            Znajdź najbliższy punkt
-          </button>
         </div>
       </div>
     </Section>
@@ -2479,13 +2458,39 @@ function B2BSection() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    setError,
+    formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = (data) => {
-    // eslint-disable-next-line no-console
-    console.log("Formularz B2B:", data);
-    reset();
+  const [serverMsg, setServerMsg] = useState(null);
+
+  const onSubmit = async (data) => {
+    setServerMsg(null);
+    try {
+      const res = await fetch("/api/b2b", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const payload = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        const message = payload?.error || "Nie udało się wysłać zgłoszenia.";
+        setServerMsg({ type: "error", text: message });
+        setError("root", { type: "server", message });
+        return;
+      }
+
+      setServerMsg({
+        type: "success",
+        text: "Dziękujemy za zgłoszenie! Skontaktujemy się z Tobą wkrótce.",
+      });
+      reset();
+    } catch (_e) {
+      const message = "Błąd sieci. Spróbuj ponownie.";
+      setServerMsg({ type: "error", text: message });
+      setError("root", { type: "network", message });
+    }
   };
 
   const benefits = [
@@ -2797,7 +2802,7 @@ function B2BSection() {
             {isSubmitting ? "Wysyłanie..." : "Wyślij zgłoszenie"}
           </button>
 
-          {isSubmitSuccessful && (
+          {serverMsg?.type === "success" && (
             <p
               style={{
                 marginTop: "6px",
@@ -2805,7 +2810,19 @@ function B2BSection() {
                 color: "#16a34a",
               }}
             >
-              Dziękujemy za zgłoszenie! Skontaktujemy się z Tobą wkrótce.
+              {serverMsg.text}
+            </p>
+          )}
+
+          {serverMsg?.type === "error" && (
+            <p
+              style={{
+                marginTop: "6px",
+                fontSize: "12px",
+                color: "#b91c1c",
+              }}
+            >
+              {serverMsg.text}
             </p>
           )}
         </form>
@@ -2823,7 +2840,7 @@ function SeoSection() {
     <section
       className={`seo-section${isSectionOpen ? " seo-section--open" : ""}`}
       style={{
-        background: "#F9FAFB",
+        background: " rgb(240, 251, 253)",
         padding: isSectionOpen ? "24px 0 48px" : "24px 0",
         marginTop: "0",
       }}
@@ -2859,15 +2876,6 @@ function SeoSection() {
           >
             Wymiana cylindrów CO₂ – znajdź nas w swoim mieście
           </span>
-          <span
-            style={{
-              fontSize: "1.4rem",
-              color: "#6b7280",
-              lineHeight: 1,
-            }}
-          >
-            {isSectionOpen ? "−" : "+"}
-          </span>
         </button>
 
         <div
@@ -2875,6 +2883,7 @@ function SeoSection() {
           className={`seo-content-wrapper${isSectionOpen ? " seo-content-wrapper--open" : ""}`}
           role="region"
           aria-labelledby="seo-toggle"
+
         >
           <div className="seo-content-inner">
             <p
@@ -2883,7 +2892,7 @@ function SeoSection() {
                 maxWidth: "720px",
                 margin: "24px auto 28px",
                 fontSize: "13px",
-                color: "#6b7280",
+                color: "rgb(240, 251, 253)",
               }}
             >
               Poniżej znajdziesz listę miast, w których dostępne są punkty wymiany
@@ -3028,6 +3037,37 @@ function ContactSection() {
     { icon: <MapPin size={26} />,title: "Siedziba", value: "Polska",             href: "#map"                         },
   ];
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm();
+  const [serverMsg, setServerMsg] = useState(null);
+
+  const onSubmit = async (data) => {
+    setServerMsg(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const payload = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setServerMsg({
+          type: "error",
+          text: payload?.error || "Nie udało się wysłać wiadomości.",
+        });
+        return;
+      }
+      setServerMsg({ type: "success", text: "Wiadomość została wysłana. Dziękujemy!" });
+      reset();
+    } catch (_e) {
+      setServerMsg({ type: "error", text: "Błąd sieci. Spróbuj ponownie." });
+    }
+  };
+
   return (
     <Section id="contact" title="Kontakt" subtitle="Skontaktuj się" light>
       <div
@@ -3088,28 +3128,99 @@ function ContactSection() {
         ))}
       </div>
 
-      {/* Contact form */}
       <div
+        className="contact-layout"
         style={{
-          background: "#fff",
-          border: "2px solid #D6F3F7",
-          borderRadius: "24px",
-          padding: "40px",
-          maxWidth: "560px",
-          margin: "0 auto",
+          display: "grid",
+          gap: "32px",
+          alignItems: "stretch",
         }}
       >
-        <h3 style={{ fontSize: "1.2rem", fontWeight: 900, color: "#1f2937", textAlign: "center", marginBottom: "24px" }}>
-          Napisz do nas
-        </h3>
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          {[
-            { label: "Imię i nazwisko", type: "text",  ph: "Jan Kowalski"  },
-            { label: "Adres e-mail",    type: "email", ph: "jan@firma.pl"  },
-            { label: "Telefon",         type: "tel",   ph: "+48 ___ ___ ___" },
-          ].map((f) => (
-            <div key={f.label}>
+        {/* Formularz */}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          style={{
+            background: "#fff",
+            border: "2px solid #D6F3F7",
+            borderRadius: "24px",
+            padding: "40px",
+          }}
+        >
+          <h3 style={{ fontSize: "1.2rem", fontWeight: 900, color: "#1f2937", textAlign: "center", marginBottom: "24px" }}>
+            Napisz do nas
+          </h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            {[
+              {
+                name: "fullName",
+                label: "Imię i nazwisko",
+                type: "text",
+                ph: "Jan Kowalski",
+                validation: { required: "To pole jest wymagane" },
+              },
+              {
+                name: "email",
+                label: "Adres e-mail",
+                type: "email",
+                ph: "jan@firma.pl",
+                validation: {
+                  required: "To pole jest wymagane",
+                  pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Podaj poprawny adres e-mail" },
+                },
+              },
+              {
+                name: "phone",
+                label: "Telefon",
+                type: "tel",
+                ph: "+48 ___ ___ ___",
+                validation: { required: "To pole jest wymagane" },
+              },
+            ].map((f) => (
+              <div key={f.name}>
+                <label
+                  htmlFor={f.name}
+                  style={{
+                    display: "block",
+                    fontSize: "10px",
+                    fontWeight: 700,
+                    color: "#6b7280",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    marginBottom: "6px",
+                  }}
+                >
+                  {f.label}
+                </label>
+                <input
+                  id={f.name}
+                  type={f.type}
+                  placeholder={f.ph}
+                  {...register(f.name, f.validation)}
+                  style={{
+                    width: "100%",
+                    border: `2px solid ${errors[f.name] ? "#ef4444" : "#e5e7eb"}`,
+                    borderRadius: "12px",
+                    padding: "12px 16px",
+                    fontSize: "14px",
+                    outline: "none",
+                    fontFamily: "inherit",
+                    transition: "border-color 0.2s",
+                  }}
+                  onFocus={(e) => (e.target.style.borderColor = "#2AACBC")}
+                  onBlur={(e) =>
+                    (e.target.style.borderColor = errors[f.name] ? "#ef4444" : "#e5e7eb")
+                  }
+                />
+                {errors[f.name] && (
+                  <p style={{ marginTop: "4px", fontSize: "11px", color: "#b91c1c" }}>
+                    {errors[f.name].message}
+                  </p>
+                )}
+              </div>
+            ))}
+            <div>
               <label
+                htmlFor="message"
                 style={{
                   display: "block",
                   fontSize: "10px",
@@ -3120,83 +3231,93 @@ function ContactSection() {
                   marginBottom: "6px",
                 }}
               >
-                {f.label}
+                Wiadomość
               </label>
-              <input
-                type={f.type}
-                placeholder={f.ph}
+              <textarea
+                id="message"
+                rows={4}
+                placeholder="Twoja wiadomość..."
+                {...register("message", { required: "To pole jest wymagane" })}
                 style={{
                   width: "100%",
-                  border: "2px solid #e5e7eb",
+                  border: `2px solid ${errors.message ? "#ef4444" : "#e5e7eb"}`,
                   borderRadius: "12px",
                   padding: "12px 16px",
                   fontSize: "14px",
                   outline: "none",
                   fontFamily: "inherit",
+                  resize: "none",
                   transition: "border-color 0.2s",
                 }}
                 onFocus={(e) => (e.target.style.borderColor = "#2AACBC")}
-                onBlur={(e)  => (e.target.style.borderColor = "#e5e7eb")}
+                onBlur={(e)  => (e.target.style.borderColor = errors.message ? "#ef4444" : "#e5e7eb")}
               />
+              {errors.message && (
+                <p style={{ marginTop: "4px", fontSize: "11px", color: "#b91c1c" }}>
+                  {errors.message.message}
+                </p>
+              )}
             </div>
-          ))}
-          <div>
-            <label
-              style={{
-                display: "block",
-                fontSize: "10px",
-                fontWeight: 700,
-                color: "#6b7280",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                marginBottom: "6px",
-              }}
-            >
-              Wiadomość
-            </label>
-            <textarea
-              rows={4}
-              placeholder="Twoja wiadomość..."
+            <button
+              type="submit"
+              disabled={isSubmitting}
               style={{
                 width: "100%",
-                border: "2px solid #e5e7eb",
+                background: "#2AACBC",
+                color: "#fff",
+                fontWeight: 700,
+                padding: "14px",
                 borderRadius: "12px",
-                padding: "12px 16px",
-                fontSize: "14px",
-                outline: "none",
+                border: "none",
+                fontSize: "15px",
+                cursor: "pointer",
                 fontFamily: "inherit",
-                resize: "none",
-                transition: "border-color 0.2s",
+                transition: "background 0.2s, box-shadow 0.2s",
+                opacity: isSubmitting ? 0.85 : 1,
               }}
-              onFocus={(e) => (e.target.style.borderColor = "#2AACBC")}
-              onBlur={(e)  => (e.target.style.borderColor = "#e5e7eb")}
-            />
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#1A9BAB";
+                e.currentTarget.style.boxShadow = "0 6px 20px rgba(42,172,188,0.35)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "#2AACBC";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              {isSubmitting ? "Wysyłanie..." : "Wyślij wiadomość"}
+            </button>
+
+            {serverMsg?.type === "success" && (
+              <p style={{ marginTop: "6px", fontSize: "12px", color: "#16a34a", fontWeight: 700 }}>
+                {serverMsg.text}
+              </p>
+            )}
+            {serverMsg?.type === "error" && (
+              <p style={{ marginTop: "6px", fontSize: "12px", color: "#b91c1c", fontWeight: 700 }}>
+                {serverMsg.text}
+              </p>
+            )}
           </div>
-          <button
+        </form>
+
+        {/* Zdjęcie obok formularza */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            src="/pracownik.png"
+            alt="Pracownik SodaWave pomagający klientom"
             style={{
               width: "100%",
-              background: "#2AACBC",
-              color: "#fff",
-              fontWeight: 700,
-              padding: "14px",
-              borderRadius: "12px",
-              border: "none",
-              fontSize: "15px",
-              cursor: "pointer",
-              fontFamily: "inherit",
-              transition: "background 0.2s, box-shadow 0.2s",
+              maxWidth: "720px",
+              height: "auto",
+              objectFit: "contain",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#1A9BAB";
-              e.currentTarget.style.boxShadow = "0 6px 20px rgba(42,172,188,0.35)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "#2AACBC";
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          >
-            Wyślij wiadomość
-          </button>
+          />
         </div>
       </div>
     </Section>
@@ -3206,7 +3327,10 @@ function ContactSection() {
 // ─── FOOTER ───────────────────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer style={{ background: "linear-gradient(135deg, #1A7A8A, #0f5f6d)", padding: "56px 0" }}>
+    <footer
+      id="footer"
+      style={{ background: "linear-gradient(135deg, #1A7A8A, #0f5f6d)", padding: "56px 0" }}
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div
           style={{
@@ -3335,7 +3459,7 @@ function Footer() {
                 { label: "Adres",   val: "Łazy, 21-400 Łuków, Polska" },
               ].map(({ label, val }) => (
                 <li key={label} style={{ marginBottom: "8px" }}>
-                  <span style={{ color: "#fff", fontWeight: 600 }}>{label}: </span>{val}
+                  <span style={{ color: "rgba(255,255,255,0.55)", fontWeight: 600 }}>{label}: </span>{val}
                 </li>
               ))}
               <li style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
@@ -3387,7 +3511,7 @@ function Footer() {
             gap: "8px",
           }}
         >
-          <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "20px" }}>
+          <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "12px" }}>
             © 2026 SodaWave | PRUMET wszelkie prawa zastrzeżone
           </p>
           <div

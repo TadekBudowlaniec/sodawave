@@ -58,6 +58,11 @@ img, svg {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes hero-breath {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.03); }
+}
+
 @keyframes bounce-y {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-8px); }
@@ -66,6 +71,8 @@ img, svg {
 .animate-fade-in   { animation: fade-in  0.8s ease both; }
 .animate-slide-up  { animation: slide-up 0.7s ease both; }
 .animate-bounce    { animation: bounce-y 1.4s ease-in-out infinite; }
+
+.hero-title-breath { animation: hero-breath 3.5s ease-in-out infinite; transform-origin: left center; }
 
 .delay-100 { animation-delay: 0.10s; }
 .delay-200 { animation-delay: 0.20s; }
@@ -219,6 +226,16 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
   }
 }
 
+/* Offer cards: hover interaction only */
+.offer-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(15, 118, 110, 0.28) !important;
+}
+
 /* Hero image tweaks */
 @media (min-width: 992px) {
   .hero-image {
@@ -297,9 +314,9 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
   .offer-card__image {
     position: absolute;
     right: -20px;
-    bottom: -20px;
+    top: 10px;
     width: auto;
-    height: 85%;
+    height: 90%;
     object-fit: contain;
     z-index: 1;
     pointer-events: none;
@@ -308,8 +325,8 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
   /* Dokładniejsze pozycjonowanie butelki syropu */
   .offer-card--white .offer-card__image {
     right: -15px;
-    bottom: -5px;
-    height: 85%;
+    top: 10px;
+    height: 90%;
   }
 
   /* 4 karty w jednym rzędzie na wszystkich desktopach */
@@ -335,5 +352,17 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
     gap: 32px;
     align-items: flex-start;
+  }
+
+  .contact-layout {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 991px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
   }
 }
