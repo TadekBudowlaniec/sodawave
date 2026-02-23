@@ -206,6 +206,14 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
     padding: 64px 0 !important;
   }
 
+  /* Logo + tagline: do lewej, myślnik zaraz przy logo */
+  .about-logo-tagline {
+    gap: 2px !important;
+    justify-content: flex-start;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
   .offer-card {
     flex-direction: column !important;
     align-items: stretch !important;
@@ -264,6 +272,12 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
     margin-top: 2rem;
     justify-content: center;
     align-items: center;
+    transform: none !important;
+  }
+
+  .hero-image img {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

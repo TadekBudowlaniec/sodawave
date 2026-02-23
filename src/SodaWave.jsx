@@ -1706,6 +1706,7 @@ function AboutSection() {
           Chcemy, aby przygotowanie ulubionych napojów w domu było proste, szybkie i odpowiedzialne. Dlatego łączymy wygodę, dostępność, realną oszczędność i ekologię w jednym rozwiązaniu.
           </p>
           <div
+            className="about-logo-tagline"
             style={{
               display: "flex",
               alignItems: "center",
