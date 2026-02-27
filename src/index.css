@@ -206,12 +206,25 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
     padding: 64px 0 !important;
   }
 
-  /* Logo + tagline: do lewej, myślnik zaraz przy logo */
+  /* Logo + tagline: do lewej, myślnik zaraz przy logo; smaller on mobile so line fits */
   .about-logo-tagline {
-    gap: 2px !important;
+    gap: 6px !important;
     justify-content: flex-start;
     margin-left: 0;
     padding-left: 0;
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+
+  .about-logo-tagline img {
+    height: 26px !important;
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  .about-logo-tagline span {
+    font-size: 12px !important;
+    white-space: nowrap;
   }
 
   .offer-card {
