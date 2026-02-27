@@ -1121,7 +1121,7 @@ function Hero() {
         }}
       />
 
-      {/* Decorative bubbles */}
+      {/* Decorative static circles (background) */}
       {[
         { size: 220, x: "72%", y: "6%",  op: 0.07 },
         { size: 120, x: "84%", y: "62%", op: 0.09 },
@@ -1129,7 +1129,7 @@ function Hero() {
         { size: 90,  x: "9%",  y: "72%", op: 0.06 },
       ].map((b, i) => (
         <div
-          key={i}
+          key={`bg-${i}`}
           style={{
             position: "absolute",
             width: b.size,
@@ -1143,6 +1143,49 @@ function Hero() {
           }}
         />
       ))}
+
+      {/* Rising gas bubbles (CO₂ / carbonation) */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          overflow: "hidden",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+        aria-hidden
+      >
+        {[
+          { left: "8%",  size: 8,  duration: 9,  delay: 0,   drift: 6 },
+          { left: "18%", size: 12, duration: 7,  delay: -2,  drift: -4 },
+          { left: "28%", size: 6,  duration: 11, delay: -4,  drift: 8 },
+          { left: "42%", size: 14, duration: 8,  delay: -1,  drift: -6 },
+          { left: "55%", size: 10, duration: 10, delay: -3,  drift: 5 },
+          { left: "65%", size: 7,  duration: 12, delay: -5,  drift: -7 },
+          { left: "75%", size: 11, duration: 9,  delay: -2.5, drift: 4 },
+          { left: "85%", size: 9,  duration: 8.5, delay: -1.5, drift: -5 },
+          { left: "92%", size: 6,  duration: 11, delay: -6,  drift: 3 },
+          { left: "15%", size: 10, duration: 10.5, delay: -3.5, drift: -3 },
+          { left: "35%", size: 7,  duration: 9.5, delay: -4.5, drift: 6 },
+          { left: "50%", size: 13, duration: 7.5, delay: -2,  drift: -4 },
+          { left: "70%", size: 8,  duration: 11.5, delay: -5.5, drift: 5 },
+          { left: "22%", size: 9,  duration: 8,  delay: -1,  drift: -6 },
+          { left: "78%", size: 6,  duration: 10, delay: -4,  drift: 4 },
+        ].map((b, i) => (
+          <div
+            key={`bubble-${i}`}
+            className="hero-bubble"
+            style={{
+              left: b.left,
+              width: b.size,
+              height: b.size,
+              animationDuration: `${b.duration}s`,
+              animationDelay: `${b.delay}s`,
+              "--bubble-drift": `${b.drift}px`,
+            }}
+          />
+        ))}
+      </div>
 
       <div
         className="max-w-7xl mx-auto px-6 w-full hero-grid"
