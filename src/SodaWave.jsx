@@ -1156,21 +1156,21 @@ function Hero() {
         aria-hidden
       >
         {[
-          { left: "8%",  size: 8,  duration: 9,  delay: 0,   drift: 6 },
-          { left: "18%", size: 12, duration: 7,  delay: -2,  drift: -4 },
-          { left: "28%", size: 6,  duration: 11, delay: -4,  drift: 8 },
-          { left: "42%", size: 14, duration: 8,  delay: -1,  drift: -6 },
-          { left: "55%", size: 10, duration: 10, delay: -3,  drift: 5 },
-          { left: "65%", size: 7,  duration: 12, delay: -5,  drift: -7 },
-          { left: "75%", size: 11, duration: 9,  delay: -2.5, drift: 4 },
-          { left: "85%", size: 9,  duration: 8.5, delay: -1.5, drift: -5 },
-          { left: "92%", size: 6,  duration: 11, delay: -6,  drift: 3 },
-          { left: "15%", size: 10, duration: 10.5, delay: -3.5, drift: -3 },
-          { left: "35%", size: 7,  duration: 9.5, delay: -4.5, drift: 6 },
-          { left: "50%", size: 13, duration: 7.5, delay: -2,  drift: -4 },
-          { left: "70%", size: 8,  duration: 11.5, delay: -5.5, drift: 5 },
-          { left: "22%", size: 9,  duration: 8,  delay: -1,  drift: -6 },
-          { left: "78%", size: 6,  duration: 10, delay: -4,  drift: 4 },
+          { left: "8%",  size: 16, duration: 9,  delay: 0,   drift: 6 },
+          { left: "18%", size: 24, duration: 7,  delay: -2,  drift: -4 },
+          { left: "28%", size: 12, duration: 11, delay: -4,  drift: 8 },
+          { left: "42%", size: 28, duration: 8,  delay: -1,  drift: -6 },
+          { left: "55%", size: 20, duration: 10, delay: -3,  drift: 5 },
+          { left: "65%", size: 14, duration: 12, delay: -5,  drift: -7 },
+          { left: "75%", size: 22, duration: 9,  delay: -2.5, drift: 4 },
+          { left: "85%", size: 18, duration: 8.5, delay: -1.5, drift: -5 },
+          { left: "92%", size: 12, duration: 11, delay: -6,  drift: 3 },
+          { left: "15%", size: 20, duration: 10.5, delay: -3.5, drift: -3 },
+          { left: "35%", size: 14, duration: 9.5, delay: -4.5, drift: 6 },
+          { left: "50%", size: 26, duration: 7.5, delay: -2,  drift: -4 },
+          { left: "70%", size: 16, duration: 11.5, delay: -5.5, drift: 5 },
+          { left: "22%", size: 18, duration: 8,  delay: -1,  drift: -6 },
+          { left: "78%", size: 12, duration: 10, delay: -4,  drift: 4 },
         ].map((b, i) => (
           <div
             key={`bubble-${i}`}
