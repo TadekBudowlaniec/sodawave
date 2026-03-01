@@ -89,6 +89,14 @@ img, svg {
   animation: bubble-rise linear infinite;
 }
 
+/* 50% larger bubbles on desktop only; mobile unchanged */
+@media (min-width: 768px) {
+  .hero-bubble-wrapper {
+    transform: scale(1.5);
+    transform-origin: bottom center;
+  }
+}
+
 .animate-fade-in   { animation: fade-in  0.8s ease both; }
 .animate-slide-up  { animation: slide-up 0.7s ease both; }
 .animate-bounce    { animation: bounce-y 1.4s ease-in-out infinite; }
@@ -280,6 +288,42 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
     display: block;
     align-self: center;
     z-index: 1;
+  }
+}
+
+/* Offer card icon boxes (gwint / krople) – base; overridden by media queries */
+.offer-card__icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+}
+
+/* Desktop: icon boxes +20% for readability */
+@media (min-width: 768px) {
+  .offer-card__icon-box {
+    width: 67px;
+    height: 67px;
+    border-radius: 22px;
+  }
+
+  /* Pepsi image: 15% smaller, same alignment, 50px lower */
+  .offer-card__pepsi-image {
+    transform: scale(0.935) translateY(276px);
+    transform-origin: top right;
+  }
+}
+
+/* Phone: icon boxes +10–15% larger; Pepsi 20–25% smaller */
+@media (max-width: 767px) {
+  .offer-card__icon-box {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+  }
+
+  .offer-card__pepsi-image {
+    transform: scale(0.8) !important;
+    transform-origin: center center;
   }
 }
 

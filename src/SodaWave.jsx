@@ -11,6 +11,7 @@ import {
   Leaf,
   Award,
   ChevronDown,
+  ChevronLeft,
   Building2,
   ArrowRight,
   Star,
@@ -1174,16 +1175,28 @@ function Hero() {
         ].map((b, i) => (
           <div
             key={`bubble-${i}`}
-            className="hero-bubble"
+            className="hero-bubble-wrapper"
             style={{
+              position: "absolute",
               left: b.left,
+              bottom: "-5%",
               width: b.size,
               height: b.size,
-              animationDuration: `${b.duration}s`,
-              animationDelay: `${b.delay}s`,
-              "--bubble-drift": `${b.drift}px`,
             }}
-          />
+          >
+            <div
+              className="hero-bubble"
+              style={{
+                left: 0,
+                bottom: 0,
+                width: b.size,
+                height: b.size,
+                animationDuration: `${b.duration}s`,
+                animationDelay: `${b.delay}s`,
+                "--bubble-drift": `${b.drift}px`,
+              }}
+            />
+          </div>
         ))}
       </div>
 
@@ -1888,10 +1901,8 @@ function OfferSection() {
             }}
           >
             <div
+              className="offer-card__icon-box"
               style={{
-                width: "56px",
-                height: "56px",
-                borderRadius: "18px",
                 background: "#ec4899",
                 display: "flex",
                 alignItems: "center",
@@ -1970,10 +1981,8 @@ function OfferSection() {
             }}
           >
             <div
+              className="offer-card__icon-box"
               style={{
-                width: "56px",
-                height: "56px",
-                borderRadius: "18px",
                 background: "#3b82f6",
                 display: "flex",
                 alignItems: "center",
@@ -2052,10 +2061,8 @@ function OfferSection() {
             }}
           >
             <div
+              className="offer-card__icon-box"
               style={{
-                width: "56px",
-                height: "56px",
-                borderRadius: "18px",
                 background: "#2AACBC",
                 display: "flex",
                 alignItems: "center",
@@ -2080,23 +2087,22 @@ function OfferSection() {
             </div>
           </div>
 
-          {/* PEPSI - powiększona i zrównana z zaworami cylindrów */}
+          {/* PEPSI - size/position controlled by CSS (desktop -15%, mobile -20%) */}
           <img
-            className="offer-card__image"
+            className="offer-card__image offer-card__pepsi-image"
             src="/pepsi.png"
             alt="Syropy SodaStream – zestaw Pepsi"
             style={{
               position: "absolute",
               right: "-5px",
-              top: "15px", // Lekko niżej, by nakrętka Pepsi była na równi z zaworami cylindrów z lewej strony
+              top: "15px",
               width: "55%",
               height: "100%",
               objectFit: "contain",
-              objectPosition: "right top", // Trzyma się góry!
-              transform: "scale(1.1) translateY(201px)", // Mocno powiększone
-              transformOrigin: "top right", // Skalujemy od góry, by nie zepsuć linii
+              objectPosition: "right top",
               zIndex: 1,
-              pointerEvents: "none"
+              pointerEvents: "none",
+              translate: "translateY(200px)",
             }}
           />
         </div>
@@ -3089,6 +3095,130 @@ function ContactSection() {
   );
 }
 
+// ─── PRIVACY POLICY (standalone page) ──────────────────────────────────────
+function PrivacyPage() {
+  const goHome = () => {
+    window.location.hash = "";
+    window.scrollTo(0, 0);
+  };
+
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#F0FBFD",
+        fontFamily: "'Nunito', 'Poppins', 'Segoe UI', sans-serif",
+      }}
+    >
+      {/* Top bar with back button */}
+      <header
+        style={{
+          background: "#fff",
+          boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
+          padding: "16px 24px",
+          position: "sticky",
+          top: 0,
+          zIndex: 100,
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-6" style={{ maxWidth: "720px", margin: "0 auto" }}>
+          <a
+            href="#"
+            onClick={(e) => { e.preventDefault(); goHome(); }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              color: "#2AACBC",
+              fontWeight: 700,
+              fontSize: "14px",
+              transition: "color 0.2s, opacity 0.2s",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = "#1A9BAB"; e.currentTarget.style.opacity = "0.9"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = "#2AACBC"; e.currentTarget.style.opacity = "1"; }}
+          >
+            <ChevronLeft size={20} />
+            Strona główna
+          </a>
+        </div>
+      </header>
+
+      <main style={{ padding: "40px 24px 80px" }}>
+        <div className="max-w-7xl mx-auto px-6" style={{ maxWidth: "720px", margin: "0 auto" }}>
+          <h1
+            style={{
+              fontSize: "clamp(1.6rem, 3vw, 2rem)",
+              fontWeight: 900,
+              color: "#1f2937",
+              marginBottom: "32px",
+            }}
+          >
+            Polityka Prywatności serwisu sodawave.pl
+          </h1>
+
+          <div style={{ color: "#4b5563", lineHeight: 1.85, fontSize: "15px" }}>
+            <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#1f2937", marginTop: "28px", marginBottom: "10px" }}>
+              1. Informacje ogólne
+            </h2>
+            <p>
+              Operatorem serwisu sodawave.pl oraz Administratorem danych osobowych jest firma PRUMET (zgodnie z danymi rejestrowymi firmy). Kontakt z Administratorem jest możliwy pod adresem e-mail:{" "}
+              <a href="mailto:sodawave@sodawave.pl" style={{ color: "#2AACBC", fontWeight: 600 }}>sodawave@sodawave.pl</a> lub pod numerem telefonu:{" "}
+              <a href="tel:+48695864734" style={{ color: "#2AACBC", fontWeight: 600 }}>+48 695 864 734</a>.
+            </p>
+
+            <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#1f2937", marginTop: "28px", marginBottom: "10px" }}>
+              2. Jakie dane zbieramy?
+            </h2>
+            <p>
+              Serwis realizuje funkcje pozyskiwania informacji o użytkownikach i ich zachowaniu w następujący sposób:
+            </p>
+            <ul style={{ paddingLeft: "1.25rem", marginTop: "8px" }}>
+              <li>Poprzez dobrowolnie wprowadzone w formularzach informacje (np. imię, adres e-mail, numer telefonu w celu odpowiedzi na zapytanie).</li>
+              <li>Poprzez zapisywanie w urządzeniach końcowych plików cookie (tzw. „ciasteczka").</li>
+              <li>Poprzez logi serwera www zbierane przez operatora hostingowego (Seohost).</li>
+            </ul>
+
+            <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#1f2937", marginTop: "28px", marginBottom: "10px" }}>
+              3. Cel przetwarzania danych
+            </h2>
+            <p>
+              Dane podane w formularzu kontaktowym są przetwarzane w celu wynikającym z funkcji konkretnego formularza, np. w celu dokonania procesu obsługi zgłoszenia handlowego lub kontaktu zwrotnego.
+            </p>
+
+            <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#1f2937", marginTop: "28px", marginBottom: "10px" }}>
+              4. Odbiorcy danych
+            </h2>
+            <p>
+              Dane osobowe mogą być przekazywane podmiotom technicznie realizującym niektóre usługi – w szczególności dotyczy to przekazywania informacji o posiadaczu rejestrowanej domeny do podmiotów będących operatorami domen internetowych, serwisów płatniczych lub innych podmiotów, z którymi Administrator w tym zakresie współpracuje (np. Google Maps w celu wyświetlania mapy punktów).
+            </p>
+
+            <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#1f2937", marginTop: "28px", marginBottom: "10px" }}>
+              5. Twoje prawa
+            </h2>
+            <p>
+              Zgodnie z RODO, przysługuje Ci prawo do:
+            </p>
+            <ul style={{ paddingLeft: "1.25rem", marginTop: "8px" }}>
+              <li>Dostępu do swoich danych oraz otrzymania ich kopii.</li>
+              <li>Sprostowania (poprawiania) swoich danych.</li>
+              <li>Usunięcia danych ("prawo do bycia zapomnianym").</li>
+              <li>Ograniczenia przetwarzania danych.</li>
+              <li>Wniesienia sprzeciwu wobec przetwarzania.</li>
+            </ul>
+
+            <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#1f2937", marginTop: "28px", marginBottom: "10px" }}>
+              6. Pliki Cookies
+            </h2>
+            <p>
+              Serwis korzysta z plików cookies. Są one wykorzystywane w celu utrzymania sesji użytkownika oraz w celach statystycznych i marketingowych (np. Google Analytics). Użytkownik może w każdej chwili zmienić ustawienia dotyczące plików cookies w swojej przeglądarce.
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
 // ─── FOOTER ───────────────────────────────────────────────────────────────
 function Footer() {
   return (
@@ -3251,13 +3381,16 @@ function Footer() {
               </li>
               <li style={{ marginTop: "8px" }}>
                 <a
-                  href="#"
+                  href="#privacy"
                   style={{
                     color: "rgba(255,255,255,0.55)",
                     fontSize: "12px",
                     textDecoration: "underline",
                     textDecorationStyle: "dotted",
+                    transition: "color 0.2s",
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}
                 >
                   Polityka prywatności
                 </a>
@@ -3298,7 +3431,27 @@ function Footer() {
 }
 
 // ─── APP ──────────────────────────────────────────────────────────────────
+function useHashRoute() {
+  const [showPrivacy, setShowPrivacy] = useState(
+    () => typeof window !== "undefined" && window.location.hash === "#privacy"
+  );
+
+  useEffect(() => {
+    const onHashChange = () => setShowPrivacy(window.location.hash === "#privacy");
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  return showPrivacy;
+}
+
 export default function App() {
+  const showPrivacy = useHashRoute();
+
+  if (showPrivacy) {
+    return <PrivacyPage />;
+  }
+
   return (
     <div
       style={{
