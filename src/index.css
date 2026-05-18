@@ -322,7 +322,7 @@ input::placeholder, textarea::placeholder { color: #9ca3af; }
   }
 
   .offer-card__pepsi-image {
-    transform: scale(0.8) !important;
+    transform: scale(0.64) !important;
     transform-origin: center center;
   }
 }

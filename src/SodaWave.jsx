@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import L from "leaflet";
+import { sodaWaveLocations } from "./data/locations.js";
+import { extractCity, slugify } from "./lib/cities.js";
+
+export { sodaWaveLocations };
 import {
   MapPin,
   Phone,
@@ -41,95 +45,14 @@ const scroll = (href) =>
 
 const POLAND_CENTER = [52.1, 19.4];
 
-export const sodaWaveLocations = [
-  { id: 1, lat: 51.938981958301675, lng: 22.384780370042876, address: "Aleje Tadeusza Kościuszki 40, Łuków", name: "Sklep Rondo, Delikatesy Sezam", hours: "7–23" },
-  { id: 2, lat: 53.1235, lng: 18.0163, address: "Bydgoszcz", name: "Galeria Focus, stoisko Markiewka", hours: "8–18" },
-  { id: 3, lat: 53.1026, lng: 18.0315, address: "ul. Białogardzka 27, Bydgoszcz", name: "Warzywniaczek", hours: "8–18" },
-  { id: 4, lat: 53.1594, lng: 18.1633, address: "ul. Narcyza Gieryna 4, Bydgoszcz", name: "Sklep Groszek", hours: "8–18" },
-  { id: 5, lat: 53.1092, lng: 18.0538, address: "ul. Baczyńskiego 35, Bydgoszcz", name: "Żulka-Kulka, sklep spożywczy", hours: "8–18" },
-  { id: 6, lat: 53.1165, lng: 17.9942, address: "ul. Marii Konopnickiej 2A/3, Bydgoszcz", name: "sklep spożywczy", hours: "8–18" },
-  { id: 7, lat: 53.1332, lng: 18.0062, address: "ul. Gdańska 85, Bydgoszcz", name: "Warzywniaczek", hours: "8–18" },
-  { id: 8, lat: 53.1163, lng: 17.9806, address: "ul. Waryńskiego 51/63U, Bydgoszcz", name: "Warzywniak Świeżak", hours: "8–18" },
-  { id: 9, lat: 53.1412, lng: 18.0135, address: "ul. 11 Listopada 8, Bydgoszcz", name: "Delikatesy Na Leśnym", hours: "8–18" },
-  { id: 10, lat: 53.1054, lng: 18.0152, address: "ul. A. Grzymały-Siedleckiego 10, Bydgoszcz", name: "Salon Prasowy", hours: "8–18" },
-  { id: 11, lat: 53.1475, lng: 17.9501, address: "ul. Kolbego 44, Bydgoszcz", name: "Epaka, punkt wysyłek", hours: "8–18" },
-  { id: 12, lat: 53.1154, lng: 17.9856, address: "ul. Juliusza Kossaka 48, Bydgoszcz", name: "Warzywniak U Agi", hours: "8–18" },
-  { id: 13, lat: 53.1251, lng: 17.9515, address: "ul. Nakielska 156, Bydgoszcz", name: "Delikatesy", hours: "8–18" },
-  { id: 14, lat: 52.7954, lng: 18.2570, address: "ul. Świętego Ducha 26, Inowrocław", name: "Pasmanteria Guziczek", hours: "8–18" },
-  { id: 15, lat: 52.7820, lng: 18.2550, address: "ul. Okrężek 20, Inowrocław", name: "Sklep Julia", hours: "8–18" },
-  { id: 16, lat: 52.7905, lng: 18.2530, address: "al. Kopernika 8A, Inowrocław", name: "Sklep ABC", hours: "8–18" },
-  { id: 17, lat: 52.7885, lng: 18.2610, address: "ul. Wojska Polskiego 19B, Inowrocław", name: "Intercom, sklep komputerowy", hours: "8–18" },
-  { id: 18, lat: 52.8630, lng: 17.9540, address: "ul. 4 Stycznia 54 / Artylerzystów 1B, Barcin", name: "Markiewka Sklep", hours: "8–18" },
-  { id: 19, lat: 52.6580, lng: 17.9575, address: "ul. Jagiełły 20, Mogilno", name: "Naprawa Obuwia Szewc", hours: "8–18" },
-  { id: 20, lat: 52.9535, lng: 17.9220, address: "Plac 1000-lecia 20, Łabiszyn", name: "Markiewka Sklep", hours: "8–18" },
-  { id: 21, lat: 52.8055, lng: 18.0875, address: "ul. Rynek 22, Pakość", name: "Kleks", hours: "8–18" },
-  { id: 22, lat: 52.7533, lng: 18.1105, address: "ul. Główna 17, Janikowo", name: "Markiewka Sklep", hours: "8–18" },
-  { id: 23, lat: 53.0965, lng: 17.9355, address: "ul. Szubińska 8, Białe Błota", name: "Warzywa i Owoce", hours: "8–18" },
-  { id: 24, lat: 52.8488, lng: 17.7205, address: "ul. Potockiego 1, Żnin", name: "Best-Seler", hours: "8–18" },
-  { id: 25, lat: 52.6285, lng: 18.1720, address: "ul. Św. Ducha 17, Strzelno", name: "Sklep Polski Prill", hours: "8–18" },
-  { id: 26, lat: 53.0015, lng: 17.7405, address: "ul. Bema 3, Szubin", name: "Czysta Chata", hours: "8–18" },
-  { id: 27, lat: 53.1415, lng: 17.5955, address: "ul. Dąbrowskiego 36, Nakło nad Notecią", name: "Czysta Chata", hours: "8–18" },
-  { id: 28, lat: 53.0805, lng: 18.2255, address: "ul. Żwirki i Wigury 1, Solec Kujawski", name: "Sklep spożywczy Jola", hours: "8–18" },
-  { id: 29, lat: 53.3135, lng: 17.9380, address: "ul. Pomianowskiego 9, Koronowo", name: "Sklep Zajączek", hours: "8–18" },
-  { id: 30, lat: 53.3155, lng: 17.9420, address: "ul. Witosa 14, Koronowo", name: "Chatka Puchatka", hours: "8–18" },
-  { id: 31, lat: 52.9005, lng: 18.1360, address: "ul. Jęczmienna 2A, Złotniki Kujawskie", name: "Markiewka", hours: "8–18" },
-  { id: 32, lat: 52.8425, lng: 18.2110, address: "ul. Dworcowa 17, Jaksice", name: "Lewiatan", hours: "8–18" },
-  { id: 33, lat: 52.8965, lng: 18.2435, address: "Rojewo 141", name: "Lewiatan", hours: "8–18" },
-  { id: 34, lat: 52.8905, lng: 18.3205, address: "Gniewkówiec 21", name: "Lewiatan", hours: "8–18" },
-  { id: 35, lat: 52.9725, lng: 18.0665, address: "ul. Bydgoska 14I/J, Nowa Wieś Wielka", name: "sklep spożywczy", hours: "8–18" },
-  { id: 36, lat: 52.8975, lng: 18.4065, address: "ul. Dworcowa 4, Gniewkowo", name: "Lewiatan", hours: "8–18" },
-  { id: 37, lat: 53.0205, lng: 18.6410, address: "ul. W. Dziewulskiego 39C, Toruń", name: "Epaka, punkt wysyłek", hours: "8–18" },
-  { id: 38, lat: 53.0165, lng: 18.5910, address: "ul. Kraszewskiego 38, Toruń", name: "sklep spożywczo-warzywny", hours: "8–18" },
-  { id: 39, lat: 53.0285, lng: 18.5710, address: "ul. Bartosza Głowackiego 2, Toruń", name: "Sklep Cykoria", hours: "8–18" },
-  { id: 40, lat: 52.9905, lng: 18.5810, address: "ul. Poznańska 80, Toruń", name: "Lewiatan", hours: "8–18" },
-  { id: 41, lat: 52.9855, lng: 18.6110, address: "ul. Strzałowa 7, Toruń", name: "Lewiatan", hours: "8–18" },
-  { id: 42, lat: 53.0185, lng: 18.5860, address: "ul. Bema 20A, Toruń", name: "Lewiatan", hours: "8–18" },
-  { id: 43, lat: 52.9955, lng: 18.6310, address: "ul. Łódzka 35, Toruń", name: "Lewiatan", hours: "8–18" },
-  { id: 44, lat: 53.0255, lng: 18.6510, address: "ul. Łyskowskiego 29/35, Toruń", name: "Lewiatan", hours: "8–18" },
-  { id: 45, lat: 53.2205, lng: 17.8905, address: "Mochle 14", name: "Sklep Odido", hours: "8–18" },
-  { id: 46, lat: 52.6785, lng: 18.3285, address: "ul. Rynek 1, Kruszwica", name: "DW-Kiosk", hours: "8–18" },
-  { id: 47, lat: 52.6805, lng: 18.3305, address: "ul. Kujawska 29A, Kruszwica", name: "DW-Kiosk", hours: "8–18" },
-  { id: 48, lat: 53.1255, lng: 17.9555, address: "ul. Nakielska 180, Bydgoszcz", name: "Lin", hours: "8–18" },
-  { id: 49, lat: 53.0185, lng: 18.5755, address: "ul. Fałata 92, Toruń", name: "Sklep ABC", hours: "8–18" },
-  { id: 50, lat: 52.7935, lng: 18.2505, address: "ul. Wojska Polskiego, Inowrocław", name: "Witaminka 1", hours: "8–18" },
-  { id: 51, lat: 52.7936, lng: 18.2506, address: "ul. Wojska Polskiego, Inowrocław", name: "Witaminka 2", hours: "8–18" },
-  { id: 52, lat: 52.7937, lng: 18.2507, address: "ul. Wojska Polskiego, Inowrocław", name: "Witaminka 3", hours: "8–18" },
-  { id: 53, lat: 53.1155, lng: 17.9855, address: "ul. Juliusza Kossaka 43, Bydgoszcz", name: "Rumaks", hours: "8–18" },
-  { id: 54, lat: 52.8205, lng: 18.3505, address: "Wierzchosławice 56", name: "Chatka Puchatka", hours: "8–18" },
-  { id: 55, lat: 53.1105, lng: 18.0405, address: "ul. Kaczyńskiego 36/9, Bydgoszcz", name: "Groszek", hours: "8–18" },
-  { id: 56, lat: 52.7555, lng: 18.1055, address: "ul. Ogrodowa 24, Janikowo", name: "Delikatesy", hours: "8–18" },
-  { id: 57, lat: 52.7505, lng: 18.1105, address: "ul. Dworcowa 17, Janikowo", name: "sklep", hours: "8–18" },
-  { id: 58, lat: 53.3105, lng: 17.9505, address: "ul. Szosa Bydgoska 33, Koronowo", name: "Delikatesy", hours: "8–18" },
-  { id: 59, lat: 53.0205, lng: 18.0205, address: "Brzoza", name: "Warzywniak", hours: "8–18" },
-  { id: 60, lat: 52.25628017997793, lng: 20.97681638900404, address: "ul. Piaskowa 6, Warszawa", name: "Lewiatan", hours: "7–23" },
-  { id: 61, lat: 52.09160676550525, lng: 21.61931811238021, address: "ul. Mińska 8, Siennica", name: "Antosiewicz, sklep wielobranżowy", hours: "8–18" },
-  { id: 62, lat: 51.9494455870526, lng: 22.052085027715055, address: "Stary Jamielnik 69", name: "Lewiatan", hours: "7–21" },
-  { id: 63, lat: 51.93318663901361, lng: 22.37589898168492, address: "ul. Stodolna 19A, Łuków", name: "Stokrotka", hours: "7–21" },
-  { id: 64, lat: 53.1264, lng: 18.0504, address: "Bydgoszcz", name: "Galeria Pomorska, stoisko Markiewka", hours: "8–18" },
-  { id: 65, lat: 51.943397604616976, lng: 22.38275631237166, address: "ul. K. I. Gałczyńskiego 52, Łuków", name: "Lewiatan", hours: "8–22" },
-  { id: 66, lat: 51.95402459932325, lng: 22.389352225864968, address: "Farfak 62, Łuków", name: "Sklep spożywczy Ewa", hours: "8–18" },
-  { id: 67, lat: 51.94320457876996, lng: 22.378351527581383, address: "ul. Leopolda Staffa 4, Łuków", name: "Strefa Alkoholi", hours: "8–23" },
-  { id: 68, lat: 51.98941291931856, lng: 22.795084846040833, address: "ul. Brzeska 53A, Międzyrzec Podlaski", name: "Lewiatan", hours: "6–21" },
-  { id: 69, lat: 52.0893724320998, lng: 22.442928398838518, address: "ul. Dębowa 4, Zbuczyn", name: "Stacja Paliw Zbuczyn", hours: "6–22" },
-  { id: 70, lat: 52.15331431802724, lng: 22.24433141787723, address: "ul. Garwolińska 80, Siedlce", name: "Lewiatan", hours: "8–21" },
-  { id: 71, lat: 52.157479896866846, lng: 22.250006170923967, address: "Romanówka 18, Siedlce", name: "Chorten", hours: "6–21" },
-  { id: 72, lat: 52.178827409211905, lng: 22.289864182564557, address: "ul. Dąbrowskiego 8, Siedlce", name: "Lewiatan", hours: "6–20" },
-  { id: 73, lat: 52.04836284747071, lng: 22.298016354490937, address: "Gostchorz 42A, Siedlce", name: "Lewiatan", hours: "8–21" },
-  { id: 74, lat: 52.02327767969077, lng: 22.312644035266672, address: "Biardy 36", name: "Groszek", hours: "8–18" },
-  { id: 75, lat: 52.00270247114304, lng: 22.397915069500144, address: "Krynka 226", name: "Lewiatan", hours: "8–21" },
-  { id: 76, lat: 52.03505257330378, lng: 22.3580851201243, address: "Radomyśl 44", name: "Lewiatan", hours: "8–21" },
-  { id: 77, lat: 51.9927957901223, lng: 22.300122540331376, address: "ul. Księży Sopyłów 39A, Gręzówka", name: "Lewiatan", hours: "8–21" },
-  { id: 78, lat: 51.803032437382825, lng: 22.19039709953342, address: "ul. Łukowska 66, Krzywda", name: "Strzyżewski J., dywany", hours: "8–18" },
-  { id: 79, lat: 51.9829770598782, lng: 22.778727604251163, address: "ul. Lubelska 62, Międzyrzec Podlaski", name: "EPaka", hours: "8–16" },
-  { id: 80, lat: 52.16417916832067, lng: 22.276193203839465, address: "ul. Jana Kilińskiego 19, Siedlce", name: "Witamina, owoce i warzywa", hours: "8–17" },
-  { id: 81, lat: 51.87270205045594, lng: 22.19017372536445, address: "Stanin 150", name: "Staszko", hours: "7–17" }
-];
-
 const MAP_POINTS = sodaWaveLocations.map((p) => ({
   ...p,
   position: [p.lat, p.lng],
-  city: p.address.includes(", ") ? p.address.split(", ").pop() : p.address.split(" ")[0] || p.address,
+  city: extractCity(p.address),
+  citySlug: slugify(extractCity(p.address)),
 }));
+
+const CITY_SLUGS_WITH_PAGE = new Set(MAP_POINTS.map((p) => p.citySlug));
 
 const FAQ_ITEMS = [
   {
@@ -174,6 +97,31 @@ const FAQ_ITEMS = [
   {
     question: "Ile trwa wymiana cylindra?",
     answer: "Zazwyczaj tylko chwilę – tyle, ile standardowa obsługa w punkcie.",
+  },
+  {
+    question: "Gdzie wymienić cylinder CO₂ w Łukowie?",
+    answer:
+      "W Łukowie cylindry CO₂ wymienisz m.in. w Delikatesach Sezam przy Alejach Kościuszki, w Stokrotce na ul. Stodolnej oraz w Lewiatanie na ul. Gałczyńskiego. Wymiana odbywa się od ręki – bez zamawiania.",
+  },
+  {
+    question: "Czy wymiana cylindrów CO₂ jest dostępna w Warszawie?",
+    answer:
+      "Tak. W Warszawie działają liczne punkty wymiany cylindrów SodaWave. Aktualne adresy punktów w Warszawie znajdziesz na naszej mapie.",
+  },
+  {
+    question: "Gdzie wymienić cylinder CO₂ w Bydgoszczy i okolicach?",
+    answer:
+      "Wymiana cylindrów CO₂ w Bydgoszczy, Inowrocławiu, Nakle nad Notecią, Solcu Kujawskim i okolicznych miastach jest dostępna w punktach SodaWave. Sprawdź mapę, aby znaleźć najbliższy punkt.",
+  },
+  {
+    question: "Czy mogę wymienić cylinder w Siedlcach lub Międzyrzecu Podlaskim?",
+    answer:
+      "Tak. Punkty wymiany cylindrów CO₂ SodaWave działają zarówno w Siedlcach, jak i w Międzyrzecu Podlaskim. Wymiana jest możliwa od ręki w godzinach otwarcia sklepów.",
+  },
+  {
+    question: "W jakich miastach w Polsce mogę wymienić cylinder SodaWave?",
+    answer:
+      "SodaWave posiada punkty wymiany cylindrów CO₂ w wielu miastach w całej Polsce, m.in. w Warszawie, Poznaniu, Bydgoszczy, Toruniu, Łukowie, Siedlcach, Łodzi, Krakowie, Wrocławiu, Gdańsku, Lublinie, Katowicach i wielu innych. Pełną listę lokalizacji znajdziesz na naszej mapie.",
   },
 ];
 
@@ -2210,29 +2158,22 @@ function B2BSection() {
   const onSubmit = async (data) => {
     setServerMsg(null);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/b2b.php", {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-          Accept: "application/json" 
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "c7141449-9681-4d0f-a0b6-f91f12105466",
-          subject: "Nowe zgłoszenie B2B - SodaWave",
-          from_name: data.companyName || "Formularz B2B",
-          // Przekazanie ładnie nazwanych pól do maila:
-          "Nazwa firmy": data.companyName,
-          "NIP": data.nip,
-          "Osoba kontaktowa": data.fullName,
-          "E-mail": data.email,
-          "Telefon": data.phone,
-          "Adres lokalu": data.address
+          companyName: data.companyName,
+          nip: data.nip,
+          fullName: data.fullName,
+          email: data.email,
+          phone: data.phone,
+          address: data.address,
         }),
       });
       const payload = await res.json().catch(() => ({}));
 
-      if (!res.ok || !payload.success) {
-        const message = payload?.message || "Nie udało się wysłać zgłoszenia.";
+      if (!res.ok || !payload.ok) {
+        const message = payload?.error || "Nie udało się wysłać zgłoszenia.";
         setServerMsg({ type: "error", text: message });
         setError("root", { type: "server", message });
         return;
@@ -2647,7 +2588,7 @@ function SeoSection() {
               style={{
                 textAlign: "center",
                 maxWidth: "720px",
-                margin: "24px auto 28px",
+                margin: "24px auto 12px",
                 fontSize: "13px",
                 color: "rgb(240, 251, 253)",
               }}
@@ -2657,6 +2598,23 @@ function SeoSection() {
               charakter informacyjny i jest na bieżąco rozwijana wraz z rozwojem
               sieci.
             </p>
+            <div style={{ textAlign: "center", margin: "0 auto 28px" }}>
+              <a
+                href="/m/"
+                style={{
+                  display: "inline-block",
+                  padding: "10px 18px",
+                  background: "#2AACBC",
+                  color: "#fff",
+                  fontWeight: 800,
+                  fontSize: "14px",
+                  borderRadius: "10px",
+                  textDecoration: "none",
+                }}
+              >
+                Zobacz wszystkie strony miast →
+              </a>
+            </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           {SEO_REGIONS.map((region) => {
@@ -2728,9 +2686,25 @@ function SeoSection() {
                       color: "#4b5563",
                     }}
                   >
-                    {region.cities.map((city) => (
-                      <span key={city}>{city}</span>
-                    ))}
+                    {region.cities.map((city) => {
+                      const citySlug = slugify(city);
+                      const hasPage = CITY_SLUGS_WITH_PAGE.has(citySlug);
+                      return hasPage ? (
+                        <a
+                          key={city}
+                          href={`/m/${citySlug}/`}
+                          style={{
+                            color: "#1A9BAB",
+                            textDecoration: "none",
+                            fontWeight: 600,
+                          }}
+                        >
+                          {city}
+                        </a>
+                      ) : (
+                        <span key={city}>{city}</span>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -2766,7 +2740,7 @@ function SeoSection() {
             obejmująca cylindry kompatybilne z najczęściej spotykanymi modelami
             urządzeń.
           </p>
-          <p>
+          <p style={{ marginBottom: "10px" }}>
             Jeden cylinder pozwala przygotować nawet do 60 litrów wody
             gazowanej, co oznacza niższy koszt jednego litra napoju w
             porównaniu z wodą kupowaną w butelkach sklepowych. Domowa woda
@@ -2777,6 +2751,45 @@ function SeoSection() {
             Polsce sprawia, że usługa jest łatwo dostępna lokalnie w wielu
             miastach. To rozwiązanie bezpieczne, ekologiczne i zgodne z ideą
             gospodarki obiegu zamkniętego.
+          </p>
+          <p style={{ marginBottom: "10px" }}>
+            <strong>Wymiana cylindrów CO₂ Łuków</strong> – w Łukowie i okolicach
+            dostępnych jest kilka punktów wymiany cylindrów SodaWave. Mieszkańcy
+            Łukowa mogą wymienić cylinder CO₂ od ręki m.in. w sklepach przy
+            Alejach Kościuszki, na ul. Stodolnej i ul. Gałczyńskiego. To
+            wygodne rozwiązanie dla osób szukających szybkiej wymiany cylindra
+            do saturatora w Łukowie bez konieczności zamawiania online.
+          </p>
+          <p style={{ marginBottom: "10px" }}>
+            <strong>Wymiana cylindrów CO₂ Warszawa</strong> – stolica to jedno
+            z miast z największą liczbą punktów wymiany SodaWave. Wymiana
+            cylindrów w Warszawie odbywa się w wielu dzielnicach, dzięki czemu
+            zawsze znajdziesz punkt blisko siebie. Wymiana cylindra CO₂
+            Warszawa to szybki sposób na uzupełnienie gazu do saturatora bez
+            czekania na dostawę.
+          </p>
+          <p style={{ marginBottom: "10px" }}>
+            <strong>Wymiana cylindrów CO₂ Bydgoszcz, Toruń, Inowrocław</strong> –
+            w regionie kujawsko-pomorskim sieć SodaWave obejmuje Bydgoszcz,
+            Toruń, Inowrocław, Nakło nad Notecią, Solec Kujawski, Żnin,
+            Szubin, Mogilno, Kruszwicę i wiele innych miast. Wymiana cylindra
+            CO₂ w Bydgoszczy i okolicznych miejscowościach jest dostępna w
+            sklepach partnerskich bez formalności.
+          </p>
+          <p style={{ marginBottom: "10px" }}>
+            <strong>Wymiana cylindrów CO₂ Poznań, Łódź, Kraków, Wrocław, Gdańsk</strong> –
+            SodaWave jest obecne w największych miastach Polski. Wymiana
+            cylindrów CO₂ w Poznaniu, Łodzi, Krakowie, Wrocławiu i Gdańsku
+            odbywa się w punktach stacjonarnych zlokalizowanych w popularnych
+            sieciach handlowych. Sprawdź mapę, aby znaleźć najbliższy punkt
+            wymiany w swoim mieście.
+          </p>
+          <p>
+            <strong>Wymiana cylindrów CO₂ Siedlce, Lublin, Międzyrzec Podlaski</strong> –
+            we wschodniej Polsce punkty wymiany SodaWave działają m.in. w
+            Siedlcach, Lublinie i Międzyrzecu Podlaskim. Wymiana cylindra CO₂
+            w Siedlcach i okolicach to szybki i ekologiczny sposób na
+            uzupełnienie gazu do saturatora bez wychodzenia z miasta.
           </p>
         </div>
           </div>
@@ -2805,29 +2818,22 @@ function ContactSection() {
   const onSubmit = async (data) => {
     setServerMsg(null);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/contact.php", {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-          Accept: "application/json" 
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "c7141449-9681-4d0f-a0b6-f91f12105466",
-          subject: "Nowa wiadomość z formularza kontaktowego - SodaWave",
-          from_name: data.fullName || "Formularz Kontaktowy",
-          // Przekazanie ładnie nazwanych pól do maila:
-          "Imię i nazwisko": data.fullName,
-          "E-mail": data.email,
-          "Telefon": data.phone,
-          "Treść wiadomości": data.message
+          fullName: data.fullName,
+          email: data.email,
+          phone: data.phone,
+          message: data.message,
         }),
       });
       const payload = await res.json().catch(() => ({}));
-      
-      if (!res.ok || !payload.success) {
+
+      if (!res.ok || !payload.ok) {
         setServerMsg({
           type: "error",
-          text: payload?.message || "Nie udało się wysłać wiadomości.",
+          text: payload?.error || "Nie udało się wysłać wiadomości.",
         });
         return;
       }
@@ -3331,7 +3337,7 @@ function Footer() {
                   Kontakt
                 </a>
               </li>
-              <li>
+              <li style={{ marginBottom: "8px" }}>
                 <a
                   href="#faq"
                   onClick={(e) => { e.preventDefault(); scroll("#faq"); }}
@@ -3340,6 +3346,16 @@ function Footer() {
                   onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}
                 >
                   FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/m/"
+                  style={{ color: "rgba(255,255,255,0.55)", fontSize: "14px", transition: "color 0.2s" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}
+                >
+                  Punkty w miastach
                 </a>
               </li>
             </ul>
@@ -3445,8 +3461,134 @@ function useHashRoute() {
   return showPrivacy;
 }
 
+function useInjectStructuredData() {
+  useEffect(() => {
+    const parseHours = (hours) => {
+      // "8–18" / "7-23" / "8–22" → { opens: "08:00", closes: "18:00" }
+      if (!hours) return null;
+      const m = hours.match(/(\d{1,2})\s*[–-]\s*(\d{1,2})/);
+      if (!m) return null;
+      const pad = (n) => String(n).padStart(2, "0");
+      return { opens: `${pad(m[1])}:00`, closes: `${pad(m[2])}:00` };
+    };
+
+    const extractCity = (address) => {
+      if (!address) return "";
+      if (address.includes(",")) return address.split(",").pop().trim();
+      const parts = address.trim().split(/\s+/);
+      return parts[parts.length - 1];
+    };
+
+    // Group by city — one LocalBusiness "department" per (city, name)
+    const branches = sodaWaveLocations.map((loc) => {
+      const city = extractCity(loc.address);
+      const oh = parseHours(loc.hours);
+      return {
+        "@type": "LocalBusiness",
+        "name": `SodaWave – ${loc.name} (${city})`,
+        "image": "https://sodawave.pl/og-image.png",
+        "telephone": "+48695864734",
+        "url": "https://sodawave.pl/#map",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": loc.address,
+          "addressLocality": city,
+          "addressCountry": "PL",
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": loc.lat,
+          "longitude": loc.lng,
+        },
+        ...(oh
+          ? {
+              openingHoursSpecification: [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                  ],
+                  opens: oh.opens,
+                  closes: oh.closes,
+                },
+              ],
+            }
+          : {}),
+        "parentOrganization": { "@id": "https://sodawave.pl/#organization" },
+      };
+    });
+
+    const branchesScript = document.createElement("script");
+    branchesScript.type = "application/ld+json";
+    branchesScript.dataset.sodawaveSchema = "branches";
+    branchesScript.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": branches,
+    });
+
+    // FAQ schema
+    const faqScript = document.createElement("script");
+    faqScript.type = "application/ld+json";
+    faqScript.dataset.sodawaveSchema = "faq";
+    faqScript.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": FAQ_ITEMS.filter((i) => i.answer).map((i) => ({
+        "@type": "Question",
+        "name": i.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": i.answer,
+        },
+      })),
+    });
+
+    // ItemList of all served cities (helps Google understand multi-city scope)
+    const allCities = Array.from(
+      new Set(SEO_REGIONS.flatMap((r) => r.cities))
+    );
+    const citiesScript = document.createElement("script");
+    citiesScript.type = "application/ld+json";
+    citiesScript.dataset.sodawaveSchema = "cities";
+    citiesScript.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Miasta obsługiwane przez SodaWave – wymiana cylindrów CO₂",
+      "itemListElement": allCities.map((city, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        "item": {
+          "@type": "Place",
+          "name": `Wymiana cylindrów CO₂ ${city}`,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": city,
+            "addressCountry": "PL",
+          },
+        },
+      })),
+    });
+
+    document.head.appendChild(branchesScript);
+    document.head.appendChild(faqScript);
+    document.head.appendChild(citiesScript);
+
+    return () => {
+      branchesScript.remove();
+      faqScript.remove();
+      citiesScript.remove();
+    };
+  }, []);
+}
+
 export default function App() {
   const showPrivacy = useHashRoute();
+  useInjectStructuredData();
 
   if (showPrivacy) {
     return <PrivacyPage />;
